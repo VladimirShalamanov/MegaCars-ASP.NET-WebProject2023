@@ -1,7 +1,7 @@
 ﻿namespace MegaCarsSystem.Common
 {
     public static class EntityValidationConstants
-    {
+    {   // Updated
         public class Agent
         {
             public const int PhoneNumber_MinLength = 7;
