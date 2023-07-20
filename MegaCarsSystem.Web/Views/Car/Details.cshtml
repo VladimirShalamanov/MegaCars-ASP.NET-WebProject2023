@@ -1,0 +1,87 @@
+﻿@using MegaCarsSystem.Services.Data.Interfaces;
+@using MegaCarsSystem.Web.Infrastructure.Extensions;
+@model CarDetailsViewModel
+
+@inject IAgentService AgentService
+@inject ICarService CarService
+@{
+    bool isUserAgent = await AgentService.AgentExistsByUserIdAsync(this.User.GetId()!);
+    bool isAgentOwnerOfTheCar = await AgentService.HasCarWithIdAsync(this.User.GetId(), Model.Id);
+
+    bool isCarRentedByUser = await CarService.IsRentedByUserWithIdAsync(Model.Id, this.User.GetId()!);
+}
+
+@{
+    ViewBag.Title = "Car Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="Car Image">
+        </div>
+
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Brand @Model.Model</u></p>
+            <p>Year Of Manufacture: <b>@Model.YearOfManufacture</b></p>
+            <p>Horsepower: <b>@Model.Horsepower</b></p>
+            <p>Engine: <b>@Model.Engine</b></p>
+            <p>Gearbox: <b>@Model.Gearbox</b></p>
+            <p>Category: <b>@Model.Category</b></p>
+            <p>Located in: <b>@Model.Address</b></p>
+            <p>
+                Price Per Day:
+                <b>@($"{Model.PricePerDay:f2}") </b>BGN
+            </p>
+            <p>
+                <u>Additional information:</u>
+                <br>@Model.Description
+            </p>
+            <p><i>(@(Model.IsRented ? "Rented" : "Not Rented"))</i></p>
+
+            <div class="form-inline">
+
+                @if (this.User.Identity?.IsAuthenticated ?? false)
+                {
+                    @if (isUserAgent && isAgentOwnerOfTheCar)
+                    {
+                        <a class="btn btn-warning" asp-controller="Car" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                        <a class="ml-2 btn btn-danger" asp-controller="Car" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                    }
+
+                    @if (!Model.IsRented)
+                    {
+                        @if (!isUserAgent)
+                        {
+                            <form class="ml-2" asp-controller="Car" asp-action="Rent" asp-route-id="@Model.Id" method="post">
+                                <input class="btn btn-primary" type="submit" value="Rent" />
+                            </form>
+                        }
+                    }
+                    else
+                    {
+                        @if (!isUserAgent && isCarRentedByUser)
+                        {
+                            <form class="ml-2" asp-controller="Car" asp-action="Leave" asp-route-id="@Model.Id" method="post">
+                                <input class="btn btn-primary" type="submit" value="Leave" />
+                            </form>
+                        }
+                    }
+                }
+            </div>
+
+            <p></p>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title"><u>Agent Information</u></h5>
+                    <p class="card-text">Email: @Model.Agent.Email</p>
+                    <p class="card-text">Phone Number: @Model.Agent.PhoneNumber</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

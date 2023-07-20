@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MegaCarsSystem.Common\MegaCarsSystem.Common.csproj" />
+    <ProjectReference Include="..\MegaCarsSystem.Data.Models\MegaCarsSystem.Data.Models.csproj" />
+    <ProjectReference Include="..\MegaCarsSystem.Data\MegaCarsSystem.Data.csproj" />
+    <ProjectReference Include="..\MegaCarsSystem.Services.Data.Models\MegaCarsSystem.Services.Data.Models.csproj" />
+    <ProjectReference Include="..\MegaCarsSystem.Web.ViewModels\MegaCarsSystem.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

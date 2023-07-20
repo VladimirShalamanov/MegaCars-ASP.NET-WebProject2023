@@ -1,0 +1,89 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MegaCarsSystem.Web", "MegaCarsSystem.Web\MegaCarsSystem.Web.csproj", "{B6F5CD4F-DB4D-4B9B-978E-0BC55EC4DDFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MegaCarsSystem.Common", "MegaCarsSystem.Common\MegaCarsSystem.Common.csproj", "{C30D2C57-729B-4007-9298-16EBAC4DC431}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{34868B5A-EE89-4F38-8DCB-24C103C3FB0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{B363687F-51FC-4E05-809A-DFA394BFB6CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MegaCarsSystem.Data", "MegaCarsSystem.Data\MegaCarsSystem.Data.csproj", "{49E2C25A-020A-4B47-8E8C-049A21D0E1D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MegaCarsSystem.Data.Models", "MegaCarsSystem.Data.Models\MegaCarsSystem.Data.Models.csproj", "{DFD22810-1DB1-4264-B4F3-D6B25DD0F6AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MegaCarsSystem.Web.ViewModels", "MegaCarsSystem.Web.ViewModels\MegaCarsSystem.Web.ViewModels.csproj", "{4867D5F5-ACA3-4267-A33D-BE3FA15B5481}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{CFFCC775-29F1-4F1D-B5B2-5E2FB3C4A7D5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MegaCarsSystem.Services.Data", "MegaCarsSystem.Services.Data\MegaCarsSystem.Services.Data.csproj", "{9F4ED52D-31C7-48AF-AC81-6065F8D5D883}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MegaCarsSystem.Web.Infrastructure", "MegaCarsSystem.Web.Infrastructure\MegaCarsSystem.Web.Infrastructure.csproj", "{81FC3A16-8D78-4CAE-B2F4-404105A7AA65}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MegaCarsSystem.Services.Data.Models", "MegaCarsSystem.Services.Data.Models\MegaCarsSystem.Services.Data.Models.csproj", "{0B30BCEB-3C0C-4B2F-9E2B-1FE5FB2140BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegaCarsSystem.WebAPI", "MegaCarsSystem.WebAPI\MegaCarsSystem.WebAPI.csproj", "{3953E476-AC2E-45BA-A6F4-37180C77C997}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6F5CD4F-DB4D-4B9B-978E-0BC55EC4DDFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F5CD4F-DB4D-4B9B-978E-0BC55EC4DDFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F5CD4F-DB4D-4B9B-978E-0BC55EC4DDFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F5CD4F-DB4D-4B9B-978E-0BC55EC4DDFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C30D2C57-729B-4007-9298-16EBAC4DC431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C30D2C57-729B-4007-9298-16EBAC4DC431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C30D2C57-729B-4007-9298-16EBAC4DC431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C30D2C57-729B-4007-9298-16EBAC4DC431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49E2C25A-020A-4B47-8E8C-049A21D0E1D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49E2C25A-020A-4B47-8E8C-049A21D0E1D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49E2C25A-020A-4B47-8E8C-049A21D0E1D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49E2C25A-020A-4B47-8E8C-049A21D0E1D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFD22810-1DB1-4264-B4F3-D6B25DD0F6AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD22810-1DB1-4264-B4F3-D6B25DD0F6AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD22810-1DB1-4264-B4F3-D6B25DD0F6AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD22810-1DB1-4264-B4F3-D6B25DD0F6AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4867D5F5-ACA3-4267-A33D-BE3FA15B5481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4867D5F5-ACA3-4267-A33D-BE3FA15B5481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4867D5F5-ACA3-4267-A33D-BE3FA15B5481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4867D5F5-ACA3-4267-A33D-BE3FA15B5481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F4ED52D-31C7-48AF-AC81-6065F8D5D883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F4ED52D-31C7-48AF-AC81-6065F8D5D883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F4ED52D-31C7-48AF-AC81-6065F8D5D883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F4ED52D-31C7-48AF-AC81-6065F8D5D883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81FC3A16-8D78-4CAE-B2F4-404105A7AA65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81FC3A16-8D78-4CAE-B2F4-404105A7AA65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81FC3A16-8D78-4CAE-B2F4-404105A7AA65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81FC3A16-8D78-4CAE-B2F4-404105A7AA65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B30BCEB-3C0C-4B2F-9E2B-1FE5FB2140BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B30BCEB-3C0C-4B2F-9E2B-1FE5FB2140BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B30BCEB-3C0C-4B2F-9E2B-1FE5FB2140BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B30BCEB-3C0C-4B2F-9E2B-1FE5FB2140BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3953E476-AC2E-45BA-A6F4-37180C77C997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3953E476-AC2E-45BA-A6F4-37180C77C997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3953E476-AC2E-45BA-A6F4-37180C77C997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3953E476-AC2E-45BA-A6F4-37180C77C997}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B6F5CD4F-DB4D-4B9B-978E-0BC55EC4DDFC} = {34868B5A-EE89-4F38-8DCB-24C103C3FB0B}
+		{49E2C25A-020A-4B47-8E8C-049A21D0E1D8} = {B363687F-51FC-4E05-809A-DFA394BFB6CD}
+		{DFD22810-1DB1-4264-B4F3-D6B25DD0F6AF} = {B363687F-51FC-4E05-809A-DFA394BFB6CD}
+		{4867D5F5-ACA3-4267-A33D-BE3FA15B5481} = {34868B5A-EE89-4F38-8DCB-24C103C3FB0B}
+		{9F4ED52D-31C7-48AF-AC81-6065F8D5D883} = {CFFCC775-29F1-4F1D-B5B2-5E2FB3C4A7D5}
+		{81FC3A16-8D78-4CAE-B2F4-404105A7AA65} = {34868B5A-EE89-4F38-8DCB-24C103C3FB0B}
+		{0B30BCEB-3C0C-4B2F-9E2B-1FE5FB2140BA} = {CFFCC775-29F1-4F1D-B5B2-5E2FB3C4A7D5}
+		{3953E476-AC2E-45BA-A6F4-37180C77C997} = {34868B5A-EE89-4F38-8DCB-24C103C3FB0B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A4D02D2-BD33-4F16-8746-893397BB61D6}
+	EndGlobalSection
+EndGlobal

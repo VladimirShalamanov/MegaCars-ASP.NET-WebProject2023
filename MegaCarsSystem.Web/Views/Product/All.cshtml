@@ -1,0 +1,59 @@
+﻿@model IEnumerable<AllProductViewModel>
+
+@{
+    ViewBag.Title = "All Products";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img class="card-img-top" style="height:450px" src="@product.Image" alt="Product Image">
+                <div class="card-body text-center">
+                    <h4>@product.Name</h4>
+                    <h6>
+                        Price:
+                        <b>@($"{product.Price:f2}") BGN</b>
+                    </h6>
+                    <br />
+
+                    <form class="input-group-sm" asp-controller="ShopCart" asp-action="AddToCart" asp-route-id="@product.Id" method="post">
+                        <input class="btn btn-primary" type="submit" value="AddToCart" />
+                    </form>
+
+                   @* <a asp-controller="Car" asp-action="Details" asp-route-id="@Model.Id"
+                       class="btn btn-success">Details</a>
+
+                    @if (this.User.Identity?.IsAuthenticated ?? false)
+                    {
+
+                        <a asp-controller="Car" asp-action="Edit" asp-route-id="@Model.Id"
+                           class="btn btn-warning">Edit</a>
+                        <a asp-controller="Car" asp-action="Delete" asp-route-id="@Model.Id"
+                           class="btn btn-danger">Delete</a>
+                        <p></p>
+
+                        @if (!Model.IsRented)
+                        {
+                            <form class="input-group-sm" asp-controller="Car"
+                                  asp-action="Rent" asp-route-id="@Model.Id" method="post">
+                                <input class="btn btn-primary" type="submit" value="Rent" />
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-controller="Car" asp-action="Leave"
+                                  asp-route-id="@Model.Id" method="post">
+                                <input class="btn btn-primary" type="submit" value="Leave" />
+                            </form>
+                        }
+                    }*@
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ItemsForShopCartViewModel>
+
+@{
+    ViewBag.Title = "Your Shop Cart";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+@if (!Model.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@($"{item.Price} BGN")</td>
+                    <td>
+                        <button @*@onclick="()=> DecreaseQuantity(item)"*@>-</button>
+                        @item.Quantity
+                        <button @*@onclick="()=> IncreaseQuantity(item)"*@>+</button>
+                    </td>
+                    <td>@($"{item.Price * item.Quantity} BGN")</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Total:</td>
+                <td>$ @Model.Sum(item => item.Price * item.Quantity)</td>
+            </tr>
+        </tfoot>
+    </table>
+}
+
+@*@code {
+    private void DecreaseQuantity(CartItem item)
+    {
+        if (item.Quantity > 1)
+        {
+            item.Quantity--;
+        }
+    }
+
+    private void IncreaseQuantity(CartItem item)
+    {
+        item.Quantity++;
+    }
+}*@

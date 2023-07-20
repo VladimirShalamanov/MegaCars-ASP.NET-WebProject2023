@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>fd2e0496-4f6d-400b-90db-176c990d4a00</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MegaCarsSystem.Common\MegaCarsSystem.Common.csproj" />
+    <ProjectReference Include="..\MegaCarsSystem.Services.Data.Models\MegaCarsSystem.Services.Data.Models.csproj" />
+    <ProjectReference Include="..\MegaCarsSystem.Services.Data\MegaCarsSystem.Services.Data.csproj" />
+    <ProjectReference Include="..\MegaCarsSystem.Web.Infrastructure\MegaCarsSystem.Web.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
