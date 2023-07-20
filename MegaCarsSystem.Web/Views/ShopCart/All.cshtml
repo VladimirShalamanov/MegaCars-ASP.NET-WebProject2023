@@ -9,7 +9,15 @@
 
 @if (!Model.Any())
 {
-    <p>Your cart is empty.</p>
+    <p class="text-center">
+        Your cart is empty.
+        <br>
+        Click <a href="/Product/All"
+                 onmouseover="this.style.color='magenta';
+                              this.style.textDecoration='none';"
+                 onmouseout="this.style.color='orange';
+                             this.style.textDecoration='underline';">here</a> for continue your shopping.
+    </p>
 }
 else
 {
@@ -17,13 +25,14 @@ else
         <thead>
             <tr>
                 <th>Item</th>
-                <th>Price</th>
+                <th @*colspan="2"*@>Price</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
         </thead>
+
         <tbody>
-            @foreach (var item in Model)
+            @foreach (ItemsForShopCartViewModel item in Model)
             {
                 <tr>
                     <td>@item.Name</td>
@@ -37,10 +46,14 @@ else
                 </tr>
             }
         </tbody>
+
         <tfoot>
             <tr>
+                <td colspan="5">&nbsp;</td>
+            </tr>
+            <tr>
                 <td colspan="3">Total:</td>
-                <td>$ @Model.Sum(item => item.Price * item.Quantity)</td>
+                <td>@Model.Sum(item => item.Price * item.Quantity) BGN</td>
             </tr>
         </tfoot>
     </table>
