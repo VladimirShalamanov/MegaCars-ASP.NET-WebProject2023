@@ -21,55 +21,52 @@
 }
 else
 {
-    <table>
+    
+    
+
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Item</th>
-                <th @*colspan="2"*@>Price</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
+                <th></th>
             </tr>
         </thead>
-
         <tbody>
-            @foreach (ItemsForShopCartViewModel item in Model)
+            @foreach (var item in Model)
             {
                 <tr>
+                    <td><img src="@item.Image" alt="Item Image" width="50" height="50" /></td>
                     <td>@item.Name</td>
-                    <td>@($"{item.Price} BGN")</td>
+                    <td>@item.Price</td>
                     <td>
-                        <button @*@onclick="()=> DecreaseQuantity(item)"*@>-</button>
+                        <a asp-controller="Cart" asp-action="DecreaseQuantity" asp-route-id="@item.Id" style="text-decoration: none"><i class="fa-regular fa-square-minus" style="color: magenta"></i></a>
                         @item.Quantity
-                        <button @*@onclick="()=> IncreaseQuantity(item)"*@>+</button>
+                        <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Id" style="text-decoration: none"><i class="fa-regular fa-square-plus" style="color: magenta"></i></a>
                     </td>
-                    <td>@($"{item.Price * item.Quantity} BGN")</td>
+                    <td>@(item.Price * item.Quantity)</td>
+                    <td>
+                        <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Id">
+                            <i class="fa-solid fa-trash-can" style="color: red"></i>
+
+                        </a>
+
+                    </td>
                 </tr>
             }
+            <tr>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align: right;"><strong>Total:</strong></td>
+                <td>
+                    @Model.Sum(item => item.Price * item.Quantity)
+                </td>
+                <td></td>
+            </tr>
         </tbody>
-
-        <tfoot>
-            <tr>
-                <td colspan="5">&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="3">Total:</td>
-                <td>@Model.Sum(item => item.Price * item.Quantity) BGN</td>
-            </tr>
-        </tfoot>
     </table>
 }
-
-@*@code {
-    private void DecreaseQuantity(CartItem item)
-    {
-        if (item.Quantity > 1)
-        {
-            item.Quantity--;
-        }
-    }
-
-    private void IncreaseQuantity(CartItem item)
-    {
-        item.Quantity++;
-    }
-}*@
