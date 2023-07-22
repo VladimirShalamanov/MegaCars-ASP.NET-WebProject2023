@@ -91,18 +91,18 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Mine">My Cars</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="ShopCart" asp-action="All">
-                                    <i class="fa fa-shopping-cart" style="font-size:24px;color:orange"></i>
-                                </a>
-                            </li>
-
                             @if (isUserAgent)
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Add">Add Car</a>
                                 </li>
                             }
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ShopCart" asp-action="All">
+                                    <i class="fa fa-shopping-cart" style="font-size:24px;color:orange"></i>
+                                </a>
+                            </li>
                         }
                     </ul>
 

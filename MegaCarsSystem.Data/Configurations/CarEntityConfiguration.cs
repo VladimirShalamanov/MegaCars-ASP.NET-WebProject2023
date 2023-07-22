@@ -64,7 +64,7 @@
                 PricePerDay = 1500.00M,
                 CategoryId = 6,
                 AgentId = Guid.Parse("A6F8D35A-A59F-4227-9DA1-4BBA22B919E1"),
-                RenterId = Guid.Parse("B96378D2-A1A1-44D4-479F-08DB7649A045")
+                RenterId = Guid.Parse("30C3ED84-2725-45F3-95AE-5D93572DFE5B")
             };
             cars.Add(car);
 

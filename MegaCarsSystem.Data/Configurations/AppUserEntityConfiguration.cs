@@ -10,6 +10,14 @@
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
             builder
+                .Property(u => u.FirstName)
+                .HasDefaultValue("TestF");
+
+            builder
+                .Property(u => u.LastName)
+                .HasDefaultValue("TestL");
+
+            builder
                 .HasOne(e => e.ShopCart)
                 .WithOne(e => e.User) 
                 .IsRequired();

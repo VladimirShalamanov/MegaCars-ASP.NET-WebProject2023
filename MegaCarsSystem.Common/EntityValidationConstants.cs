@@ -2,6 +2,18 @@
 {
     public static class EntityValidationConstants
     {
+        public class ApplicationUser
+        {
+            public const int FirstName_MinLength = 2;
+            public const int FirstName_MaxLength = 25;
+
+            public const int LastName_MinLength = 2;
+            public const int LastName_MaxLength = 25;
+
+            public const int Password_MinLength = 6;
+            public const int Password_MaxLength = 100;
+        }
+
         public class Agent
         {
             public const int PhoneNumber_MinLength = 7;
