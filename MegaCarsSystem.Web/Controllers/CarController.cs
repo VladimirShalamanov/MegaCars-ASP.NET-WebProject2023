@@ -187,6 +187,7 @@
             try
             {
                 CarDetailsViewModel viewModel = await this.carService.GetDetailsByIdAsync(id);
+                //viewModel.Agent.FullName
 
                 return this.View(viewModel);
             }

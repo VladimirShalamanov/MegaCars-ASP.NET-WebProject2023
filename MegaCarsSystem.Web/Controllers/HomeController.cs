@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
-    using ViewModels.Home;
+    using MegaCarsSystem.Web.ViewModels.Home;
     using MegaCarsSystem.Services.Data.Interfaces;
 
     public class HomeController : Controller

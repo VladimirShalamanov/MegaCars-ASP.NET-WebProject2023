@@ -3,11 +3,11 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
+    using MegaCarsSystem.Web.ViewModels.ShopCart;
     using MegaCarsSystem.Services.Data.Interfaces;
     using MegaCarsSystem.Web.Infrastructure.Extensions;
 
     using static Common.NotificationsMessagesConstants;
-    using MegaCarsSystem.Web.ViewModels.ShopCart;
 
     [Authorize]
     public class ShopCartController : Controller

@@ -1,9 +1,11 @@
 ﻿@using MegaCarsSystem.Services.Data.Interfaces;
 @using MegaCarsSystem.Web.Infrastructure.Extensions;
+
 @model AllCarViewModel
 
 @inject IAgentService AgentService
 @inject ICarService CarService
+
 @{
     bool isUserAgent = await AgentService.AgentExistsByUserIdAsync(this.User.GetId()!);
     bool isAgentOwnerOfTheCar = await AgentService.HasCarWithIdAsync(this.User.GetId(), Model.Id);

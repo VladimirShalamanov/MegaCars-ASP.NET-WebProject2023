@@ -18,10 +18,12 @@
     public class CarService : ICarService
     {
         private readonly MegaCarsDbContext dbContext;
+        private readonly IUserService userService;
 
-        public CarService(MegaCarsDbContext dbContext)
+        public CarService(MegaCarsDbContext dbContext, IUserService userService)
         {
             this.dbContext = dbContext;
+            this.userService = userService;
         }
 
         public async Task<AllCarsFilteredAndPagedServiceModel> AllAsync(AllCarsQueryModel queryModel)
@@ -103,7 +105,7 @@
             };
         }
 
-        public  async Task<IEnumerable<string>> AllBrandNamesAsync()
+        public async Task<IEnumerable<string>> AllBrandNamesAsync()
         {
             IEnumerable<string> allNames = await this.dbContext
                 .Cars
@@ -270,6 +272,12 @@
                 .Where(c => c.IsActive)
                 .FirstAsync(c => c.Id.ToString() == carId);
 
+            //ApplicationUser user = await this.dbContext
+            //        .Users
+            //        .FirstAsync(u => u.Email == email);
+
+            //string fullName = $"{user.FirstName} {user.LastName}";
+
             return new CarDetailsViewModel()
             {
                 Id = car.Id.ToString(),
@@ -287,6 +295,7 @@
                 Category = car.Category.Name,
                 Agent = new AgentInfoOnCarViewModel()
                 {
+                    FullName = await this.userService.GetFullNameByEmailAsync(car.Agent.User.Email),
                     Email = car.Agent.User.Email,
                     PhoneNumber = car.Agent.PhoneNumber
                 }

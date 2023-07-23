@@ -1,8 +1,10 @@
 ﻿@using MegaCarsSystem.Services.Data.Interfaces;
 @using MegaCarsSystem.Web.Infrastructure.Extensions;
+
 @using static MegaCarsSystem.Common.GeneralApplicationConstants;
 
 @inject IAgentService AgentService
+
 @{
     bool isUserAgent = await AgentService.AgentExistsByUserIdAsync(this.User.GetId()!);
 }

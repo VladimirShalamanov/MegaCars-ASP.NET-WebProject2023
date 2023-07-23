@@ -4,6 +4,8 @@
 
     public class AgentInfoOnCarViewModel
     {
+        public string FullName { get; set; } = null!;
+
         public string Email { get; set; } = null!;
 
         [Display(Name = "Phone")]

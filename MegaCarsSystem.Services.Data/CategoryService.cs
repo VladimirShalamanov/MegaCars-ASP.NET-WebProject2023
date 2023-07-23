@@ -1,9 +1,9 @@
 ﻿namespace MegaCarsSystem.Services.Data
 {
-    using Microsoft.EntityFrameworkCore;
-
     using System.Threading.Tasks;
     using System.Collections.Generic;
+
+    using Microsoft.EntityFrameworkCore;
 
     using MegaCarsSystem.Data;
     using MegaCarsSystem.Data.Models;

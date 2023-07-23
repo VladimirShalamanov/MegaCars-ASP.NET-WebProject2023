@@ -1,13 +1,16 @@
 namespace MegaCarsSystem.Web
 {
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Identity;
 
-    using Data;
-    using Data.Models;
+    using MegaCarsSystem.Data;
+    using MegaCarsSystem.Data.Models;
     using MegaCarsSystem.Services.Data.Interfaces;
     using MegaCarsSystem.Web.Infrastructure.Extensions;
     using MegaCarsSystem.Web.Infrastructure.ModelBinders;
-    using Microsoft.AspNetCore.Mvc;
+
+    using static Common.GeneralApplicationConstants;
 
     public class Program
     {
@@ -37,6 +40,7 @@ namespace MegaCarsSystem.Web
                 options.Password.RequiredLength =
                     builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
             })
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<MegaCarsDbContext>();
 
             builder.Services.AddApplicationServices(typeof(ICarService));
@@ -75,6 +79,11 @@ namespace MegaCarsSystem.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            if (app.Environment.IsDevelopment())
+            {
+                app.SeedAdministrator(DevelopmentAdminEmail);
+            }
 
             app.UseEndpoints(endpoints =>
             {
