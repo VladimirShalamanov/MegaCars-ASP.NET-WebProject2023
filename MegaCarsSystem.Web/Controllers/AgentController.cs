@@ -39,8 +39,7 @@
         public async Task<IActionResult> Become(BecomeAgentFormModel model)
         {
             string? userId = this.User.GetId();
-            bool isAgent = await this.agentService
-                .AgentExistsByUserIdAsync(userId!);
+            bool isAgent = await this.agentService.AgentExistsByUserIdAsync(userId!);
 
             if (isAgent)
             {
@@ -49,8 +48,7 @@
                 return RedirectToAction("Index", "Home");
             }
 
-            bool isPhoneNumberTaken = await this.agentService
-                .AgentExistsByPhoneNumberAsync(model.PhoneNumber);
+            bool isPhoneNumberTaken = await this.agentService.AgentExistsByPhoneNumberAsync(model.PhoneNumber);
 
             if (isPhoneNumberTaken)
             {
@@ -63,8 +61,7 @@
                 return this.View(model);
             }
 
-            bool userHasActiveRents = await this.agentService
-                .HasRentsByUserIdAsync(userId!);
+            bool userHasActiveRents = await this.agentService.HasRentsByUserIdAsync(userId!);
 
             if (userHasActiveRents)
             {

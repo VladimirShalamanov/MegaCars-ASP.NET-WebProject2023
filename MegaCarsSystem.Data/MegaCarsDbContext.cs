@@ -20,11 +20,13 @@
         public DbSet<ShopCart> ShopCarts { get; set; } = null!;
 
 
+        public DbSet<Agent> Agents { get; set; } = null!;
+
+
         public DbSet<Gearbox> Gearboxes { get; set; } = null!;
         public DbSet<Engine> Engines { get; set; } = null!;
         public DbSet<Category> Categories { get; set; } = null!;
         public DbSet<Car> Cars { get; set; } = null!;
-        public DbSet<Agent> Agents { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
