@@ -41,7 +41,7 @@
                 .HasForeignKey(a => a.AgentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasData(GenerateCars());
+            //builder.HasData(GenerateCars());
         }
 
         private Car[] GenerateCars()

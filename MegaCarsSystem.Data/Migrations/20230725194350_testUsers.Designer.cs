@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MegaCarsSystem.Data.Migrations
 {
     [DbContext(typeof(MegaCarsDbContext))]
-    [Migration("20230725170557_GuestAdded")]
-    partial class GuestAdded
+    [Migration("20230725194350_testUsers")]
+    partial class testUsers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,14 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Agents");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8054bc54-c38b-4ba4-96ed-ea58995c326b"),
+                            PhoneNumber = "+359888777666",
+                            UserId = new Guid("85ce132c-35cc-4b6a-8081-ec74aad74ea3")
+                        });
                 });
 
             modelBuilder.Entity("MegaCarsSystem.Data.Models.ApplicationUser", b =>
@@ -127,20 +135,39 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c8456483-8aa7-4064-912d-967070b2b115"),
+                            Id = new Guid("6435e52c-1508-46ae-b585-49c797a9e607"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "53b2671c-e5a3-474d-b0a2-6df30f8d226e",
+                            ConcurrencyStamp = "858c038a-5419-4189-aea1-54b596833c8b",
                             Email = "guest@guest.com",
                             EmailConfirmed = false,
                             FirstName = "Guest",
-                            LastName = "User_Test",
+                            LastName = "GuIsHere_Test",
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@guest.com",
                             NormalizedUserName = "guest@guest.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECtgDb0kZ16RFXKcngvCO9QfudsoswtbS4F/Dvx6cIdlylvVhqsWt2XboSgcX7n2Ew==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMQ7QIjBLr3jJsRqlQPGOl3RHi+eemOAUSJM5UzXz9nxEnV7N4RGTonKmzCO/fSILw==",
                             PhoneNumberConfirmed = false,
+                            SecurityStamp = "1f0eec96-7514-43b6-a3dd-89608fd36f6b",
                             TwoFactorEnabled = false,
                             UserName = "guest@guest.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("85ce132c-35cc-4b6a-8081-ec74aad74ea3"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4aaa4948-060a-488b-bc55-3b31f494f7d1",
+                            Email = "agent@agent.com",
+                            EmailConfirmed = false,
+                            FirstName = "Agent",
+                            LastName = "AgIsHere_Test",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "agent@agent.com",
+                            NormalizedUserName = "agent@agent.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAKzmzQznzACz9PjiHXHoNsPjiuqN4oYPeTHn7NlZcw8S2BaCApZNsc9uaYbJ0hyXw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "72b26ce2-d826-479d-a849-0bb294a6b20a",
+                            TwoFactorEnabled = false,
+                            UserName = "agent@agent.com"
                         });
                 });
 
@@ -226,7 +253,7 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f7286bed-2ae8-4ada-89aa-56f9df21b8b7"),
+                            Id = new Guid("ecec9150-af9e-4994-9cd7-02aa957453a2"),
                             Address = "Boyana Neighbourhood, Sofia, Bulgaria",
                             AgentId = new Guid("a6f8d35a-a59f-4227-9da1-4bba22b919e1"),
                             Brand = "McLaren",
@@ -245,7 +272,7 @@ namespace MegaCarsSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("32245362-18fb-48f9-918a-6f4c56931ed0"),
+                            Id = new Guid("730120f3-b7a9-481f-8aca-e1bedb15044f"),
                             Address = "Boyana Neighbourhood, Sofia, Bulgaria",
                             AgentId = new Guid("a6f8d35a-a59f-4227-9da1-4bba22b919e1"),
                             Brand = "Toyota",
@@ -461,7 +488,7 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3677a188-23a4-4a07-99f1-1b107c5c8538"),
+                            Id = new Guid("fdf06808-b548-49d9-91bd-8638fa29ccd0"),
                             Description = "Мetal key holder for your keys.",
                             Image = "https://i.etsystatic.com/13582943/r/il/2f99a2/1700229685/il_fullxfull.1700229685_ooj3.jpg",
                             Name = "Keychain Turbine",
@@ -469,7 +496,7 @@ namespace MegaCarsSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2a3ea786-886f-442e-8c46-f45a8acf885c"),
+                            Id = new Guid("f75dd2f6-e500-4175-9ac9-2c13d90677fd"),
                             Description = "Black T-shirt with great quality.",
                             Image = "https://images-na.ssl-images-amazon.com/images/I/61oFHwCIKrL._SLDPMOBCAROUSELAUTOCROP288221_MCnd_AC_SR462,693_.jpg",
                             Name = "T-shirt Supercar",
