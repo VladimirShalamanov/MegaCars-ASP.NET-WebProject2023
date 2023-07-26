@@ -5,6 +5,8 @@
 
     using MegaCarsSystem.Data.Models;
 
+    using static Common.GeneralApplicationConstants;
+
     public class CarEntityConfiguration : IEntityTypeConfiguration<Car>
     {
         public void Configure(EntityTypeBuilder<Car> builder)
@@ -41,7 +43,7 @@
                 .HasForeignKey(a => a.AgentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.HasData(GenerateCars());
+            builder.HasData(GenerateCars());
         }
 
         private Car[] GenerateCars()
@@ -63,8 +65,7 @@
                 ImageUrl = "https://edge.pxcrush.net/cars/dealer/dro0hrehxv0n0250f55sf7nqy.jpg?pxc_expires=20231101025101&pxc_clear=1&pxc_signature=2e0f693b59a609c1f0f77e21ed5fbfed",
                 PricePerDay = 1500.00M,
                 CategoryId = 6,
-                AgentId = Guid.Parse("A6F8D35A-A59F-4227-9DA1-4BBA22B919E1"),
-                RenterId = Guid.Parse("30C3ED84-2725-45F3-95AE-5D93572DFE5B")
+                AgentId = Guid.Parse(AgentId)
             };
             cars.Add(car);
 
@@ -81,7 +82,7 @@
                 ImageUrl = "https://performancedrive.com.au/wp-content/uploads/2020/02/2020-Toyota-GR-Supra-GT-scaled.jpg",
                 PricePerDay = 900.00M,
                 CategoryId = 3,
-                AgentId = Guid.Parse("A6F8D35A-A59F-4227-9DA1-4BBA22B919E1")
+                AgentId = Guid.Parse(AgentId)
             };
             cars.Add(car);
 

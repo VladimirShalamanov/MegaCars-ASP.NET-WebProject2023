@@ -10,14 +10,6 @@
 
     public class AppUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
-
-        //private readonly MegaCarsDbContext dbContext;
-
-        //public AppUserEntityConfiguration(MegaCarsDbContext dbContext)
-        //{
-        //    this.dbContext = dbContext;
-        //}
-
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
             builder
@@ -33,59 +25,58 @@
                 .WithOne(e => e.User)
                 .IsRequired();
 
-            //if (!await this.dbContext.Users.AnyAsync(u => u.Email == GuestEmail))
-            //{
-            //}
-            //builder.HasData(GenerateUsers());
+            builder.HasData(GenerateUsers());
         }
 
-        //private ApplicationUser[] GenerateUsers()
-        //{
-        //    var hasher = new PasswordHasher<ApplicationUser>();
+        private ApplicationUser[] GenerateUsers()
+        {
+            var hasher = new PasswordHasher<ApplicationUser>();
 
-        //    ICollection<ApplicationUser> users = new HashSet<ApplicationUser>();
+            ICollection<ApplicationUser> users = new HashSet<ApplicationUser>();
 
-        //    ApplicationUser guestUser = new ApplicationUser()
-        //    {
-        //        Id = Guid.Parse("bc4be1b1-a70e-41bb-93b5-4920240f259a"),
-        //        Email = GuestEmail,
-        //        NormalizedEmail = GuestEmail,
-        //        UserName = GuestEmail,
-        //        NormalizedUserName = GuestEmail,        //        FirstName = GuestFirstName,
-        //        LastName = GuestLastName
-        //    };
+            ApplicationUser guestUser = new ApplicationUser()
+            {
+                Id = Guid.Parse(GuestId),
+                Email = GuestEmail,
+                NormalizedEmail = GuestEmail,
+                UserName = GuestEmail,
+                NormalizedUserName = GuestEmail,                FirstName = GuestFirstName,
+                LastName = GuestLastName
+            };
+            guestUser.PasswordHash = hasher.HashPassword(guestUser, GuestPassword);
+            guestUser.SecurityStamp = Guid.NewGuid().ToString();
+            users.Add(guestUser);
 
-        //    guestUser.PasswordHash = hasher.HashPassword(guestUser, GuestPassword);
 
-        //    ApplicationUser agentUser = new ApplicationUser()
-        //    {
-        //        Id = Guid.Parse("83cae343-5b73-4c10-bac2-238264566a69"),
-        //        Email = AgentEmail,
-        //        NormalizedEmail = AgentEmail,
-        //        UserName = AgentEmail,
-        //        NormalizedUserName = AgentEmail,        //        FirstName = AgentFirstName,
-        //        LastName = AgentLastName
-        //    };
+            ApplicationUser agentUser = new ApplicationUser()
+            {
+                Id = Guid.Parse(UserAgentId),
+                Email = AgentEmail,
+                NormalizedEmail = AgentEmail,
+                UserName = AgentEmail,
+                NormalizedUserName = AgentEmail,                FirstName = AgentFirstName,
+                LastName = AgentLastName
+            };
+            agentUser.PasswordHash = hasher.HashPassword(agentUser, AgentPassword);
+            agentUser.SecurityStamp = Guid.NewGuid().ToString();
+            users.Add(agentUser);
 
-        //    agentUser.PasswordHash = hasher.HashPassword(agentUser, AgentPassword);
 
-        //    //ApplicationUser adminUser = new ApplicationUser()
-        //    //{
-        //    //    Id = Guid.Parse("a5dd31b5-860f-4e43-bce8-9bdfc9f0f547"),
-        //    //    Email = DevelopmentAdminEmail,
-        //    //    NormalizedEmail = DevelopmentAdminEmail,
-        //    //    UserName = DevelopmentAdminEmail,
-        //    //    NormalizedUserName = DevelopmentAdminEmail,        //    //    FirstName = DevelopmentAdminFirstName,
-        //    //    LastName = DevelopmentAdminLastName
-        //    //};
+            ApplicationUser adminUser = new ApplicationUser()
+            {
+                Id = Guid.Parse(Development_UserAdminId),
+                Email = Development_AdminEmail,
+                NormalizedEmail = Development_AdminEmail,
+                UserName = Development_AdminEmail,
+                NormalizedUserName = Development_AdminEmail,                FirstName = Development_AdminFirstName,
+                LastName = Development_AdminLastName
+            };
+            adminUser.PasswordHash = hasher.HashPassword(adminUser, Development_AdminPassword);
+            adminUser.SecurityStamp = Guid.NewGuid().ToString();
+            users.Add(adminUser);
 
-        //    //adminUser.PasswordHash = hasher.HashPassword(adminUser, DevelopmentAdminPassword);
 
-        //    users.Add(guestUser);
-        //    users.Add(agentUser);
-        //    //users.Add(adminUser);
-
-        //    return users.ToArray();
-        //}
+            return users.ToArray();
+        }
     }
 }

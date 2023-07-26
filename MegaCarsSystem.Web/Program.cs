@@ -82,7 +82,7 @@ namespace MegaCarsSystem.Web
 
             if (app.Environment.IsDevelopment())
             {
-                app.SeedAdministrator(DevelopmentAdminEmail);
+                app.SeedAdministrator(Development_AdminEmail);
             }
 
             app.UseEndpoints(endpoints =>
