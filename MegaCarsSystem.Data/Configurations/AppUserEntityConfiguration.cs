@@ -21,8 +21,9 @@
                 .HasDefaultValue("TestL");
 
             builder
-                .HasOne(e => e.ShopCart)
-                .WithOne(e => e.User)
+                .HasOne(u => u.ShopCart)
+                .WithOne(u => u.User)
+                .HasForeignKey<ApplicationUser>(s => s.Id)
                 .IsRequired();
 
             builder.HasData(GenerateUsers());
@@ -32,22 +33,8 @@
         {
             var hasher = new PasswordHasher<ApplicationUser>();
 
-            ICollection<ApplicationUser> users = new HashSet<ApplicationUser>();
-
-            ApplicationUser guestUser = new ApplicationUser()
-            {
-                Id = Guid.Parse(GuestId),
-                Email = GuestEmail,
-                NormalizedEmail = GuestEmail,
-                UserName = GuestEmail,
-                NormalizedUserName = GuestEmail,                FirstName = GuestFirstName,
-                LastName = GuestLastName
-            };
-            guestUser.PasswordHash = hasher.HashPassword(guestUser, GuestPassword);
-            guestUser.SecurityStamp = Guid.NewGuid().ToString();
-            users.Add(guestUser);
-
-
+            List<ApplicationUser> agentAndAdmin = new List<ApplicationUser>();
+            
             ApplicationUser agentUser = new ApplicationUser()
             {
                 Id = Guid.Parse(UserAgentId),
@@ -59,8 +46,7 @@
             };
             agentUser.PasswordHash = hasher.HashPassword(agentUser, AgentPassword);
             agentUser.SecurityStamp = Guid.NewGuid().ToString();
-            users.Add(agentUser);
-
+            agentAndAdmin.Add(agentUser);
 
             ApplicationUser adminUser = new ApplicationUser()
             {
@@ -73,10 +59,9 @@
             };
             adminUser.PasswordHash = hasher.HashPassword(adminUser, Development_AdminPassword);
             adminUser.SecurityStamp = Guid.NewGuid().ToString();
-            users.Add(adminUser);
+            agentAndAdmin.Add(adminUser);
 
-
-            return users.ToArray();
+            return agentAndAdmin.ToArray();
         }
     }
 }

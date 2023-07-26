@@ -22,7 +22,7 @@
         [MaxLength(LastName_MaxLength)]
         public string LastName { get; set; } = null!;
 
-        public ShopCart? ShopCart { get; set; } = null!;
+        public ShopCart ShopCart { get; set; } = null!;
 
         public ICollection<Car> RentedCars { get; set; }
     }
