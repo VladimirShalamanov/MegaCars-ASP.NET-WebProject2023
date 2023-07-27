@@ -30,5 +30,14 @@
 
             return $"{user.FirstName} {user.LastName}";
         }
+
+        public async Task<bool> UserExistsByIdAsync(string userId)
+        {
+            bool isFoundUser = await this.dbContext
+                .Users
+                .AnyAsync(a => a.Id.ToString() == userId);
+
+            return isFoundUser;
+        }
     }
 }

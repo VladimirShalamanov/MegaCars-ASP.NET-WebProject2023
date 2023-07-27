@@ -64,7 +64,7 @@
             return allItems;
         }
 
-        public async Task<bool> ExsistByIdAsync(string userId)
+        public async Task<bool> ExistsShopCartByIdAsync(string userId)
         {
             bool isFoundShopCart = await this.dbContext
                 .ShopCarts

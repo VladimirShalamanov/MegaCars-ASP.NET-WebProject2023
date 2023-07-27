@@ -44,7 +44,7 @@
             return allNames;
         }
 
-        public async Task<bool> ExistsByIdAsync(int id)
+        public async Task<bool> ExistsCategoryByIdAsync(int id)
         {
             bool isFoundCategory = await this.dbContext
                 .Categories

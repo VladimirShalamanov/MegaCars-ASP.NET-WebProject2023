@@ -6,7 +6,7 @@
     {
         Task<IEnumerable<EngineForCarFormModel>> GetAllEnginesAsync();
 
-        Task<bool> ExistsByIdAsync(int id);
+        Task<bool> ExistsEngineByIdAsync(int id);
 
         Task<IEnumerable<string>> AllEngineNamesAsync();
     }

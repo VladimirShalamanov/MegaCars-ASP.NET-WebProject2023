@@ -35,7 +35,7 @@
             return products;
         }
 
-        public async Task<bool> ExsistByIdAsync(string productId)
+        public async Task<bool> ExistsProductByIdAsync(string productId)
         {
             bool isFoundProduct = await this.dbContext
                 .Products

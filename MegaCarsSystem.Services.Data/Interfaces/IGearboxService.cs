@@ -6,7 +6,7 @@
     {
         Task<IEnumerable<GearboxForCarFormModel>> GetAllGearboxesAsync();
 
-        Task<bool> ExistsByIdAsync(int id);
+        Task<bool> ExistsGearboxByIdAsync(int id);
 
         Task<IEnumerable<string>> AllGearboxNamesAsync();
     }

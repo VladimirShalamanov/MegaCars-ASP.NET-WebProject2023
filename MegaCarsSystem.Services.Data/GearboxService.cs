@@ -28,7 +28,7 @@
             return allNames;
         }
 
-        public async Task<bool> ExistsByIdAsync(int id)
+        public async Task<bool> ExistsGearboxByIdAsync(int id)
         {
             bool isFoundGearbox = await this.dbContext
                 .Gearboxes

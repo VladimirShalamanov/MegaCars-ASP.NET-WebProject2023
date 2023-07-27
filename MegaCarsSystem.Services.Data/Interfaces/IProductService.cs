@@ -7,7 +7,7 @@
     {
         Task<IEnumerable<AllProductViewModel>> AllProductsAsync();
 
-        Task<bool> ExsistByIdAsync(string productId);
+        Task<bool> ExistsProductByIdAsync(string productId);
 
         Task<Product> GetProductByIdAsync(string productId);
     }

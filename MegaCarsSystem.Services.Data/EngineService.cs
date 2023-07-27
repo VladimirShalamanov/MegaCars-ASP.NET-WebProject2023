@@ -28,7 +28,7 @@
             return allNames;
         }
 
-        public async Task<bool> ExistsByIdAsync(int id)
+        public async Task<bool> ExistsEngineByIdAsync(int id)
         {
             bool isFoundEngine = await this.dbContext
                 .Engines

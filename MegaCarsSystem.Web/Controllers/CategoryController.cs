@@ -28,7 +28,7 @@
         [HttpGet]
         public async Task<IActionResult> Details(int id, string information)
         {
-            bool categoryExists = await this.categoryService.ExistsByIdAsync(id);
+            bool categoryExists = await this.categoryService.ExistsCategoryByIdAsync(id);
 
             if (!categoryExists)
             {

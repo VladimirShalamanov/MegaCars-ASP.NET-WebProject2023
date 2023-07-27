@@ -35,6 +35,8 @@
 
             List<ApplicationUser> agentAndAdmin = new List<ApplicationUser>();
             
+            // add guest !!!
+
             ApplicationUser agentUser = new ApplicationUser()
             {
                 Id = Guid.Parse(UserAgentId),

@@ -14,19 +14,24 @@
     {
         private readonly IShopCartService shopCartService;
         private readonly IProductService productService;
+        private readonly IUserService userService;
 
         public ShopCartController(
             IShopCartService shopCartService,
-            IProductService productService)
+            IProductService productService,
+            IUserService userService)
         {
             this.shopCartService = shopCartService;
             this.productService = productService;
+            this.userService = userService;
+
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> AddToCart(string id)
         {
-            bool productExists = await this.productService.ExsistByIdAsync(id);
+            bool productExists = await this.productService.ExistsProductByIdAsync(id);
 
             if (!productExists)
             {
@@ -35,16 +40,17 @@
                 return this.RedirectToAction("All", "Product");
             }
 
-            if (!this.User.Identity?.IsAuthenticated ?? false)
+
+            if (this.User.Identity?.IsAuthenticated == false)
             {
                 this.TempData[ErrorMessage] = "You must be login user if you want to buying products!";
 
-                return this.Redirect("/Identity/Account/Login");
+                return this.RedirectToAction("Login", "User");
             }
 
             string userId = this.User.GetId()!;
 
-            bool shopCartExists = await this.shopCartService.ExsistByIdAsync(userId);
+            bool shopCartExists = await this.shopCartService.ExistsShopCartByIdAsync(userId);
 
             if (!shopCartExists)
             {
@@ -75,7 +81,7 @@
 
             string userId = this.User.GetId()!;
 
-            bool shopCartExists = await this.shopCartService.ExsistByIdAsync(userId);
+            bool shopCartExists = await this.shopCartService.ExistsShopCartByIdAsync(userId);
 
             if (!shopCartExists)
             {

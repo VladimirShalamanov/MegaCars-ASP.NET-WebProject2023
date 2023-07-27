@@ -92,21 +92,21 @@
                 return RedirectToAction("Become", "Agent");
             }
 
-            bool engineExists = await this.engineService.ExistsByIdAsync(formModel.EngineId);
+            bool engineExists = await this.engineService.ExistsEngineByIdAsync(formModel.EngineId);
 
             if (!engineExists)
             {
                 this.ModelState.AddModelError(nameof(formModel.EngineId), "Selected engine with type fuel does not exist!");
             }
 
-            bool gearboxExists = await this.gearboxService.ExistsByIdAsync(formModel.GearboxId);
+            bool gearboxExists = await this.gearboxService.ExistsGearboxByIdAsync(formModel.GearboxId);
 
             if (!gearboxExists)
             {
                 this.ModelState.AddModelError(nameof(formModel.GearboxId), "Selected gearbox does not exist!");
             }
 
-            bool categoryExists = await this.categoryService.ExistsByIdAsync(formModel.CategoryId);
+            bool categoryExists = await this.categoryService.ExistsCategoryByIdAsync(formModel.CategoryId);
 
             if (!categoryExists)
             {

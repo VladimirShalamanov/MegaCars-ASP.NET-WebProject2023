@@ -8,7 +8,7 @@
 
         Task<IEnumerable<AllCategoriesViewModel>> AllCategoriesForListAsync();
 
-        Task<bool> ExistsByIdAsync(int id);
+        Task<bool> ExistsCategoryByIdAsync(int id);
 
         Task<IEnumerable<string>> AllCategoryNamesAsync();
 

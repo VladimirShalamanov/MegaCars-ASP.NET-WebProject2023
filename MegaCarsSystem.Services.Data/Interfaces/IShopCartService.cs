@@ -6,7 +6,7 @@
     {
         Task AddToCartByIdAsync(string userId, string productId);
 
-        Task<bool> ExsistByIdAsync(string userId);
+        Task<bool> ExistsShopCartByIdAsync(string userId);
 
         Task CreateShopCartByIdAsync(string userId);
 
