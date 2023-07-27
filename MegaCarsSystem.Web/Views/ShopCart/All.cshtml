@@ -46,11 +46,21 @@ else
                     </td>
                     <td>@(item.Price * item.Quantity)</td>
                     <td>
-                        <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Id">
+                        @*<form asp-controller="ShopCart" asp-action="RemoveFromCart" asp-route-id="@item.Id" method="post">
+                                <input class="btn btn-primary" type="submit" value="RemoveFromCart" />
                             <i class="fa-solid fa-trash-can" style="color: red"></i>
+                            
+                        </form>
 
-                        </a>
+                        <form asp-controller="ShopCart" asp-action="RemoveFromCart" asp-route-id="@item.Id" method="post">
+                            <input class="btn btn-primary" type="submit" value="AddToCart" />
+                        </form>*@
 
+                        <form asp-controller="ShopCart" asp-action="RemoveFromCart" asp-route-id="@item.Id" method="post">
+                            <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
+                                <i class="fa-solid fa-trash-can" style="color: red"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             }

@@ -8,19 +8,24 @@
     using MegaCarsSystem.Web.ViewModels.User;
 
     using static Common.NotificationsMessagesConstants;
+    using MegaCarsSystem.Services.Data.Interfaces;
 
     public class UserController : Controller
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
 
+        private readonly IShopCartService shopCartService;
+
         public UserController(
             SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager
-            )
+            UserManager<ApplicationUser> userManager,
+            IShopCartService shopCartService)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.shopCartService = shopCartService;
+
         }
 
         [HttpGet]
@@ -51,6 +56,7 @@
             if (result.Succeeded)
             {
                 await this.signInManager.SignInAsync(user, false);
+                await this.shopCartService.CreateShopCartByIdAsync(user.Id.ToString());
 
                 return this.RedirectToAction("Index", "Home");
             }

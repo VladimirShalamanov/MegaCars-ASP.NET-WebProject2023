@@ -39,5 +39,14 @@
 
             return isFoundUser;
         }
+
+        public async Task<bool> UserExistsByEmailAsync(string email)
+        {
+            bool isFoundEmail = await this.dbContext
+                .Users
+                .AnyAsync(a => a.Email == email);
+
+            return isFoundEmail;
+        }
     }
 }

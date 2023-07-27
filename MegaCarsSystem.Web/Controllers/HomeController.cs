@@ -1,10 +1,12 @@
 ﻿namespace MegaCarsSystem.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
 
     using MegaCarsSystem.Web.ViewModels.Home;
     using MegaCarsSystem.Services.Data.Interfaces;
 
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ICarService carService;

@@ -5,5 +5,7 @@
         Task<string> GetFullNameByEmailAsync(string email);
 
         Task<bool> UserExistsByIdAsync(string userId);
+
+        Task<bool> UserExistsByEmailAsync(string email);
     }
 }

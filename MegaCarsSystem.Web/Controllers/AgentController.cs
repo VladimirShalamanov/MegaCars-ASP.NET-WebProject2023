@@ -76,13 +76,17 @@
             }
             catch (Exception)
             {
-                this.TempData[ErrorMessage] =
-                    "Unexpected error occured while registering you as an agent! Please try again later or contact administrator.";
-
-                return this.RedirectToAction("Index", "Home");
+                return this.GeneralError();
             }
 
             return this.RedirectToAction("All", "Car");
+        }
+
+        private IActionResult GeneralError()
+        {
+            this.TempData[ErrorMessage] = "Unexpected error occurred! Please try again later or contact administrator.";
+
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

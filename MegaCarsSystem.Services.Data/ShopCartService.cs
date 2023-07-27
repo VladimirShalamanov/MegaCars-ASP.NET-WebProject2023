@@ -30,7 +30,6 @@
 
             Item item = new Item()
             {
-                Id = product.Id,
                 Name = product.Name,
                 Quantity = 1,
                 Price = product.Price,
@@ -39,6 +38,16 @@
             };
 
             await this.dbContext.Items.AddAsync(item);
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveFromCartByIdAsync(string userId, string itemId)
+        {
+            Item itemToRemove = await this.dbContext
+                .Items
+                .FirstAsync(p => p.Id.ToString() == itemId.ToLower());
+
+            this.dbContext.Items.Remove(itemToRemove);
             await this.dbContext.SaveChangesAsync();
         }
 
@@ -62,6 +71,15 @@
                 .ToArrayAsync();
 
             return allItems;
+        }
+
+        public async Task<bool> ExistsItemByIdAsync(string itemId)
+        {
+            bool isFoundItem = await this.dbContext
+                .Items
+                .AnyAsync(p => p.Id.ToString() == itemId);
+
+            return isFoundItem;
         }
 
         public async Task<bool> ExistsShopCartByIdAsync(string userId)
@@ -88,5 +106,6 @@
             await this.dbContext.ShopCarts.AddAsync(newShopCart);
             await this.dbContext.SaveChangesAsync();
         }
+
     }
 }

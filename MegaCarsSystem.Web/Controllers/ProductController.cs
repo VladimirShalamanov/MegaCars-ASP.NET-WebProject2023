@@ -4,7 +4,9 @@
 
     using MegaCarsSystem.Web.ViewModels.Product;
     using MegaCarsSystem.Services.Data.Interfaces;
+    using Microsoft.AspNetCore.Authorization;
 
+    [AllowAnonymous]
     public class ProductController : Controller
     {
         private readonly IProductService productService;
