@@ -52,7 +52,7 @@
 
                 this.TempData[SuccessMessage] = "You have successfully added the product to your shopping cart.";
 
-                return null;
+                return this.RedirectToAction("All", "Product");
             }
             catch (Exception)
             {
