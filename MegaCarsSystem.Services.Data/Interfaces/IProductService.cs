@@ -5,10 +5,13 @@
 
     public interface IProductService
     {
+        // Views
         Task<IEnumerable<AllProductViewModel>> AllProductsAsync();
 
-        Task<bool> ExistsProductByIdAsync(string productId);
-
+        // Func
         Task<Product> GetProductByIdAsync(string productId);
+
+        // Check
+        Task<bool> ExistsProductByIdAsync(string productId);
     }
 }

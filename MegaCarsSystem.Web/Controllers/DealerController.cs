@@ -2,32 +2,31 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
-
-    using MegaCarsSystem.Web.ViewModels.Agent;
+    using MegaCarsSystem.Web.ViewModels.Dealer;
     using MegaCarsSystem.Services.Data.Interfaces;
     using MegaCarsSystem.Web.Infrastructure.Extensions;
 
     using static Common.NotificationsMessagesConstants;
 
     [Authorize]
-    public class AgentController : Controller
+    public class DealerController : Controller
     {
-        private readonly IAgentService agentService;
+        private readonly IDealerService dealerService;
 
-        public AgentController(IAgentService agentService)
+        public DealerController(IDealerService dealerService)
         {
-            this.agentService = agentService;
+            this.dealerService = dealerService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Become()
         {
             string? userId = this.User.GetId();
-            bool isAgent = await this.agentService.AgentExistsByUserIdAsync(userId!);
+            bool isDealer = await this.dealerService.DealerExistsByUserIdAsync(userId!);
 
-            if (isAgent)
+            if (isDealer)
             {
-                this.TempData[ErrorMessage] = "You are already an agent!";
+                this.TempData[ErrorMessage] = "You are already an Dealer!";
 
                 return RedirectToAction("Index", "Home");
             }
@@ -36,24 +35,24 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Become(BecomeAgentFormModel model)
+        public async Task<IActionResult> Become(BecomeDealerFormModel model)
         {
             string? userId = this.User.GetId();
-            bool isAgent = await this.agentService.AgentExistsByUserIdAsync(userId!);
+            bool isDealer = await this.dealerService.DealerExistsByUserIdAsync(userId!);
 
-            if (isAgent)
+            if (isDealer)
             {
-                this.TempData[ErrorMessage] = "You are already an agent!";
+                this.TempData[ErrorMessage] = "You are already an Dealer!";
 
                 return RedirectToAction("Index", "Home");
             }
 
-            bool isPhoneNumberTaken = await this.agentService.AgentExistsByPhoneNumberAsync(model.PhoneNumber);
+            bool isPhoneNumberTaken = await this.dealerService.DealerExistsByPhoneNumberAsync(model.PhoneNumber);
 
             if (isPhoneNumberTaken)
             {
                 this.ModelState.AddModelError(nameof(model.PhoneNumber),
-                    "Agent with the provided phone number already exists!");
+                    "Dealer with the provided phone number already exists!");
             }
 
             if (!ModelState.IsValid)
@@ -61,18 +60,18 @@
                 return this.View(model);
             }
 
-            bool userHasActiveRents = await this.agentService.HasRentsByUserIdAsync(userId!);
+            bool userHasActiveRents = await this.dealerService.HasRentsByUserIdAsync(userId!);
 
             if (userHasActiveRents)
             {
-                this.TempData[ErrorMessage] = "You must not have any active rents in order to become an agent!";
+                this.TempData[ErrorMessage] = "You must not have any active rents in order to become an Dealer!";
 
                 return this.RedirectToAction("Mine", "Car");
             }
 
             try
             {
-                await this.agentService.Create(userId!, model);
+                await this.dealerService.Create(userId!, model);
             }
             catch (Exception)
             {

@@ -9,7 +9,7 @@
     using MegaCarsSystem.Data.Models;
     using MegaCarsSystem.Web.ViewModels.Car;
     using MegaCarsSystem.Web.ViewModels.Home;
-    using MegaCarsSystem.Web.ViewModels.Agent;
+    using MegaCarsSystem.Web.ViewModels.Dealer;
     using MegaCarsSystem.Services.Data.Models.Car;
     using MegaCarsSystem.Web.ViewModels.Car.Enums;
     using MegaCarsSystem.Services.Data.Interfaces;
@@ -20,13 +20,15 @@
         private readonly MegaCarsDbContext dbContext;
         private readonly IUserService userService;
 
-        public CarService(MegaCarsDbContext dbContext, IUserService userService)
+        public CarService(
+            MegaCarsDbContext dbContext,
+            IUserService userService)
         {
             this.dbContext = dbContext;
             this.userService = userService;
         }
 
-        public async Task<AllCarsFilteredAndPagedServiceModel> AllAsync(AllCarsQueryModel queryModel)
+        public async Task<AllCarsFilteredAndPagedServiceModel> AllCarsAsync(AllCarsQueryModel queryModel)
         {
             IQueryable<Car> carsQuery = this.dbContext
                 .Cars
@@ -55,8 +57,6 @@
                 carsQuery = carsQuery
                     .Where(e => e.Gearbox.Name == queryModel.Gearbox);
             }
-
-
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchString))
             {
@@ -116,12 +116,12 @@
             return allNames;
         }
 
-        public async Task<IEnumerable<AllCarViewModel>> AllByAgentIdAsync(string agentId)
+        public async Task<IEnumerable<AllCarViewModel>> AllByDealerIdAsync(string dealerId)
         {
-            IEnumerable<AllCarViewModel> allAgentCars = await this.dbContext
+            IEnumerable<AllCarViewModel> allDealerCars = await this.dbContext
                 .Cars
                 .Where(c => c.IsActive &&
-                            c.AgentId.ToString() == agentId)
+                            c.DealerId.ToString() == dealerId)
                 .Select(c => new AllCarViewModel()
                 {
                     Id = c.Id.ToString(),
@@ -134,7 +134,7 @@
                 })
                 .ToArrayAsync();
 
-            return allAgentCars;
+            return allDealerCars;
         }
 
         public async Task<IEnumerable<AllCarViewModel>> AllByUserIdAsync(string userId)
@@ -178,7 +178,7 @@
             return lastTwoCars;
         }
 
-        public async Task<string> CreateAndReturnIdAsync(CarFormModel formModel, string agentId)
+        public async Task<string> CreateAndReturnIdAsync(CarFormModel formModel, string dealerId)
         {
             Car newCar = new Car()
             {
@@ -193,7 +193,7 @@
                 ImageUrl = formModel.ImageUrl,
                 PricePerDay = formModel.PricePerDay,
                 CategoryId = formModel.CategoryId,
-                AgentId = Guid.Parse(agentId)
+                DealerId = Guid.Parse(dealerId)
             };
 
             await this.dbContext.Cars.AddAsync(newCar);
@@ -202,7 +202,7 @@
             return newCar.Id.ToString();
         }
 
-        public async Task<bool> ExistByIdAsync(string carId)
+        public async Task<bool> ExistCarByIdAsync(string carId)
         {
             bool isFoundCar = await this.dbContext
                 .Cars
@@ -267,16 +267,10 @@
                 .Include(e => e.Engine)
                 .Include(g => g.Gearbox)
                 .Include(c => c.Category)
-                .Include(c => c.Agent)
+                .Include(c => c.Dealer)
                 .ThenInclude(c => c.User)
                 .Where(c => c.IsActive)
                 .FirstAsync(c => c.Id.ToString() == carId);
-
-            //ApplicationUser user = await this.dbContext
-            //        .Users
-            //        .FirstAsync(u => u.Email == email);
-
-            //string fullName = $"{user.FirstName} {user.LastName}";
 
             return new CarDetailsViewModel()
             {
@@ -293,23 +287,23 @@
                 PricePerDay = car.PricePerDay,
                 IsRented = car.RenterId.HasValue,
                 Category = car.Category.Name,
-                Agent = new AgentInfoOnCarViewModel()
+                Dealer = new DealerInfoOnCarViewModel()
                 {
-                    FullName = await this.userService.GetFullNameByEmailAsync(car.Agent.User.Email),
-                    Email = car.Agent.User.Email,
-                    PhoneNumber = car.Agent.PhoneNumber
+                    FullName = await this.userService.GetFullNameByEmailAsync(car.Dealer.User.Email),
+                    Email = car.Dealer.User.Email,
+                    PhoneNumber = car.Dealer.PhoneNumber
                 }
             };
         }
 
-        public async Task<bool> IsAgentWithIdOwnerOfCarWithIdAsync(string carId, string agentId)
+        public async Task<bool> IsDealerWithIdOwnerOfCarWithIdAsync(string carId, string dealerId)
         {
             Car car = await this.dbContext
                 .Cars
                 .Where(c => c.IsActive)
                 .FirstAsync(c => c.Id.ToString() == carId);
 
-            return car.AgentId.ToString() == agentId;
+            return car.DealerId.ToString() == dealerId;
         }
 
         public async Task<CarPreDeleteDetailsViewModel> GetCarForDeleteByIdAsync(string carId)

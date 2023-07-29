@@ -4,10 +4,13 @@
     
     public interface IGearboxService
     {
+        // Views
         Task<IEnumerable<GearboxForCarFormModel>> GetAllGearboxesAsync();
 
-        Task<bool> ExistsGearboxByIdAsync(int id);
-
+        // Func
         Task<IEnumerable<string>> AllGearboxNamesAsync();
+
+        // Check
+        Task<bool> ExistsGearboxByIdAsync(int id);
     }
 }

@@ -17,24 +17,25 @@
                 .HasForeignKey<ShopCart>(s => s.UserId)
                 .IsRequired();
 
-            builder.HasData(GenerateShoppingCartsForAgentAndAdmin());
+            builder.HasData(GenerateShoppingCarts());
         }
 
-        private ShopCart[] GenerateShoppingCartsForAgentAndAdmin()
+        // Generate shopping carts for User,Dealer and Admin
+        private ShopCart[] GenerateShoppingCarts()
         {
             ICollection<ShopCart> shoppingCarts = new HashSet<ShopCart>();
 
-            ShopCart agentShopCart = new ShopCart()
+            ShopCart dealerShopCart = new ShopCart()
             {
-                Id = Guid.Parse(AgentShoppingCartId),
-                UserId = Guid.Parse(UserAgentId)
+                Id = Guid.Parse(DealerShoppingCartId),
+                UserId = Guid.Parse(UserDealerId)
             };
-            shoppingCarts.Add(agentShopCart);
+            shoppingCarts.Add(dealerShopCart);
 
             ShopCart adminShopCart = new ShopCart()
             {
                 Id = Guid.Parse(Development_AdminShoppingCartId),
-                UserId = Guid.Parse(Development_UserAdminId)
+                UserId = Guid.Parse(Development_UserDealerId)
             };
             shoppingCarts.Add(adminShopCart);
 

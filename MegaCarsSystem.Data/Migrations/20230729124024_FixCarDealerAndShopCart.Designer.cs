@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MegaCarsSystem.Data.Migrations
 {
     [DbContext(typeof(MegaCarsDbContext))]
-    [Migration("20230726181748_AgentAdminFixShopCartAdded")]
-    partial class AgentAdminFixShopCartAdded
+    [Migration("20230729124024_FixCarDealerAndShopCart")]
+    partial class FixCarDealerAndShopCart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,41 +23,6 @@ namespace MegaCarsSystem.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("MegaCarsSystem.Data.Models.Agent", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Agents");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("4fd9d7ca-37c2-411e-8a03-b978fbb1c5f3"),
-                            PhoneNumber = "+359888777666",
-                            UserId = new Guid("993dc891-f1ee-4b53-984d-3a019f294bfd")
-                        },
-                        new
-                        {
-                            Id = new Guid("d08e602f-3c3f-4391-aaf6-b4867a639c13"),
-                            PhoneNumber = "+359333222111",
-                            UserId = new Guid("bcbd7654-ab17-4621-b75b-fc43ea4449db")
-                        });
-                });
 
             modelBuilder.Entity("MegaCarsSystem.Data.Models.ApplicationUser", b =>
                 {
@@ -141,9 +106,27 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasData(
                         new
                         {
+                            Id = new Guid("2c5628be-a8ca-4cf0-bc0d-c441e6aa0c6e"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c401e667-5131-4046-bd92-b95e56f90c6c",
+                            Email = "user@user.com",
+                            EmailConfirmed = false,
+                            FirstName = "User",
+                            LastName = "Guest_Test",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "user@user.com",
+                            NormalizedUserName = "user@user.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF6xS1GYDfpy6LB9IPpQBVQaZ8tbdM9bvrclGDWB8z3N2DQ0Cc/dQLNDFwRDOkFwiw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8dec6e67-4c4b-4635-ab13-21f0e3865e09",
+                            TwoFactorEnabled = false,
+                            UserName = "user@user.com"
+                        },
+                        new
+                        {
                             Id = new Guid("993dc891-f1ee-4b53-984d-3a019f294bfd"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3ed9e6d8-4344-4883-85c6-d7d43635751e",
+                            ConcurrencyStamp = "ca8a1265-2a2b-4a48-a7db-e62d154ccf4b",
                             Email = "agent@agent.com",
                             EmailConfirmed = false,
                             FirstName = "Agent",
@@ -151,9 +134,9 @@ namespace MegaCarsSystem.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "agent@agent.com",
                             NormalizedUserName = "agent@agent.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHNfMFQoEKkFvI+V46Be8nbTXaG/MSuEL+bvuSNaid7fY25E1PduefLqIMULCtmMTg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFG/bfv90S81RpwIyxMj7BdSoa8cdaXXy6/o5FC+PE5tZzz+em1dXumTmJ3u4/w1hQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b0791874-a69b-4326-bee7-60c8b6146f91",
+                            SecurityStamp = "6ce59d6d-0b0c-4d2c-a0f3-5e4f6bdd761a",
                             TwoFactorEnabled = false,
                             UserName = "agent@agent.com"
                         },
@@ -161,7 +144,7 @@ namespace MegaCarsSystem.Data.Migrations
                         {
                             Id = new Guid("bcbd7654-ab17-4621-b75b-fc43ea4449db"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6204576a-6460-48f7-860c-de5e9b2a19ee",
+                            ConcurrencyStamp = "dbaa5c93-be83-4927-8b8a-f98a2e190089",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -169,9 +152,9 @@ namespace MegaCarsSystem.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@admin.com",
                             NormalizedUserName = "admin@admin.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEdACrmd1olanqgxe3siZPmpde+KZxf2yHue+bk1GlBRXLhLSACJtnShx+YaixITyw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIE3jNAaArQU72DxxdowRiQItvRo9uIkeq1k5FhizEd8Rf8Mmn4PB+rnEBThFfUFXQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f37fbf48-882d-458b-b4f9-9ff673c2e162",
+                            SecurityStamp = "7c88c5cb-c78d-4401-8b52-0dd21e545809",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -188,9 +171,6 @@ namespace MegaCarsSystem.Data.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<Guid>("AgentId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Brand")
                         .IsRequired()
                         .HasMaxLength(14)
@@ -203,6 +183,9 @@ namespace MegaCarsSystem.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<Guid>("DealerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -244,9 +227,9 @@ namespace MegaCarsSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AgentId");
-
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("DealerId");
 
                     b.HasIndex("EngineId");
 
@@ -259,12 +242,12 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2f7485f7-f5d9-47cf-9ab9-a79d9fef87ea"),
+                            Id = new Guid("acb65da4-762f-4cb9-976a-8b806721d4af"),
                             Address = "Boyana Neighbourhood, Sofia, Bulgaria",
-                            AgentId = new Guid("4fd9d7ca-37c2-411e-8a03-b978fbb1c5f3"),
                             Brand = "McLaren",
                             CategoryId = 6,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DealerId = new Guid("4fd9d7ca-37c2-411e-8a03-b978fbb1c5f3"),
                             Description = "This is a sports car and is recommended to be driven carefully.",
                             EngineId = 2,
                             GearboxId = 2,
@@ -277,12 +260,12 @@ namespace MegaCarsSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("aa72e1ce-7207-4b6d-895d-ebbcb7144841"),
+                            Id = new Guid("232fd1f0-e06d-47c0-9a35-2041279f312f"),
                             Address = "Boyana Neighbourhood, Sofia, Bulgaria",
-                            AgentId = new Guid("4fd9d7ca-37c2-411e-8a03-b978fbb1c5f3"),
                             Brand = "Toyota",
                             CategoryId = 3,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DealerId = new Guid("4fd9d7ca-37c2-411e-8a03-b978fbb1c5f3"),
                             Description = "The car is a sports coupe type and is convenient for maneuvering in urban conditions.",
                             EngineId = 1,
                             GearboxId = 1,
@@ -367,6 +350,41 @@ namespace MegaCarsSystem.Data.Migrations
                         {
                             Id = 11,
                             Name = "Off-Road"
+                        });
+                });
+
+            modelBuilder.Entity("MegaCarsSystem.Data.Models.Dealer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Dealers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4fd9d7ca-37c2-411e-8a03-b978fbb1c5f3"),
+                            PhoneNumber = "+359888777666",
+                            UserId = new Guid("993dc891-f1ee-4b53-984d-3a019f294bfd")
+                        },
+                        new
+                        {
+                            Id = new Guid("d08e602f-3c3f-4391-aaf6-b4867a639c13"),
+                            PhoneNumber = "+359333222111",
+                            UserId = new Guid("bcbd7654-ab17-4621-b75b-fc43ea4449db")
                         });
                 });
 
@@ -493,7 +511,7 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("64de7417-79ab-4a94-a34b-ba6a5ba78ccd"),
+                            Id = new Guid("4103a975-2edd-45d9-a80c-941f03baab96"),
                             Description = "Мetal key holder for your keys.",
                             Image = "https://i.etsystatic.com/13582943/r/il/2f99a2/1700229685/il_fullxfull.1700229685_ooj3.jpg",
                             Name = "Keychain Turbine",
@@ -501,7 +519,7 @@ namespace MegaCarsSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("805da73b-da5b-4705-8571-e576d3643535"),
+                            Id = new Guid("9827aac8-741a-4537-9ea8-473b8321a264"),
                             Description = "Black T-shirt with great quality.",
                             Image = "https://images-na.ssl-images-amazon.com/images/I/61oFHwCIKrL._SLDPMOBCAROUSELAUTOCROP288221_MCnd_AC_SR462,693_.jpg",
                             Name = "T-shirt Supercar",
@@ -673,28 +691,17 @@ namespace MegaCarsSystem.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("MegaCarsSystem.Data.Models.Agent", b =>
-                {
-                    b.HasOne("MegaCarsSystem.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("MegaCarsSystem.Data.Models.Car", b =>
                 {
-                    b.HasOne("MegaCarsSystem.Data.Models.Agent", "Agent")
-                        .WithMany("OwnedCars")
-                        .HasForeignKey("AgentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("MegaCarsSystem.Data.Models.Category", "Category")
                         .WithMany("Cars")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MegaCarsSystem.Data.Models.Dealer", "Dealer")
+                        .WithMany("OwnedCars")
+                        .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -714,15 +721,26 @@ namespace MegaCarsSystem.Data.Migrations
                         .WithMany("RentedCars")
                         .HasForeignKey("RenterId");
 
-                    b.Navigation("Agent");
-
                     b.Navigation("Category");
+
+                    b.Navigation("Dealer");
 
                     b.Navigation("Engine");
 
                     b.Navigation("Gearbox");
 
                     b.Navigation("Renter");
+                });
+
+            modelBuilder.Entity("MegaCarsSystem.Data.Models.Dealer", b =>
+                {
+                    b.HasOne("MegaCarsSystem.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MegaCarsSystem.Data.Models.Item", b =>
@@ -798,11 +816,6 @@ namespace MegaCarsSystem.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MegaCarsSystem.Data.Models.Agent", b =>
-                {
-                    b.Navigation("OwnedCars");
-                });
-
             modelBuilder.Entity("MegaCarsSystem.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("RentedCars");
@@ -814,6 +827,11 @@ namespace MegaCarsSystem.Data.Migrations
             modelBuilder.Entity("MegaCarsSystem.Data.Models.Category", b =>
                 {
                     b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("MegaCarsSystem.Data.Models.Dealer", b =>
+                {
+                    b.Navigation("OwnedCars");
                 });
 
             modelBuilder.Entity("MegaCarsSystem.Data.Models.Engine", b =>

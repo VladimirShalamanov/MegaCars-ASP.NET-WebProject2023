@@ -33,26 +33,37 @@
         {
             var hasher = new PasswordHasher<ApplicationUser>();
 
-            List<ApplicationUser> agentAndAdmin = new List<ApplicationUser>();
-            
-            // add guest !!!
+            List<ApplicationUser> usersUDA = new List<ApplicationUser>();
 
-            ApplicationUser agentUser = new ApplicationUser()
+            ApplicationUser userGuest = new ApplicationUser()
             {
-                Id = Guid.Parse(UserAgentId),
-                Email = AgentEmail,
-                NormalizedEmail = AgentEmail,
-                UserName = AgentEmail,
-                NormalizedUserName = AgentEmail,                FirstName = AgentFirstName,
-                LastName = AgentLastName
+                Id = Guid.Parse(UserId),
+                Email = UserEmail,
+                NormalizedEmail = UserEmail,
+                UserName = UserEmail,
+                NormalizedUserName = UserEmail,                FirstName = UserFirstName,
+                LastName = UserLastName
             };
-            agentUser.PasswordHash = hasher.HashPassword(agentUser, AgentPassword);
-            agentUser.SecurityStamp = Guid.NewGuid().ToString();
-            agentAndAdmin.Add(agentUser);
+            userGuest.PasswordHash = hasher.HashPassword(userGuest, UserPassword);
+            userGuest.SecurityStamp = Guid.NewGuid().ToString();
+            usersUDA.Add(userGuest);
+
+            ApplicationUser dealerUser = new ApplicationUser()
+            {
+                Id = Guid.Parse(UserDealerId),
+                Email = DealerEmail,
+                NormalizedEmail = DealerEmail,
+                UserName = DealerEmail,
+                NormalizedUserName = DealerEmail,                FirstName = DealerFirstName,
+                LastName = DealerLastName
+            };
+            dealerUser.PasswordHash = hasher.HashPassword(dealerUser, DealerPassword);
+            dealerUser.SecurityStamp = Guid.NewGuid().ToString();
+            usersUDA.Add(dealerUser);
 
             ApplicationUser adminUser = new ApplicationUser()
             {
-                Id = Guid.Parse(Development_UserAdminId),
+                Id = Guid.Parse(Development_UserDealerId),
                 Email = Development_AdminEmail,
                 NormalizedEmail = Development_AdminEmail,
                 UserName = Development_AdminEmail,
@@ -61,9 +72,9 @@
             };
             adminUser.PasswordHash = hasher.HashPassword(adminUser, Development_AdminPassword);
             adminUser.SecurityStamp = Guid.NewGuid().ToString();
-            agentAndAdmin.Add(adminUser);
+            usersUDA.Add(adminUser);
 
-            return agentAndAdmin.ToArray();
+            return usersUDA.ToArray();
         }
     }
 }

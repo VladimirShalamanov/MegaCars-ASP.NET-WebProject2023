@@ -3,12 +3,12 @@
 
 @model AllCarViewModel
 
-@inject IAgentService AgentService
+@inject IDealerService DealerService
 @inject ICarService CarService
 
 @{
-    bool isUserAgent = await AgentService.AgentExistsByUserIdAsync(this.User.GetId()!);
-    bool isAgentOwnerOfTheCar = await AgentService.HasCarWithIdAsync(this.User.GetId(), Model.Id);
+    bool isUserDealer = await DealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
+    bool isDealerOwnerOfTheCar = await DealerService.HasCarWithIdAsync(this.User.GetId(), Model.Id);
 
     bool isCarRentedByUser = await CarService.IsRentedByUserWithIdAsync(Model.Id, this.User.GetId()!);
 }
@@ -30,7 +30,7 @@
 
             @if (this.User.Identity?.IsAuthenticated ?? false)
             {
-                @if ((isUserAgent && isAgentOwnerOfTheCar) || this.User.IsAdmin())
+                @if ((isUserDealer && isDealerOwnerOfTheCar) || this.User.IsAdmin())
                 {
                     <a asp-controller="Car" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
                     <a asp-controller="Car" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
@@ -40,7 +40,7 @@
 
                 @if (!Model.IsRented)
                 {
-                    @if (!isUserAgent || this.User.IsAdmin())
+                    @if (!isUserDealer || this.User.IsAdmin())
                     {
                         <form class="input-group-sm" asp-controller="Car" asp-action="Rent" asp-route-id="@Model.Id" method="post">
                             <input class="btn btn-primary" type="submit" value="Rent" />
@@ -49,7 +49,7 @@
                 }
                 else
                 {
-                    @if (!isUserAgent && isCarRentedByUser)
+                    @if (!isUserDealer && isCarRentedByUser)
                     {
                         <form asp-controller="Car" asp-action="Leave" asp-route-id="@Model.Id" method="post">
                             <input class="btn btn-primary" type="submit" value="Leave" />

@@ -4,14 +4,15 @@
 
     public interface ICategoryService
     {
+        // Views
         Task<IEnumerable<CategoryForCarFormModel>> GetAllCategoriesAsync();
-
         Task<IEnumerable<AllCategoriesViewModel>> AllCategoriesForListAsync();
+        Task<CategoryDetailsViewModel> GetDetailsByIdAsync(int id);
 
-        Task<bool> ExistsCategoryByIdAsync(int id);
-
+        // Func
         Task<IEnumerable<string>> AllCategoryNamesAsync();
 
-        Task<CategoryDetailsViewModel> GetDetailsByIdAsync(int id);
+        // Check
+        Task<bool> ExistsCategoryByIdAsync(int id);
     }
 }

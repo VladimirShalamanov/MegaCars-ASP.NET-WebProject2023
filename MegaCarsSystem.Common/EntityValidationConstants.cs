@@ -14,7 +14,7 @@
             public const int Password_MaxLength = 100;
         }
 
-        public class Agent
+        public class Dealer
         {
             public const int PhoneNumber_MinLength = 7;
             public const int PhoneNumber_MaxLength = 15;

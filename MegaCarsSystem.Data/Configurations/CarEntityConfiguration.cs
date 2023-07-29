@@ -38,9 +38,9 @@
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasOne(a => a.Agent)
+                .HasOne(a => a.Dealer)
                 .WithMany(a => a.OwnedCars)
-                .HasForeignKey(a => a.AgentId)
+                .HasForeignKey(a => a.DealerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasData(GenerateCars());
@@ -65,7 +65,7 @@
                 ImageUrl = "https://edge.pxcrush.net/cars/dealer/dro0hrehxv0n0250f55sf7nqy.jpg?pxc_expires=20231101025101&pxc_clear=1&pxc_signature=2e0f693b59a609c1f0f77e21ed5fbfed",
                 PricePerDay = 1500.00M,
                 CategoryId = 6,
-                AgentId = Guid.Parse(AgentId)
+                DealerId = Guid.Parse(DealerId)
             };
             cars.Add(car);
 
@@ -82,7 +82,7 @@
                 ImageUrl = "https://performancedrive.com.au/wp-content/uploads/2020/02/2020-Toyota-GR-Supra-GT-scaled.jpg",
                 PricePerDay = 900.00M,
                 CategoryId = 3,
-                AgentId = Guid.Parse(AgentId)
+                DealerId = Guid.Parse(DealerId)
             };
             cars.Add(car);
 

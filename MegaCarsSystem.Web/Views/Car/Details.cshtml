@@ -2,11 +2,11 @@
 @using MegaCarsSystem.Web.Infrastructure.Extensions;
 @model CarDetailsViewModel
 
-@inject IAgentService AgentService
+@inject IDealerService DealerService
 @inject ICarService CarService
 @{
-    bool isUserAgent = await AgentService.AgentExistsByUserIdAsync(this.User.GetId()!);
-    bool isAgentOwnerOfTheCar = await AgentService.HasCarWithIdAsync(this.User.GetId(), Model.Id);
+    bool isUserDealer = await DealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
+    bool isDealerOwnerOfTheCar = await DealerService.HasCarWithIdAsync(this.User.GetId(), Model.Id);
 
     bool isCarRentedByUser = await CarService.IsRentedByUserWithIdAsync(Model.Id, this.User.GetId()!);
 }
@@ -47,7 +47,7 @@
 
                 @if (this.User.Identity?.IsAuthenticated ?? false)
                 {
-                    @if ((isUserAgent && isAgentOwnerOfTheCar) || this.User.IsAdmin())
+                    @if ((isUserDealer && isDealerOwnerOfTheCar) || this.User.IsAdmin())
                     {
                         <a class="btn btn-warning" asp-controller="Car" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
                         <a class="ml-2 btn btn-danger" asp-controller="Car" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
@@ -55,7 +55,7 @@
 
                     @if (!Model.IsRented)
                     {
-                        @if (!isUserAgent || this.User.IsAdmin())
+                        @if (!isUserDealer || this.User.IsAdmin())
                         {
                             <form class="ml-2" asp-controller="Car" asp-action="Rent" asp-route-id="@Model.Id" method="post">
                                 <input class="btn btn-primary" type="submit" value="Rent" />
@@ -64,7 +64,7 @@
                     }
                     else
                     {
-                        @if (!isUserAgent && isCarRentedByUser)
+                        @if (!isUserDealer && isCarRentedByUser)
                         {
                             <form class="ml-2" asp-controller="Car" asp-action="Leave" asp-route-id="@Model.Id" method="post">
                                 <input class="btn btn-primary" type="submit" value="Leave" />
@@ -77,10 +77,10 @@
             <p></p>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title"><u>Agent Information</u></h5>
-                    <p class="card-text">Name: @Model.Agent.FullName</p>
-                    <p class="card-text">Email: @Model.Agent.Email</p>
-                    <p class="card-text">Phone Number: @Model.Agent.PhoneNumber</p>
+                    <h5 class="card-title"><u>Dealer Information</u></h5>
+                    <p class="card-text">Name: @Model.Dealer.FullName</p>
+                    <p class="card-text">Email: @Model.Dealer.Email</p>
+                    <p class="card-text">Phone Number: @Model.Dealer.PhoneNumber</p>
                 </div>
             </div>
         </div>

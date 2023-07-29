@@ -4,10 +4,13 @@
 
     public interface IEngineService
     {
+        // Views
         Task<IEnumerable<EngineForCarFormModel>> GetAllEnginesAsync();
 
-        Task<bool> ExistsEngineByIdAsync(int id);
-
+        // Func
         Task<IEnumerable<string>> AllEngineNamesAsync();
+
+        // Check
+        Task<bool> ExistsEngineByIdAsync(int id);
     }
 }

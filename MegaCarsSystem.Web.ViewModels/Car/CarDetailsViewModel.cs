@@ -1,6 +1,6 @@
 ﻿namespace MegaCarsSystem.Web.ViewModels.Car
 {
-    using MegaCarsSystem.Web.ViewModels.Agent;
+    using MegaCarsSystem.Web.ViewModels.Dealer;
 
     public class CarDetailsViewModel : AllCarViewModel
     {
@@ -15,7 +15,7 @@
         public string Description { get; set; } = null!;
         
         public string Category { get; set; } = null!;
-
-        public AgentInfoOnCarViewModel Agent { get; set; } = null!;
+         
+        public DealerInfoOnCarViewModel Dealer { get; set; } = null!;
     }
 }

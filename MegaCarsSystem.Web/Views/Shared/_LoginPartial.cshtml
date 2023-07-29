@@ -8,10 +8,10 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject IUserService UserService
 
-@inject IAgentService AgentService
+@inject IDealerService DealerService
 
 @{
-    bool isUserAgent = await AgentService.AgentExistsByUserIdAsync(this.User.GetId()!);
+    bool isUserDealer = await DealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
     string userFullName = await UserService.GetFullNameByEmailAsync(User.Identity?.Name!);
 }
 
@@ -23,10 +23,10 @@
     <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @userFullName</a>
     </li>
-        if (!isUserAgent)
+        if (!isUserDealer)
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-controller="Agent" asp-action="Become">Become Agent</a>
+                <a class="nav-link text-dark" asp-controller="Dealer" asp-action="Become">Become Dealer</a>
             </li>
         }
     <li class="nav-item">

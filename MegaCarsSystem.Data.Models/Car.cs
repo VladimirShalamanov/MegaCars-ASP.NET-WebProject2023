@@ -57,8 +57,8 @@
         public int CategoryId { get; set; }
         public Category Category { get; set; } = null!;
 
-        public Guid AgentId { get; set; }
-        public Agent Agent { get; set; } = null!;
+        public Guid DealerId { get; set; }
+        public Dealer Dealer { get; set; } = null!;
 
         public Guid? RenterId { get; set; }
         public ApplicationUser? Renter { get; set; } = null!;

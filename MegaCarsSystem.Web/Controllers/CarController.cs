@@ -13,24 +13,26 @@
     [Authorize]
     public class CarController : Controller
     {
-        private readonly IAgentService agentService;
         private readonly ICarService carService;
         private readonly IEngineService engineService;
         private readonly IGearboxService gearboxService;
         private readonly ICategoryService categoryService;
 
+        private readonly IDealerService dealerService;
+
         public CarController(
-            IAgentService agentService,
             ICarService carService,
             IEngineService engineService,
             IGearboxService gearboxService,
-            ICategoryService categoryService)
+            ICategoryService categoryService,
+            IDealerService dealerService)
         {
-            this.agentService = agentService;
             this.carService = carService;
             this.engineService = engineService;
             this.gearboxService = gearboxService;
             this.categoryService = categoryService;
+
+            this.dealerService = dealerService;
         }
 
         [HttpGet]
@@ -38,7 +40,7 @@
         public async Task<IActionResult> All([FromQuery] AllCarsQueryModel queryModel)
         {
             AllCarsFilteredAndPagedServiceModel serviceModel =
-                await this.carService.AllAsync(queryModel);
+                await this.carService.AllCarsAsync(queryModel);
 
             queryModel.Cars = serviceModel.Cars;
             queryModel.TotalCars = serviceModel.TotalCarsCount;
@@ -54,13 +56,13 @@
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            bool isAgent = await this.agentService.AgentExistsByUserIdAsync(this.User.GetId()!);
+            bool isDealer = await this.dealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isAgent)
+            if (!isDealer)
             {
-                this.TempData[ErrorMessage] = "You must become an agent in order to add new cars!";
+                this.TempData[ErrorMessage] = "You must become an Dealer in order to add new cars!";
 
-                return RedirectToAction("Become", "Agent");
+                return RedirectToAction("Become", "Dealer");
             }
 
             try
@@ -83,13 +85,13 @@
         [HttpPost]
         public async Task<IActionResult> Add(CarFormModel formModel)
         {
-            bool isAgent = await this.agentService.AgentExistsByUserIdAsync(this.User.GetId()!);
+            bool isDealer = await this.dealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isAgent)
+            if (!isDealer)
             {
-                this.TempData[ErrorMessage] = "You must become an agent in order to add new cars!";
+                this.TempData[ErrorMessage] = "You must become an Dealer in order to add new cars!";
 
-                return RedirectToAction("Become", "Agent");
+                return RedirectToAction("Become", "Dealer");
             }
 
             bool engineExists = await this.engineService.ExistsEngineByIdAsync(formModel.EngineId);
@@ -122,9 +124,9 @@
 
             try
             {
-                string? agentId = await this.agentService.GetAgentIdByUserIdAsync(this.User.GetId()!);
+                string? dealerId = await this.dealerService.GetDealerIdByUserIdAsync(this.User.GetId()!);
 
-                string carId = await this.carService.CreateAndReturnIdAsync(formModel, agentId!);
+                string carId = await this.carService.CreateAndReturnIdAsync(formModel, dealerId!);
 
                 this.TempData[SuccessMessage] = "Car was added successfully!";
 
@@ -148,24 +150,24 @@
             List<AllCarViewModel> myCars = new List<AllCarViewModel>();
 
             string userId = this.User.GetId()!;
-            bool isUserAgent = await this.agentService.AgentExistsByUserIdAsync(userId);
+            bool isUserDealer = await this.dealerService.DealerExistsByUserIdAsync(userId);
 
             try
             {
                 if (this.User.IsAdmin())
                 {
-                    string agentId = await this.agentService.GetAgentIdByUserIdAsync(userId);
+                    string dealerId = await this.dealerService.GetDealerIdByUserIdAsync(userId);
 
-                    myCars.AddRange(await this.carService.AllByAgentIdAsync(agentId));
+                    myCars.AddRange(await this.carService.AllByDealerIdAsync(dealerId));
                     myCars.AddRange(await this.carService.AllByUserIdAsync(userId));
 
                     myCars = myCars.DistinctBy(c => c.Id).ToList();
                 }
-                else if (isUserAgent)
+                else if (isUserDealer)
                 {
-                    string agentId = await this.agentService.GetAgentIdByUserIdAsync(userId);
+                    string dealerId = await this.dealerService.GetDealerIdByUserIdAsync(userId);
 
-                    myCars.AddRange(await this.carService.AllByAgentIdAsync(agentId));
+                    myCars.AddRange(await this.carService.AllByDealerIdAsync(dealerId));
                 }
                 else
                 {
@@ -184,7 +186,7 @@
         [AllowAnonymous]
         public async Task<IActionResult> Details(string id)
         {
-            bool carExists = await this.carService.ExistByIdAsync(id);
+            bool carExists = await this.carService.ExistCarByIdAsync(id);
 
             if (!carExists)
             {
@@ -196,7 +198,6 @@
             try
             {
                 CarDetailsViewModel viewModel = await this.carService.GetDetailsByIdAsync(id);
-                //viewModel.Agent.FullName
 
                 return this.View(viewModel);
             }
@@ -209,7 +210,7 @@
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            bool carExists = await this.carService.ExistByIdAsync(id);
+            bool carExists = await this.carService.ExistCarByIdAsync(id);
 
             if (!carExists)
             {
@@ -218,22 +219,22 @@
                 return this.RedirectToAction("All", "Car");
             }
 
-            bool isUserAgent = await this.agentService.AgentExistsByUserIdAsync(this.User.GetId()!);
+            bool isUserDealer = await this.dealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserAgent && !this.User.IsAdmin())
+            if (!isUserDealer && !this.User.IsAdmin())
             {
-                this.TempData[ErrorMessage] = "You must become an agent in order to edit car info!";
+                this.TempData[ErrorMessage] = "You must become an Dealer in order to edit car info!";
 
-                return this.RedirectToAction("Become", "Agent");
+                return this.RedirectToAction("Become", "Dealer");
             }
 
-            string agentId = await this.agentService.GetAgentIdByUserIdAsync(this.User.GetId()!);
+            string dealerId = await this.dealerService.GetDealerIdByUserIdAsync(this.User.GetId()!);
 
-            bool isAgentOwner = await this.carService.IsAgentWithIdOwnerOfCarWithIdAsync(id, agentId);
+            bool isDealerOwner = await this.carService.IsDealerWithIdOwnerOfCarWithIdAsync(id, dealerId);
 
-            if (!isAgentOwner && !this.User.IsAdmin())
+            if (!isDealerOwner && !this.User.IsAdmin())
             {
-                this.TempData[ErrorMessage] = "You must be the agent owner of the car you want to edit!";
+                this.TempData[ErrorMessage] = "You must be the Dealer owner of the car you want to edit!";
 
                 return this.RedirectToAction("Mine", "Car");
             }
@@ -266,7 +267,7 @@
                 return this.View(formModel);
             }
 
-            bool carExists = await this.carService.ExistByIdAsync(id);
+            bool carExists = await this.carService.ExistCarByIdAsync(id);
 
             if (!carExists)
             {
@@ -275,22 +276,22 @@
                 return this.RedirectToAction("All", "Car");
             }
 
-            bool isUserAgent = await this.agentService.AgentExistsByUserIdAsync(this.User.GetId()!);
+            bool isUserDealer = await this.dealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserAgent && !this.User.IsAdmin())
+            if (!isUserDealer && !this.User.IsAdmin())
             {
-                this.TempData[ErrorMessage] = "You must become an agent in order to edit car info!";
+                this.TempData[ErrorMessage] = "You must become an Dealer in order to edit car info!";
 
-                return this.RedirectToAction("Become", "Agent");
+                return this.RedirectToAction("Become", "Dealer");
             }
 
-            string agentId = await this.agentService.GetAgentIdByUserIdAsync(this.User.GetId()!);
+            string dealerId = await this.dealerService.GetDealerIdByUserIdAsync(this.User.GetId()!);
 
-            bool isAgentOwner = await this.carService.IsAgentWithIdOwnerOfCarWithIdAsync(id, agentId);
+            bool isDealerOwner = await this.carService.IsDealerWithIdOwnerOfCarWithIdAsync(id, dealerId);
 
-            if (!isAgentOwner && !this.User.IsAdmin())
+            if (!isDealerOwner && !this.User.IsAdmin())
             {
-                this.TempData[ErrorMessage] = "You must be the agent owner of the car you want to edit!";
+                this.TempData[ErrorMessage] = "You must be the Dealer owner of the car you want to edit!";
 
                 return this.RedirectToAction("Mine", "Car");
             }
@@ -318,7 +319,7 @@
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
-            bool carExists = await this.carService.ExistByIdAsync(id);
+            bool carExists = await this.carService.ExistCarByIdAsync(id);
 
             if (!carExists)
             {
@@ -327,22 +328,22 @@
                 return this.RedirectToAction("All", "Car");
             }
 
-            bool isUserAgent = await this.agentService.AgentExistsByUserIdAsync(this.User.GetId()!);
+            bool isUserDealer = await this.dealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserAgent && !this.User.IsAdmin())
+            if (!isUserDealer && !this.User.IsAdmin())
             {
-                this.TempData[ErrorMessage] = "You must become an agent in order to edit car info!";
+                this.TempData[ErrorMessage] = "You must become an Dealer in order to edit car info!";
 
-                return this.RedirectToAction("Become", "Agent");
+                return this.RedirectToAction("Become", "Dealer");
             }
 
-            string agentId = await this.agentService.GetAgentIdByUserIdAsync(this.User.GetId()!);
+            string dealerId = await this.dealerService.GetDealerIdByUserIdAsync(this.User.GetId()!);
 
-            bool isAgentOwner = await this.carService.IsAgentWithIdOwnerOfCarWithIdAsync(id, agentId);
+            bool isDealerOwner = await this.carService.IsDealerWithIdOwnerOfCarWithIdAsync(id, dealerId);
 
-            if (!isAgentOwner && !this.User.IsAdmin())
+            if (!isDealerOwner && !this.User.IsAdmin())
             {
-                this.TempData[ErrorMessage] = "You must be the agent owner of the car you want to edit!";
+                this.TempData[ErrorMessage] = "You must be the Dealer owner of the car you want to edit!";
 
                 return this.RedirectToAction("Mine", "Car");
             }
@@ -362,7 +363,7 @@
         [HttpPost]
         public async Task<IActionResult> Delete(string id, CarPreDeleteDetailsViewModel formModel)
         {
-            bool carExists = await this.carService.ExistByIdAsync(id);
+            bool carExists = await this.carService.ExistCarByIdAsync(id);
 
             if (!carExists)
             {
@@ -371,22 +372,22 @@
                 return this.RedirectToAction("All", "Car");
             }
 
-            bool isUserAgent = await this.agentService.AgentExistsByUserIdAsync(this.User.GetId()!);
+            bool isUserDealer = await this.dealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserAgent && !this.User.IsAdmin())
+            if (!isUserDealer && !this.User.IsAdmin())
             {
-                this.TempData[ErrorMessage] = "You must become an agent in order to edit car info!";
+                this.TempData[ErrorMessage] = "You must become an Dealer in order to edit car info!";
 
-                return this.RedirectToAction("Become", "Agent");
+                return this.RedirectToAction("Become", "Dealer");
             }
 
-            string agentId = await this.agentService.GetAgentIdByUserIdAsync(this.User.GetId()!);
+            string dealerId = await this.dealerService.GetDealerIdByUserIdAsync(this.User.GetId()!);
 
-            bool isAgentOwner = await this.carService.IsAgentWithIdOwnerOfCarWithIdAsync(id, agentId);
+            bool isDealerOwner = await this.carService.IsDealerWithIdOwnerOfCarWithIdAsync(id, dealerId);
 
-            if (!isAgentOwner && !this.User.IsAdmin())
+            if (!isDealerOwner && !this.User.IsAdmin())
             {
-                this.TempData[ErrorMessage] = "You must be the agent owner of the car you want to edit!";
+                this.TempData[ErrorMessage] = "You must be the Dealer owner of the car you want to edit!";
 
                 return this.RedirectToAction("Mine", "Car");
             }
@@ -408,7 +409,7 @@
         [HttpPost]
         public async Task<IActionResult> Rent(string id)
         {
-            bool carExists = await this.carService.ExistByIdAsync(id);
+            bool carExists = await this.carService.ExistCarByIdAsync(id);
 
             if (!carExists)
             {
@@ -426,11 +427,11 @@
                 return this.RedirectToAction("All", "Car");
             }
 
-            bool isUserAgent = await this.agentService.AgentExistsByUserIdAsync(this.User.GetId()!);
+            bool isUserDealer = await this.dealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (isUserAgent && !this.User.IsAdmin())
+            if (isUserDealer && !this.User.IsAdmin())
             {
-                this.TempData[ErrorMessage] = "Agents can't rent cars!";
+                this.TempData[ErrorMessage] = "Dealers can't rent cars!";
 
                 return this.RedirectToAction("Index", "Home");
             }
@@ -450,7 +451,7 @@
         [HttpPost]
         public async Task<IActionResult> Leave(string id)
         {
-            bool carExists = await this.carService.ExistByIdAsync(id);
+            bool carExists = await this.carService.ExistCarByIdAsync(id);
 
             if (!carExists)
             {

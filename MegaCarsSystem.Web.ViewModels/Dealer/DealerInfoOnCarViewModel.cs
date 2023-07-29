@@ -1,8 +1,8 @@
-﻿namespace MegaCarsSystem.Web.ViewModels.Agent
+﻿namespace MegaCarsSystem.Web.ViewModels.Dealer
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class AgentInfoOnCarViewModel
+    public class DealerInfoOnCarViewModel
     {
         public string FullName { get; set; } = null!;
 

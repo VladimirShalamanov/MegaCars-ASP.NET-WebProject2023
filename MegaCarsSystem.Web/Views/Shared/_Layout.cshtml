@@ -3,10 +3,10 @@
 
 @using static MegaCarsSystem.Common.GeneralApplicationConstants;
 
-@inject IAgentService AgentService
+@inject IDealerService DealerService
 
 @{
-    bool isUserAgent = await AgentService.AgentExistsByUserIdAsync(this.User.GetId()!);
+    bool isUserDealer = await DealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
 }
 
 <!DOCTYPE html>
@@ -93,7 +93,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Mine">My Cars</a>
                             </li>
 
-                            @if (isUserAgent)
+                            @if (isUserDealer)
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Add">Add Car</a>

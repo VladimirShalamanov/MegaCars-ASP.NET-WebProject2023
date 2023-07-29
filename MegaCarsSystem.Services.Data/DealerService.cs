@@ -6,34 +6,34 @@
 
     using MegaCarsSystem.Data;
     using MegaCarsSystem.Data.Models;
-    using MegaCarsSystem.Web.ViewModels.Agent;
+    using MegaCarsSystem.Web.ViewModels.Dealer;
     using MegaCarsSystem.Services.Data.Interfaces;
 
-    public class AgentService : IAgentService
+    public class DealerService : IDealerService
     {
         private readonly MegaCarsDbContext dbContext;
 
-        public AgentService(MegaCarsDbContext dbContext)
+        public DealerService(MegaCarsDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
-        public async Task<bool> AgentExistsByUserIdAsync(string userId)
+        public async Task<bool> DealerExistsByUserIdAsync(string userId)
         {
-            bool isFoundAgent = await this.dbContext
-                .Agents
+            bool isFoundDealer = await this.dbContext
+                .Dealers
                 .AnyAsync(a => a.UserId.ToString() == userId);
 
-            return isFoundAgent;
+            return isFoundDealer;
         }
 
-        public async Task<bool> AgentExistsByPhoneNumberAsync(string phoneNumber)
+        public async Task<bool> DealerExistsByPhoneNumberAsync(string phoneNumber)
         {
-            bool isFoundAgent = await this.dbContext
-                .Agents
+            bool isFoundDealer = await this.dbContext
+                .Dealers
                 .AnyAsync(a => a.PhoneNumber == phoneNumber);
 
-            return isFoundAgent;
+            return isFoundDealer;
         }
 
         public async Task<bool> HasRentsByUserIdAsync(string userId)
@@ -50,45 +50,45 @@
             return user.RentedCars.Any();
         }
 
-        public async Task Create(string userId, BecomeAgentFormModel model)
+        public async Task Create(string userId, BecomeDealerFormModel model)
         {
-            var newAgent = new Agent()
+            var newDealer = new Dealer()
             {
                 PhoneNumber = model.PhoneNumber,
                 UserId = Guid.Parse(userId)
             };
 
-            await this.dbContext.Agents.AddAsync(newAgent);
+            await this.dbContext.Dealers.AddAsync(newDealer);
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task<string> GetAgentIdByUserIdAsync(string userId)
+        public async Task<string> GetDealerIdByUserIdAsync(string userId)
         {
-            Agent? agent = await this.dbContext
-                .Agents
+            Dealer? dealer = await this.dbContext
+                .Dealers
                 .FirstOrDefaultAsync(a => a.UserId.ToString() == userId);
 
-            if (agent == null)
+            if (dealer == null)
             {
                 return null;
             }
 
-            return agent.Id.ToString();
+            return dealer.Id.ToString();
         }
 
         public async Task<bool> HasCarWithIdAsync(string? userId, string carId)
         {
-            Agent? agent = await this.dbContext
-                .Agents
+            Dealer? dealer = await this.dbContext
+                .Dealers
                 .Include(a => a.OwnedCars)
                 .FirstOrDefaultAsync(a => a.UserId.ToString() == userId);
 
-            if (agent == null)
+            if (dealer == null)
             {
                 return false;
             }
 
-            return agent.OwnedCars.Any(c => c.Id.ToString() == carId.ToLower());
+            return dealer.OwnedCars.Any(c => c.Id.ToString() == carId.ToLower());
         }
     }
 }

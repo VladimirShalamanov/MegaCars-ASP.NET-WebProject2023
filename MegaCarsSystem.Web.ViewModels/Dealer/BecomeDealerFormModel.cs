@@ -1,10 +1,10 @@
-﻿namespace MegaCarsSystem.Web.ViewModels.Agent
+﻿namespace MegaCarsSystem.Web.ViewModels.Dealer
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static Common.EntityValidationConstants.Agent;
+    using static Common.EntityValidationConstants.Dealer;
 
-    public class BecomeAgentFormModel
+    public class BecomeDealerFormModel
     {
         [Required]
         [StringLength(PhoneNumber_MaxLength, MinimumLength = PhoneNumber_MinLength)]

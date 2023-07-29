@@ -2,11 +2,11 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static Common.EntityValidationConstants.Agent;
+    using static Common.EntityValidationConstants.Dealer;
 
-    public class Agent
+    public class Dealer
     {
-        public Agent()
+        public Dealer()
         {
             this.Id = Guid.NewGuid();
             this.OwnedCars = new HashSet<Car>();
