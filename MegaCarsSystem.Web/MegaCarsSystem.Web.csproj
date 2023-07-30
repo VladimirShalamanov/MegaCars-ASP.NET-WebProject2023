@@ -30,7 +30,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Pages\Account\" />
-    <Folder Include="wwwroot\videos\" />
+    <Folder Include="wwwroot\logos\" />
   </ItemGroup>
 
 </Project>
