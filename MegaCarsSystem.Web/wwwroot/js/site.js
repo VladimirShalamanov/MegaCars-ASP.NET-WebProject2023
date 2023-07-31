@@ -1,4 +1,14 @@
-﻿function statistics() {
+﻿function menuHamburger() {
+    const menuToggle = document.querySelector('.toggle');
+    const showcase = document.querySelector('.showcase');
+
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        showcase.classList.toggle('active');
+    })
+}
+
+function statistics() {
     $('#statistics_btn').on('click', function (e) {
         e.preventDefault();
         e.stopPropagation();

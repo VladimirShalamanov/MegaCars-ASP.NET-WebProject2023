@@ -36,60 +36,62 @@
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                 <img src="/logos/MegaCarsLogo.png" class="logo">
             </a>
-            
-            @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
-            @*<nav>
-                @*<div class="container-fluid">
-                <div>
 
-
-                    @*<button class="navbar-toggler" type="button"
-                    data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <div>
-                        <ul class="navbar-nav flex-grow-1">
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="All">All Cars</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="All">All Products</a>
-                            </li>
-
-                            @if (this.User.Identity?.IsAuthenticated ?? false)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Mine">My Cars</a>
-                                </li>
-
-                                @if (isUserDealer)
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Add">Add Car</a>
-                                    </li>
-                                }
-
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="ShopCart" asp-action="All">
-                                        <i class="fa fa-shopping-cart" style="font-size:24px;color:orange"></i>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-
-                        <partial name="_LoginPartial" />
-                    </div>
-
-                </div>
-            </nav>*@
-
-            <div class="toggle active">
+            <div class="toggle">
                 <i class="fa-solid fa-bars fa-2xl" style="color: white"></i>
             </div>
+
+            @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
+            @*<nav>
+            @*<div class="container-fluid">
+            <div>
+
+
+            @*<button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <div>
+            <ul class="navbar-nav flex-grow-1">
+
+            <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="All">All Cars</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="All">All Products</a>
+            </li>
+
+            @if (this.User.Identity?.IsAuthenticated ?? false)
+            {
+            <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Mine">My Cars</a>
+            </li>
+
+            @if (isUserDealer)
+            {
+            <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Add">Add Car</a>
+            </li>
+            }
+
+            <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="ShopCart" asp-action="All">
+            <i class="fa fa-shopping-cart" style="font-size:24px;color:orange"></i>
+            </a>
+            </li>
+            }
+            </ul>
+
+            <partial name="_LoginPartial" />
+            </div>
+
+            </div>
+            </nav>*@
+
+
         </header>
 
         <div class="container">
@@ -97,10 +99,19 @@
                 @RenderBody()
             </main>
         </div>
+
     </section>
 
+    <div class="menu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Blog</a></li>
+        </ul>
+    </div>
+
     @*<footer class="border-top footer text-muted">*@
-    <footer class="footer">
+    @*<footer class="footer">
         <div class="container">
 
             &copy; Mega Cars @ReleaseYear
@@ -109,12 +120,29 @@
                 @Html.Raw($" - {DateTime.UtcNow.Year}")
             }
         </div>
-    </footer>
+    </footer>*@
+
+    <script>
+        const menuToggle = document.querySelector('.toggle')
+        const showcase = document.querySelector('.showcase')
+        const menuItems = document.querySelector('.menu')
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active')
+            showcase.classList.toggle('active')
+            menuItems.classList.toggle('active')
+        })
+    </script>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/video-player.js" asp-append-version="true"></script>
-
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+@*@section Scripts
+    {
+    <script>menuHamburger();</script>
+}*@
