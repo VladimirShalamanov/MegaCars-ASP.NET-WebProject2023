@@ -23,6 +23,13 @@ body {
     padding: 0;
 }
 
+.text {
+    color: white;
+/*    font-size: 50px;*/
+    -webkit-text-stroke-width: 0.7px;
+    -webkit-text-stroke-color: black;
+}
+
 .showcase {
     position: absolute;
     right: 0;
@@ -106,7 +113,7 @@ body {
     }
 
     .text p {
-        font-size: 1em;
+        font-size: 2em;
         margin: 20px 0;
         font-weight: 400;
         max-width: 700px;

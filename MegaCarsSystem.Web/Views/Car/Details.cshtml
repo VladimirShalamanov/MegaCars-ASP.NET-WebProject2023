@@ -25,7 +25,7 @@
                  src="@Model.ImageUrl" alt="Car Image">
         </div>
 
-        <div class="card col-8 border-0">
+        <div class="card col-8 border-0" style="background: black">
             <p style="font-size:25px;"><u>@Model.Brand @Model.Model</u></p>
             <p>Year Of Manufacture: <b>@Model.YearOfManufacture</b></p>
             <p>Horsepower: <b>@Model.Horsepower</b></p>
@@ -75,7 +75,7 @@
             </div>
 
             <p></p>
-            <div class="card" style="width: 18rem;">
+            <div class="card border-white" style="width: 18rem; background: black;">
                 <div class="card-body">
                     <h5 class="card-title"><u>Dealer Information</u></h5>
                     <p class="card-text">Name: @Model.Dealer.FullName</p>

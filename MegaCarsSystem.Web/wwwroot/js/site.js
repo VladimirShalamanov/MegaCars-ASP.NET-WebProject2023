@@ -1,13 +1,13 @@
 ﻿function menuHamburger() {
     //$('.toggle').on('click', () => {
 
-        const menuToggle = $('.toggle');
-        const showcase = $('.showcase');
-        const menuItems = $('.menu');
+    const menuToggle = $('.toggle');
+    const showcase = $('.showcase');
+    const menuItems = $('.menu');
 
-        menuToggle.toggleClass('active');
-        showcase.toggleClass('active');
-        menuItems.toggleClass('active');
+    menuToggle.toggleClass('active');
+    showcase.toggleClass('active');
+    menuItems.toggleClass('active');
     //});
 }
 
