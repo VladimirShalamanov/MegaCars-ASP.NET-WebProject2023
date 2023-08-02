@@ -1,15 +1,19 @@
 ﻿function menuHamburger() {
-    const menuToggle = document.querySelector('.toggle');
-    const showcase = document.querySelector('.showcase');
+    //$('.toggle').on('click', () => {
 
-    menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        showcase.classList.toggle('active');
-    })
+        const menuToggle = $('.toggle');
+        const showcase = $('.showcase');
+        const menuItems = $('.menu');
+
+        menuToggle.toggleClass('active');
+        showcase.toggleClass('active');
+        menuItems.toggleClass('active');
+    //});
 }
 
 function statistics() {
     $('#statistics_btn').on('click', function (e) {
+
         e.preventDefault();
         e.stopPropagation();
 
@@ -30,5 +34,5 @@ function statistics() {
             $('#statistics_btn').removeClass('btn-danger');
             $('#statistics_btn').addClass('btn-primary');
         }
-    })
+    });
 }

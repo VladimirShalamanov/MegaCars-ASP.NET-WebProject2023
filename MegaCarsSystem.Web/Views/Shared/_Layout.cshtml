@@ -38,8 +38,11 @@
             </a>
 
             <div class="toggle">
-                <i class="fa-solid fa-bars fa-2xl" style="color: white"></i>
+                <i class="fa-solid fa-bars fa-2xl" style="color: white" onclick="menuHamburger()"></i>
             </div>
+
+            
+
 
             @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
             @*<nav>
@@ -122,27 +125,15 @@
         </div>
     </footer>*@
 
-    <script>
-        const menuToggle = document.querySelector('.toggle')
-        const showcase = document.querySelector('.showcase')
-        const menuItems = document.querySelector('.menu')
+   
 
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active')
-            showcase.classList.toggle('active')
-            menuItems.classList.toggle('active')
-        })
-    </script>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/video-player.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
+    
+    @RenderSection("MenuScripts", required: false)
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-
-@*@section Scripts
-    {
-    <script>menuHamburger();</script>
-}*@
