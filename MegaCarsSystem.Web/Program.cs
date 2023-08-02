@@ -48,6 +48,7 @@ namespace MegaCarsSystem.Web
             builder.Services.ConfigureApplicationCookie(cfg =>
             {
                 cfg.LoginPath = "/User/Login";
+                cfg.AccessDeniedPath = "/Home/Error/401";
             });
 
             builder.Services
@@ -83,16 +84,22 @@ namespace MegaCarsSystem.Web
 
             if (app.Environment.IsDevelopment())
             {
-                app.SeedAdministrator(Development_AdminEmail);
+                app.SeedAdministrator(AdminEmail_Development);
             }
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "/{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "ProtectingUrlPattern",
                     pattern: "/{controller}/{action}/{id}/{information}",
                     defaults: new { Controller = "Category", Action = "Details" });
+
                 endpoints.MapDefaultControllerRoute();
+
                 endpoints.MapRazorPages();
             });
 

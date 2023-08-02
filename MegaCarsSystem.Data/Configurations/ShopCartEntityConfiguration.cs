@@ -34,8 +34,8 @@
 
             ShopCart adminShopCart = new ShopCart()
             {
-                Id = Guid.Parse(Development_AdminShoppingCartId),
-                UserId = Guid.Parse(Development_UserDealerId)
+                Id = Guid.Parse(AdminShoppingCartId_Development),
+                UserId = Guid.Parse(UserDealerId_Development)
             };
             shoppingCarts.Add(adminShopCart);
 

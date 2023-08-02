@@ -6,6 +6,8 @@
     using MegaCarsSystem.Web.ViewModels.Home;
     using MegaCarsSystem.Services.Data.Interfaces;
 
+    using static Common.GeneralApplicationConstants;
+
     [AllowAnonymous]
     public class HomeController : Controller
     {
@@ -18,6 +20,11 @@
 
         public async Task<IActionResult> Index()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return this.RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+
             IEnumerable<IndexViewModel> viewModel =
                 await this.carService.carsForIndexAsync();
 
@@ -29,7 +36,12 @@
         {
             if (statusCode == 400 || statusCode == 404)
             {
-                return View("CustomError");
+                return View("Error404");
+            }
+
+            if (statusCode == 401)
+            {
+                return View("Error401");
             }
 
             return View();

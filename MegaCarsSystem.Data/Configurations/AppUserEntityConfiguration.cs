@@ -63,14 +63,14 @@
 
             ApplicationUser adminUser = new ApplicationUser()
             {
-                Id = Guid.Parse(Development_UserDealerId),
-                Email = Development_AdminEmail,
-                NormalizedEmail = Development_AdminEmail,
-                UserName = Development_AdminEmail,
-                NormalizedUserName = Development_AdminEmail,                FirstName = Development_AdminFirstName,
-                LastName = Development_AdminLastName
+                Id = Guid.Parse(UserDealerId_Development),
+                Email = AdminEmail_Development,
+                NormalizedEmail = AdminEmail_Development,
+                UserName = AdminEmail_Development,
+                NormalizedUserName = AdminEmail_Development,                FirstName = AdminFirstName_Development,
+                LastName = AdminLastName_Development
             };
-            adminUser.PasswordHash = hasher.HashPassword(adminUser, Development_AdminPassword);
+            adminUser.PasswordHash = hasher.HashPassword(adminUser, AdminPassword_Development);
             adminUser.SecurityStamp = Guid.NewGuid().ToString();
             usersUDA.Add(adminUser);
 

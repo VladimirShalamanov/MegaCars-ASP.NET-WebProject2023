@@ -30,9 +30,9 @@
 
             Dealer adminUser = new Dealer()
             {
-                Id = Guid.Parse(Development_DealerAdminId),
+                Id = Guid.Parse(DealerAdminId_Development),
                 PhoneNumber = "+359333222111",
-                UserId = Guid.Parse(Development_UserDealerId)
+                UserId = Guid.Parse(UserDealerId_Development)
             };
             dealerAndAdmin.Add(adminUser);
 
