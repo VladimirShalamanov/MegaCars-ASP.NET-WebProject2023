@@ -23,13 +23,6 @@ body {
     padding: 0;
 }
 
-.text {
-    color: white;
-/*    font-size: 50px;*/
-    -webkit-text-stroke-width: 0.7px;
-    -webkit-text-stroke-color: black;
-}
-
 .showcase {
     position: absolute;
     right: 0;
@@ -71,7 +64,7 @@ body {
     position: relative;
     width: 60px;
     height: 60px;
-/*    background: url('/logos/MegaCarsLogo.png');*/
+    /*    background: url('/logos/MegaCarsLogo.png');*/
     background-repeat: no-repeat;
     background-size: 50px;
     background-position: center;
@@ -79,7 +72,7 @@ body {
 }
 
     .toggle.active {
-/*        background: url('/logos/MegaCarsLogo.png');*/
+        /*        background: url('/logos/MegaCarsLogo.png');*/
         background-repeat: no-repeat;
         background-size: 25px;
         background-position: center;
@@ -94,6 +87,9 @@ body {
 }
 
 .text {
+    color: white;
+    -webkit-text-stroke-width: 0.7px;
+    -webkit-text-stroke-color: black;
     position: relative;
     z-index: 10;
 }
@@ -179,6 +175,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
+        animation: fade_in_show 1s
     }
 
         .menu.active ul {
@@ -196,6 +193,30 @@ body {
                     color: deepskyblue;
                 }
 
+            .menu.active ul li form button {
+                font-size: 24px;
+                background-color: transparent;
+                color: red;
+                border: none;
+                padding: 15px 0px 0px 0px;
+            }
+
+                .menu.active ul li form button:hover {
+                    text-decoration: underline;
+                }
+
+
+@keyframes fade_in_show {
+    0% {
+        opacity: 0;
+        transform: scale(0)
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
 
 @media(max-width: 798px) {
     .showcase,

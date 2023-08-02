@@ -41,42 +41,44 @@
                 <i class="fa-solid fa-bars fa-2xl" style="color: white" onclick="menuHamburger()"></i>
             </div>
 
-            
+
 
 
             @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
             @*<nav>
-            @*<div class="container-fluid">
+
+            <div class="container-fluid">
             <div>
 
 
             @*<button class="navbar-toggler" type="button"
             data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarsupportedcontent" aria-expanded="false" aria-label="toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
             <div>
+
             <ul class="navbar-nav flex-grow-1">
 
             <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="All">All Cars</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="All">all cars</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="All">All Products</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="All">all products</a>
             </li>
 
             @if (this.User.Identity?.IsAuthenticated ?? false)
             {
             <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Mine">My Cars</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Mine">my cars</a>
             </li>
 
             @if (isUserDealer)
             {
             <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Add">Add Car</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Add">add car</a>
             </li>
             }
 
@@ -107,32 +109,65 @@
 
     <div class="menu">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Blog</a></li>
+            @*<li class="nav-item">
+            <a class="nav-link text-dark"></a>
+            </li>*@
+
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+
+
+            <li>
+                <a asp-area="" asp-controller="Car" asp-action="All">All Cars</a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Product" asp-action="All">All Products</a>
+            </li>
+
+            @if (this.User.Identity?.IsAuthenticated ?? false)
+            {
+                <li>
+                    <a asp-area="" asp-controller="Car" asp-action="Mine">My Cars</a>
+                </li>
+
+                @if (isUserDealer)
+                {
+                    <li>
+                        <a asp-area="" asp-controller="Car" asp-action="Add">Add Car</a>
+                    </li>
+                }
+
+                <li>
+                    <a asp-area="" asp-controller="ShopCart" asp-action="All">
+                        <i class="fa fa-shopping-cart" style="font-size:24px;color:orange"></i>
+                    </a>
+                </li>
+            }
+
+            <partial name="_LoginPartial" />
         </ul>
+
     </div>
 
     @*<footer class="border-top footer text-muted">*@
     @*<footer class="footer">
-        <div class="container">
+    <div class="container">
 
-            &copy; Mega Cars @ReleaseYear
-            @if (DateTime.UtcNow.Year != ReleaseYear)
-            {
-                @Html.Raw($" - {DateTime.UtcNow.Year}")
-            }
-        </div>
+    &copy; Mega Cars @ReleaseYear
+    @if (DateTime.UtcNow.Year != ReleaseYear)
+    {
+    @Html.Raw($" - {DateTime.UtcNow.Year}")
+    }
+    </div>
     </footer>*@
 
-   
+
 
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/video-player.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    
+
     @RenderSection("MenuScripts", required: false)
     @await RenderSectionAsync("Scripts", required: false)
 </body>
