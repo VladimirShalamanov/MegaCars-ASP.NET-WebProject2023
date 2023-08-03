@@ -13,6 +13,9 @@
         public const int LastActivityMinutes_BeforeOffline = 10;
 
         // For implementation of User
+        
+        // FIX THIS FOR FUTURE MIGRATION - SET UP SHOPPING CART FOR USER AND FIX N. D-ER
+
         public const string UserId = "2c5628be-a8ca-4cf0-bc0d-c441e6aa0c6e";
         public const string UserFirstName = "User";
         public const string UserLastName = "Guest_Test";

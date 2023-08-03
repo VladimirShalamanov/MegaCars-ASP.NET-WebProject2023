@@ -6,6 +6,8 @@
 @inject IDealerService DealerService
 
 @{
+    // Add custom _AdminLoyout in Admin/Views/Shared - when end with this one !!!
+
     bool isUserDealer = await DealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
 }
 

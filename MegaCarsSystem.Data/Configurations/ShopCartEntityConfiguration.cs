@@ -25,6 +25,8 @@
         {
             ICollection<ShopCart> shoppingCarts = new HashSet<ShopCart>();
 
+            // Add for 1st User
+
             ShopCart dealerShopCart = new ShopCart()
             {
                 Id = Guid.Parse(DealerShoppingCartId),
