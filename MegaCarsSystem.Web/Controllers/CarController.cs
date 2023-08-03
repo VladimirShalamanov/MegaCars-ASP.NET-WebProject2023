@@ -8,6 +8,7 @@
     using MegaCarsSystem.Services.Data.Interfaces;
     using MegaCarsSystem.Web.Infrastructure.Extensions;
 
+    using static Common.GeneralApplicationConstants;
     using static Common.NotificationsMessagesConstants;
 
     [Authorize]
@@ -147,6 +148,10 @@
         [HttpGet]
         public async Task<IActionResult> Mine()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Mine", "Car", new { Area = AdminAreaName });
+            }
             List<AllCarViewModel> myCars = new List<AllCarViewModel>();
 
             string userId = this.User.GetId()!;

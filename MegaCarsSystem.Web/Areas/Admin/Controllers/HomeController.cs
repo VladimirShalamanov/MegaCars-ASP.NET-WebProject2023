@@ -6,7 +6,7 @@
     {
         public IActionResult Index()
         {
-            return View(); //33.14
+            return View();
         }
     }
 }

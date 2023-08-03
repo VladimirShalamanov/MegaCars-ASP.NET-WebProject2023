@@ -18,7 +18,7 @@
         // Create
         Task<string> CreateAndReturnIdAsync(CarFormModel formModel, string dealerId);
 
-
+        // Check
         Task<bool> ExistCarByIdAsync(string carId);
         Task<bool> IsDealerWithIdOwnerOfCarWithIdAsync(string carId, string dealerId);
 
@@ -41,7 +41,7 @@
         Task RentCarAsync(string carId, string userId);
         Task LeaveCarAsync(string carId);
 
-
+        // WebApi
         Task<StatisticsServiceModel> GetStatisticsAsync();
     }
 }
