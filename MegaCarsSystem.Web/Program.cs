@@ -82,6 +82,8 @@ namespace MegaCarsSystem.Web
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.EnableOnlineUsersCheck();
+
             if (app.Environment.IsDevelopment())
             {
                 app.SeedAdministrator(AdminEmail_Development);

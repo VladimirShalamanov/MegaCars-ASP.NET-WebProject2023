@@ -7,6 +7,7 @@
     using Microsoft.Extensions.DependencyInjection;
 
     using MegaCarsSystem.Data.Models;
+    using MegaCarsSystem.Web.Infrastructure.Middlewares;
 
     using static Common.GeneralApplicationConstants;
 
@@ -81,6 +82,11 @@
            .GetResult();
 
             return app;
+        }
+
+        public static IApplicationBuilder EnableOnlineUsersCheck(this IApplicationBuilder app)
+        {
+            return app.UseMiddleware<OnlineUsersMiddleware>();
         }
     }
 }

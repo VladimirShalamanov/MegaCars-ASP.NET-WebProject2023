@@ -8,6 +8,10 @@
         public const int DefaultPage = 1;
         public const int EntitiesPerPage = 3;
 
+        // Middleware
+        public const string OnlineUsersCookieName = "IsOnline";
+        public const int LastActivityMinutes_BeforeOffline = 10;
+
         // For implementation of User
         public const string UserId = "2c5628be-a8ca-4cf0-bc0d-c441e6aa0c6e";
         public const string UserFirstName = "User";
