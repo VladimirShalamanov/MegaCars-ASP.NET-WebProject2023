@@ -41,11 +41,16 @@
         public const string AdminPassword_Development = "admin1122";
         public const string AdminShoppingCartId_Development = "1bca46f0-2eb4-43c7-8a76-7b006ceb109a";
 
+        // Role_Admin
         public const string AdminAreaName = "Admin";
         public const string AdminRoleName = "Administrator";
 
+
+        // Memory Caching
         public const string UsersCacheKey = "UsersCache";
         public const string RentsCacheKey = "RentsCache";
+
         public const int UsersCacheDurationMinutes = 5;
+        public const int RentsCacheDurationMinutes = 10;
     }
 }

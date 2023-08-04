@@ -46,6 +46,7 @@ namespace MegaCarsSystem.Web
             builder.Services.AddApplicationServices(typeof(ICarService));
 
             builder.Services.AddMemoryCache();
+            builder.Services.AddResponseCaching();
 
             builder.Services.ConfigureApplicationCookie(cfg =>
             {
@@ -80,6 +81,8 @@ namespace MegaCarsSystem.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseResponseCaching();
 
             app.UseAuthentication();
             app.UseAuthorization();

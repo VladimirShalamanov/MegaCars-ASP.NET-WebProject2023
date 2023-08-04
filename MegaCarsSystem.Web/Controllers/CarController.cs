@@ -10,6 +10,7 @@
 
     using static Common.GeneralApplicationConstants;
     using static Common.NotificationsMessagesConstants;
+    using Microsoft.Extensions.Caching.Memory;
 
     [Authorize]
     public class CarController : Controller
@@ -21,12 +22,15 @@
 
         private readonly IDealerService dealerService;
 
+        private readonly IMemoryCache memoryCache;
+
         public CarController(
             ICarService carService,
             IEngineService engineService,
             IGearboxService gearboxService,
             ICategoryService categoryService,
-            IDealerService dealerService)
+            IDealerService dealerService,
+            IMemoryCache memoryCache)
         {
             this.carService = carService;
             this.engineService = engineService;
@@ -34,6 +38,8 @@
             this.categoryService = categoryService;
 
             this.dealerService = dealerService;
+
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -450,6 +456,8 @@
                 this.GeneralError();
             }
 
+            this.memoryCache.Remove(RentsCacheKey);
+
             return this.RedirectToAction("Mine", "Car");
         }
 
@@ -491,6 +499,8 @@
             {
                 this.GeneralError();
             }
+
+            this.memoryCache.Remove(RentsCacheKey);
 
             return this.RedirectToAction("Mine", "Car");
         }

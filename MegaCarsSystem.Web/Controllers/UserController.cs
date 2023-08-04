@@ -3,13 +3,14 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authentication;
+    using Microsoft.Extensions.Caching.Memory;
 
     using MegaCarsSystem.Data.Models;
     using MegaCarsSystem.Web.ViewModels.User;
     using MegaCarsSystem.Services.Data.Interfaces;
 
     using static Common.NotificationsMessagesConstants;
-    using Microsoft.Extensions.Caching.Memory;
+    using static Common.GeneralApplicationConstants;
 
     public class UserController : Controller
     {
@@ -27,6 +28,7 @@
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+
             this.shopCartService = shopCartService;
             this.memoryCache = memoryCache;
         }
@@ -60,6 +62,7 @@
             {
                 await this.signInManager.SignInAsync(user, false);
                 await this.shopCartService.CreateShopCartByIdAsync(user.Id.ToString());
+                this.memoryCache.Remove(UsersCacheKey);
 
                 return this.RedirectToAction("Index", "Home");
             }
