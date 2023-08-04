@@ -33,9 +33,6 @@
         public const string DealerShoppingCartId = "61be485b-f019-4fd6-9c43-07f5aa896895";
 
         // For implementation of Admin
-        public const string AdminAreaName = "Admin";
-        public const string AdminRoleName = "Administrator";
-
         public const string UserDealerId_Development = "bcbd7654-ab17-4621-b75b-fc43ea4449db";
         public const string DealerAdminId_Development = "d08e602f-3c3f-4391-aaf6-b4867a639c13";
         public const string AdminFirstName_Development = "Admin";
@@ -43,5 +40,12 @@
         public const string AdminEmail_Development = "admin@admin.com";
         public const string AdminPassword_Development = "admin1122";
         public const string AdminShoppingCartId_Development = "1bca46f0-2eb4-43c7-8a76-7b006ceb109a";
+
+        public const string AdminAreaName = "Admin";
+        public const string AdminRoleName = "Administrator";
+
+        public const string UsersCacheKey = "UsersCache";
+        public const string RentsCacheKey = "RentsCache";
+        public const int UsersCacheDurationMinutes = 5;
     }
 }

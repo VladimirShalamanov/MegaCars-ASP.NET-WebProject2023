@@ -9,6 +9,7 @@
     using MegaCarsSystem.Services.Data.Interfaces;
 
     using static Common.NotificationsMessagesConstants;
+    using Microsoft.Extensions.Caching.Memory;
 
     public class UserController : Controller
     {
@@ -16,16 +17,18 @@
         private readonly SignInManager<ApplicationUser> signInManager;
 
         private readonly IShopCartService shopCartService;
+        private readonly IMemoryCache memoryCache;
 
         public UserController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IShopCartService shopCartService)
+            IShopCartService shopCartService,
+            IMemoryCache memoryCache)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.shopCartService = shopCartService;
-
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]

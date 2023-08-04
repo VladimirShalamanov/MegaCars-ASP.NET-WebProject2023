@@ -45,6 +45,8 @@ namespace MegaCarsSystem.Web
 
             builder.Services.AddApplicationServices(typeof(ICarService));
 
+            builder.Services.AddMemoryCache();
+
             builder.Services.ConfigureApplicationCookie(cfg =>
             {
                 cfg.LoginPath = "/User/Login";
