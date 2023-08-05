@@ -1,0 +1,30 @@
+﻿.containerProduc{
+    font-family: monospace;
+    overflow-x: hidden;
+    font-size: 15px;
+    width: 1200px;
+    margin: auto;
+    max-width: 90%;
+    transition: transform 1s;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    width: 60px;
+}
+
+.iconCart {
+    position: relative;
+    z-index: 1;
+    right: 0;
+    top: 0;
+}
+
+.totalQuantity{
+    position: absolute;
+    bottom: 22px;
+    left: 0;
+}

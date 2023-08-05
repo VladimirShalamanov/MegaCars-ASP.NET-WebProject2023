@@ -10,6 +10,7 @@
         // Func
         Task AddToCartByIdAsync(string userId, string productId);
         Task RemoveFromCartByIdAsync(string userId, string itemId);
+        Task IncreaseQuantityWithOneByIdAsync(string userId, string itemId);
 
         // Check
         Task<bool> ExistsItemByIdAsync(string itemId);

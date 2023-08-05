@@ -88,6 +88,59 @@
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> IncreaseQuantity(string id)
+        {
+            bool itemExists = await this.shopCartService.ExistsItemByIdAsync(id);
+
+            if (!itemExists)
+            {
+                this.TempData[ErrorMessage] = "Product with the provided id does not exist in your shopping cart!";
+
+                return this.RedirectToAction("All", "ShopCart");
+            }
+
+            string userId = this.User.GetId()!;
+
+            try
+            {
+                await this.shopCartService.IncreaseQuantityWithOneByIdAsync(userId, id);
+
+                return this.RedirectToAction("All", "ShopCart");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DecreaseQuantity(string id)
+        {
+            return this.Ok();
+            //bool itemExists = await this.shopCartService.ExistsItemByIdAsync(id);
+
+            //if (!itemExists)
+            //{
+            //    this.TempData[ErrorMessage] = "Product with the provided id does not exist in your shopping cart!";
+
+            //    return this.RedirectToAction("All", "ShopCart");
+            //}
+
+            //string userId = this.User.GetId()!;
+
+            //try
+            //{
+            //    await this.shopCartService.IncreaseQuantityWithOneByIdAsync(userId, id);
+
+            //    return this.RedirectToAction("All", "ShopCart");
+            //}
+            //catch (Exception)
+            //{
+            //    return GeneralError();
+            //}
+        }
+
         [HttpGet]
         public async Task<IActionResult> All()
         {

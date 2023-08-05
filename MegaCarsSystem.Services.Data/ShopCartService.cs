@@ -51,6 +51,16 @@
             await this.dbContext.SaveChangesAsync();
         }
 
+        public async Task IncreaseQuantityWithOneByIdAsync(string userId, string itemId)
+        {
+            Item item = await this.dbContext
+                .Items
+                .FirstAsync(p => p.Id.ToString() == itemId.ToLower());
+
+            item.Quantity++;
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<ItemsForShopCartViewModel>> AllItemsForShopCartByIdAsync(string userId)
         {
             ShopCart shopCart = await this.dbContext
@@ -101,7 +111,7 @@
             {
                 UserId = Guid.Parse(userId)
             };
-            
+
             await this.dbContext.ShopCarts.AddAsync(newShopCart);
             user.ShoppingCartId = newShopCart.Id;
             await this.dbContext.SaveChangesAsync();

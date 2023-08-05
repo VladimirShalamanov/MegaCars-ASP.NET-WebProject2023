@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/video-size.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ProducsStyle.css" asp-append-version="true" />
 
     <link rel="stylesheet" href="~/MegaCarsSystem.Web.styles.css" asp-append-version="true" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -38,6 +39,8 @@
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                 <img src="/logos/MegaCarsLogo.png" class="logo">
             </a>
+
+            
 
             <div class="toggle">
                 <i class="fa-solid fa-bars fa-2xl" style="color: white" onclick="menuHamburger()"></i>
@@ -138,11 +141,7 @@
                     </li>
                 }
 
-                <li>
-                    <a asp-area="" asp-controller="ShopCart" asp-action="All">
-                        <i class="fa fa-shopping-cart" style="font-size:24px;color:orange"></i>
-                    </a>
-                </li>
+
             }
 
             <partial name="_LoginPartial" />

@@ -11,6 +11,7 @@
     //});
 }
 
+
 function statistics() {
     $('#statistics_btn').on('click', function (e) {
 

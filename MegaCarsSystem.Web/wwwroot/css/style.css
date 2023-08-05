@@ -64,7 +64,6 @@ body {
     position: relative;
     width: 60px;
     height: 60px;
-    /*    background: url('/logos/MegaCarsLogo.png');*/
     background-repeat: no-repeat;
     background-size: 50px;
     background-position: center;
@@ -72,7 +71,6 @@ body {
 }
 
     .toggle.active {
-        /*        background: url('/logos/MegaCarsLogo.png');*/
         background-repeat: no-repeat;
         background-size: 25px;
         background-position: center;
@@ -160,6 +158,8 @@ body {
         .social li a:hover {
             transform: scale(0.5) translateY(-15px);
         }
+
+
 
 .menu {
     display: none;
