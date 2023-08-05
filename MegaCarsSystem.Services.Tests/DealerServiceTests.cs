@@ -43,9 +43,9 @@ namespace MegaCarsSystem.Services.Tests
         [Test]
         public async Task DealerExistsByUserId_ReturnFalseWhenNotExists()
         {
-            string foundDealerUserId = RenterUser.Id.ToString();
+            string wrongId = RenterUser.Id.ToString();
 
-            bool result = await this.dealerService.DealerExistsByUserIdAsync(foundDealerUserId);
+            bool result = await this.dealerService.DealerExistsByUserIdAsync(wrongId);
 
             Assert.IsFalse(result);
         }
@@ -58,6 +58,16 @@ namespace MegaCarsSystem.Services.Tests
             bool result = await this.dealerService.DealerExistsByPhoneNumberAsync(foundDealerPhoneNumber);
 
             Assert.IsTrue(result);
+        }
+
+        [Test]
+        public async Task DealerExistsByPhoneNumber_ReturnFalseWhenNotExists()
+        {
+            string wrongPhoneNumber = "+359000333";
+
+            bool result = await this.dealerService.DealerExistsByPhoneNumberAsync(wrongPhoneNumber);
+
+            Assert.IsFalse(result);
         }
     }
 }
