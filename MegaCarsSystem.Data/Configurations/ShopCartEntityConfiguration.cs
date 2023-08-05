@@ -13,35 +13,35 @@
         {
             builder
                 .HasOne(s => s.User)
-                .WithOne(s => s.ShopCart)
-                .HasForeignKey<ShopCart>(s => s.UserId)
-                .IsRequired();
+                .WithOne(s => s.ShoppingCart)
+                .HasForeignKey<ApplicationUser>(a => a.ShoppingCartId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasData(GenerateShoppingCarts());
+            //builder.HasData(GenerateShoppingCarts());
         }
 
         // Generate shopping carts for User,Dealer and Admin
-        private ShopCart[] GenerateShoppingCarts()
-        {
-            ICollection<ShopCart> shoppingCarts = new HashSet<ShopCart>();
+        //private ShoppingCart[] GenerateShoppingCarts()
+        //{
+        //    ICollection<ShoppingCart> shoppingCarts = new HashSet<ShoppingCart>();
 
-            // Add for 1st User
+        //    // Add for 1st User
 
-            ShopCart dealerShopCart = new ShopCart()
-            {
-                Id = Guid.Parse(DealerShoppingCartId),
-                UserId = Guid.Parse(UserDealerId)
-            };
-            shoppingCarts.Add(dealerShopCart);
+        //    ShoppingCart dealerShopCart = new ShoppingCart()
+        //    {
+        //        Id = Guid.Parse(DealerShoppingCartId),
+        //        UserId = Guid.Parse(UserDealerId)
+        //    };
+        //    shoppingCarts.Add(dealerShopCart);
 
-            ShopCart adminShopCart = new ShopCart()
-            {
-                Id = Guid.Parse(AdminShoppingCartId_Development),
-                UserId = Guid.Parse(UserDealerId_Development)
-            };
-            shoppingCarts.Add(adminShopCart);
+        //    ShoppingCart adminShopCart = new ShoppingCart()
+        //    {
+        //        Id = Guid.Parse(AdminShoppingCartId_Development),
+        //        UserId = Guid.Parse(UserDealerId_Development)
+        //    };
+        //    shoppingCarts.Add(adminShopCart);
 
-            return shoppingCarts.ToArray();
-        }
+        //    return shoppingCarts.ToArray();
+        //}
     }
 }

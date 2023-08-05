@@ -101,9 +101,9 @@
             {
                 UserId = Guid.Parse(userId)
             };
-
-            user.ShopCart = newShopCart;
+            
             await this.dbContext.ShopCarts.AddAsync(newShopCart);
+            user.ShoppingCartId = newShopCart.Id;
             await this.dbContext.SaveChangesAsync();
         }
 

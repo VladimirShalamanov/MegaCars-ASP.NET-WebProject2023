@@ -3,10 +3,10 @@ namespace MegaCarsSystem.Services.Tests
     using Microsoft.EntityFrameworkCore;
 
     using MegaCarsSystem.Data;
+    using MegaCarsSystem.Services.Data;
+    using MegaCarsSystem.Services.Data.Interfaces;
 
     using static DatabaseSeeder;
-    using MegaCarsSystem.Services.Data.Interfaces;
-    using MegaCarsSystem.Services.Data;
 
     public class DealerServiceTests
     {
@@ -48,6 +48,16 @@ namespace MegaCarsSystem.Services.Tests
             bool result = await this.dealerService.DealerExistsByUserIdAsync(foundDealerUserId);
 
             Assert.IsFalse(result);
+        }
+
+        [Test]
+        public async Task DealerExistsByPhoneNumber_ReturnTrueWhenExists()
+        {
+            string foundDealerPhoneNumber = Dealer.PhoneNumber;
+
+            bool result = await this.dealerService.DealerExistsByPhoneNumberAsync(foundDealerPhoneNumber);
+
+            Assert.IsTrue(result);
         }
     }
 }

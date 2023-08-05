@@ -9,7 +9,7 @@
 
     using static Common.GeneralApplicationConstants;
 
-    public class DealerEntityConfiguration : IEntityTypeConfiguration<Dealer>
+    public class DealerSeedEC : IEntityTypeConfiguration<Dealer>
     {
         public void Configure(EntityTypeBuilder<Dealer> builder)
         {

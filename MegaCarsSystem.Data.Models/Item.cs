@@ -26,7 +26,7 @@
         [MaxLength(Image_MaxLength)]
         public string Image { get; set; } = null!;
 
-        public Guid ShopCartId { get; set; }
-        public ShopCart ShopCart { get; set; } = null!;
+        public Guid? ShopCartId { get; set; }
+        public ShopCart? ShopCart { get; set; }
     }
 }

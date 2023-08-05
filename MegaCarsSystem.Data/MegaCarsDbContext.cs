@@ -16,13 +16,8 @@
         public MegaCarsDbContext(DbContextOptions<MegaCarsDbContext> options, bool seedDb = true)
             : base(options)
         {
-           this.seedDb = seedDb;
+            this.seedDb = seedDb;
         }
-
-        public DbSet<Product> Products { get; set; } = null!;
-        public DbSet<Item> Items { get; set; } = null!;
-        public DbSet<ShopCart> ShopCarts { get; set; } = null!;
-
 
         public DbSet<Gearbox> Gearboxes { get; set; } = null!;
         public DbSet<Engine> Engines { get; set; } = null!;
@@ -32,6 +27,10 @@
 
         public DbSet<Dealer> Dealers { get; set; } = null!;
 
+        public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<Item> Items { get; set; } = null!;
+        public DbSet<ShopCart> ShopCarts { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //Assembly configAssembly = Assembly.GetAssembly(typeof(MegaCarsDbContext)) ??
@@ -39,19 +38,23 @@
             //builder.ApplyConfigurationsFromAssembly(configAssembly);
 
             builder.ApplyConfiguration(new AppUserEntityConfiguration());
-            builder.ApplyConfiguration(new DealerEntityConfiguration());
-            builder.ApplyConfiguration(new ItemEntityConfiguration());
-            builder.ApplyConfiguration(new ShopCartEntityConfiguration());
             builder.ApplyConfiguration(new CarEntityConfiguration());
+            builder.ApplyConfiguration(new ShopCartEntityConfiguration());
+            builder.ApplyConfiguration(new ItemEntityConfiguration());
 
-            if (this.seedDb)
-            {
-                builder.ApplyConfiguration(new ProductEntityConfiguration());
-                builder.ApplyConfiguration(new CategoryEntityConfiguration());
-                builder.ApplyConfiguration(new GearboxEntityConfiguration());
-                builder.ApplyConfiguration(new EngineEntityConfiguration());
-                builder.ApplyConfiguration(new CarSeedEC());
-            }
+            builder.ApplyConfiguration(new AppUserSeedEC());
+            builder.ApplyConfiguration(new DealerSeedEC());
+            builder.ApplyConfiguration(new ShopCartSeedEC());
+
+            //if (this.seedDb)
+            //{
+            builder.ApplyConfiguration(new CategoryEntityConfiguration());
+            builder.ApplyConfiguration(new GearboxEntityConfiguration());
+            builder.ApplyConfiguration(new EngineEntityConfiguration());
+
+            builder.ApplyConfiguration(new CarSeedEC());
+            builder.ApplyConfiguration(new ProductSeedEC());
+            //}
 
             base.OnModelCreating(builder);
         }

@@ -5,7 +5,7 @@
 
     using MegaCarsSystem.Data.Models;
 
-    public class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
+    public class ProductSeedEC : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
