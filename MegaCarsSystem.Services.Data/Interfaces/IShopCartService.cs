@@ -12,6 +12,8 @@
         Task RemoveFromCartByIdAsync(string userId, string itemId);
         Task IncreaseQuantityWithOneByIdAsync(string userId, string itemId);
 
+        Task<int> GetAllItemsQuantityByUserIdAsync(string userId);
+
         // Check
         Task<bool> ExistsItemByIdAsync(string itemId);
         Task<bool> ExistsShopCartByIdAsync(string userId);

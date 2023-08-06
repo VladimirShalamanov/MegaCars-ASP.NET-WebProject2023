@@ -15,26 +15,13 @@
                 <img src="@product.Image">
                 <h2>@product.Name</h2>
                 <div class="price">Price: @($"{product.Price:f2}") BGN</div>
-                <button>Add To Cart</button>
+
+                <form asp-controller="ShopCart" asp-action="AddToCart" asp-route-id="@product.Id" method="post">
+                    <button type="submit">
+                        Add To Cart
+                    </button>
+                </form>
             </div>
         </div>
     }
 </div>
-
-@*<div class="col-md-4">
-    <div class="card mb-3">
-    <img class="card-img-top" style="height:450px" src="@product.Image" alt="Product Image">
-    <div class="card-body text-center bg-black">
-    <h4>@product.Name</h4>
-    <h6>
-    Price:
-    <b>@($"{product.Price:f2}") BGN</b>
-    </h6>
-    <br />
-
-    <form asp-controller="ShopCart" asp-action="AddToCart" asp-route-id="@product.Id" method="post">
-    <input class="btn btn-primary" type="submit" value="AddToCart" />
-    </form>
-    </div>
-    </div>
-    </div>*@

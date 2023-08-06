@@ -4,11 +4,14 @@
 @using static MegaCarsSystem.Common.GeneralApplicationConstants;
 
 @inject IDealerService DealerService
+@inject IShopCartService ShopCartService
 
 @{
     // Add custom _AdminLoyout in Admin/Views/Shared - when end with this one !!!
 
     bool isUserDealer = await DealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
+
+    int totalItems = await ShopCartService.GetAllItemsQuantityByUserIdAsync(this.User.GetId()!);
 
     var controllerName = string.Empty;
     object controllerObj;
@@ -59,7 +62,7 @@
                 <div class="iconCart">
                     <a asp-area="" asp-controller="ShopCart" asp-action="All">
                         <i class="fa fa-shopping-cart" style="font-size:24px;color:orange"></i>
-                        <div class="totalQuantity">0</div>
+                        <div class="totalQuantity">@totalItems</div>
                     </a>
                 </div>
             }

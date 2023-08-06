@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<ItemsForShopCartViewModel>
 
 @{
-    ViewBag.Title = "Your Shop Cart";
+    ViewBag.Title = "Your Shopping Cart";
 }
 
 <div class="containerShopCart">
     <div class="checkoutLayout">
         <div class="returnCart">
 
-            <a href="/">Keep shopping</a>
+            <a href="/Product/All">Keep shopping</a>
             <h1>@ViewBag.Title</h1>
 
             <div class="list">
@@ -16,12 +16,11 @@
                     @foreach (var item in Model)
                     {
                         <img src="@item.Image" alt="" />
-                        <div class="info">
-                            <div class="name">@item.Name</div>
-                            <div class="price">@item.Price</div>
-                        </div>
+                        <div class="name">@item.Name</div>
+                        <div class="price">@item.Price BGN</div>
+
                         <div class="quantity">
-                            <form asp-controller="ShopCart" asp-action="DecreaseQuantity" asp-route-id="@item.Id" style="text-decoration: none">
+                            <form asp-controller="ShopCart" asp-action="DecreaseQuantity" asp-route-id="@item.Id" method="post">
                                 <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
                                     <i class="fa-regular fa-square-minus" style="color: magenta"></i>
                                 </button>
@@ -35,11 +34,22 @@
                                 </button>
                             </form>
                         </div>
-                        <div class="returnPrice">$44</div>
+
+                        <div class="returnPrice">@(item.Price * item.Quantity) BGN</div>
+
+                        <div class="binIcon">
+                            <form asp-controller="ShopCart" asp-action="RemoveFromCart" asp-route-id="@item.Id" method="post">
+                                <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
+
+                                    <i class="fa-solid fa-trash-can" style="color: red"></i>
+                                </button>
+                            </form>
+                        </div>
                     }
+
                 </div>
             </div>
-        </div>          
+        </div>
 
         <div class="right">
             <h1>CHECKOUT</h1>
@@ -74,7 +84,7 @@
                     </select>
                 </div>
             </div>
-            
+
             <div class="return">
                 <div class="row">
                     <div>Total Quantity</div>
@@ -89,24 +99,19 @@
                 CHECKOUT
             </button>
         </div>
-           
-    </div>
-</div>           
 
-            @*<td>@(item.Price * item.Quantity)</td>
+    </div>
+</div>
+
+@*<td></td>
             <td>
-                <form asp-controller="ShopCart" asp-action="RemoveFromCart" asp-route-id="@item.Id" method="post">
-                    <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
-                        <input class="btn btn" type="submit" value="Leave" />
-                        <i class="fa-solid fa-trash-can" style="color: red"></i>
-                    </button>
-                </form>
+
             </td>*@
 
 
 
 
-            @*@if (!Model.Any())
+@*@if (!Model.Any())
             {
                 <p class="text-center">
                     Your cart is empty.
@@ -176,4 +181,4 @@
             </table>
             }*@
 
-        
+

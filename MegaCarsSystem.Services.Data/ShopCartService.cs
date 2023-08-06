@@ -61,6 +61,25 @@
             await this.dbContext.SaveChangesAsync();
         }
 
+
+
+        public async Task<int> GetAllItemsQuantityByUserIdAsync(string userId)
+        {
+            ShopCart shopCart = await this.dbContext
+                .ShopCarts
+                .Include(s => s.Items)
+                .FirstAsync(u => u.UserId.ToString() == userId);
+
+            if (!shopCart.Items.Any())
+            {
+                return 0;
+            }
+
+            int totalItems = shopCart.Items.Sum(i => i.Quantity);
+
+            return totalItems;
+        }
+
         public async Task<IEnumerable<ItemsForShopCartViewModel>> AllItemsForShopCartByIdAsync(string userId)
         {
             ShopCart shopCart = await this.dbContext
