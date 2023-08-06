@@ -1,6 +1,6 @@
-﻿.containerProduct {
+﻿/*            overflow--x:-hidden;*/
+.containerProduct {
     font-family: monospace;
-/*        overflow-x: hidden;*/
     font-size: 15px;
     width: 1200px;
     margin: auto;
@@ -15,35 +15,32 @@ a {
     text-decoration: none;
 }
 
-img {
+/*.listProduct img {
     width: 60px;
-}
+}*/
 
 .iconCart {
     position: absolute;
     right: 200px;
     z-index: 1;
-/*        top: 20px;*/
-    
 }
 
-.totalQuantity {
-    position: absolute;
-    bottom: 20px;
-    left: 15px;
-    font-size: x-large;
-    background-color: red;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    color: white;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: translateX(10px);
-    /*    display: none;*/
-}
+    .iconCart .totalQuantity {
+        position: absolute;
+        bottom: 20px;
+        left: 15px;
+        font-size: x-large;
+        background-color: red;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(10px);
+    }
 
 .listProduct {
     display: grid;
@@ -53,6 +50,7 @@ img {
 
     .listProduct .item img {
         width: 100%;
+        margin-bottom: 15px;
     }
 
     .listProduct .item h2 {
@@ -66,6 +64,7 @@ img {
 
     .listProduct .item {
         position: relative;
+        
     }
 
         .listProduct .item button {
@@ -75,12 +74,12 @@ img {
             background-color: darkorange;
             width: 50%;
             border: none;
-            padding: 20px 30px;
+            padding: 10px 20px;
             box-shadow: 0 10px 50px deepskyblue;
             cursor: pointer;
             transform: translateX(-50%) translateY(100px);
             opacity: 0;
-/*            border-radius: 50%;*/
+            border-radius: 20px;
         }
 
         .listProduct .item:hover button {
@@ -88,3 +87,107 @@ img {
             opacity: 1;
             transform: translateX(-50%)
         }
+
+
+
+/* Shopping Cart Page */
+
+.checkoutLayout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    padding: 20px;
+}
+
+    .checkoutLayout .right {
+        background-color: deepskyblue;
+        border-radius: 20px;
+        padding: 40px;
+        color: white;
+    }
+
+    .checkoutLayout .list img {
+        height: 70px;
+    }
+
+    .checkoutLayout .right .form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        border-bottom: 1px solid purple;
+        padding-bottom: 20px;
+    }
+
+    .checkoutLayout .form .group:nth-child(-n+3) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .checkoutLayout .form input,
+    .checkoutLayout .form select {
+        width: 100%;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        border-radius: 20px;
+        margin-top: 10px;
+        border: none;
+        background-color: dodgerblue;
+        color: white;
+    }
+
+    .checkoutLayout .return {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+        .checkoutLayout .return .totalQuantity,
+        .checkoutLayout .return .totalPrice {
+            font-weight: bold;
+            font-size: x-large;
+        }
+
+.buttonCheckout {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    background-color: blueviolet;
+    color: white;
+}
+
+.returnCart h1 {
+    border-top: 1px solid white;
+    padding: 20px 0;
+}
+
+.returnCart .list .item img {
+    height: 80px;
+}
+
+.returnCart .item {
+    display: grid;
+    grid-template-columns: 80px 1fr 50px 80px;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 0 10px;
+    box-shadow: 0 10px 50px skyblue;
+    border-radius: 10px;
+}
+
+    .returnCart .item .name,
+    .returnCart .item .returnPrice {
+        font-size: x-large;
+        font-weight: bold;
+    }
+
+    .returnCart .item .quantity {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 30px 0 -40px;
+    }
