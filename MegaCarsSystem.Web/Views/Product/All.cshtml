@@ -4,17 +4,12 @@
     ViewBag.Title = "All Products";
 }
 
-<div class="iconCart">
-    <a asp-area="" asp-controller="ShopCart" asp-action="All">
-        <i class="fa fa-shopping-cart" style="font-size:24px;color:orange"></i>
-        <div class="totalQuantity">0</div>
-    </a>
-</div>
+
 
 <h1 class="text-center">@ViewBag.Title</h1>
 <hr />
 
-<div class="containerProduc">
+<div class="containerProduct">
     @foreach (var product in Model)
     {
         <div class="listProduct">

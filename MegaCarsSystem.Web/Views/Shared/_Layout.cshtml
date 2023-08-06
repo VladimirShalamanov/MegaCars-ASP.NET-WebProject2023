@@ -9,6 +9,20 @@
     // Add custom _AdminLoyout in Admin/Views/Shared - when end with this one !!!
 
     bool isUserDealer = await DealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
+
+    var controllerName = string.Empty;
+    object controllerObj;
+    if (ViewContext.RouteData.Values.TryGetValue("controller", out controllerObj!))
+    {
+        controllerName = controllerObj.ToString();
+    }
+
+    var actionName = string.Empty;
+    object actionObj;
+    if (ViewContext.RouteData.Values.TryGetValue("action", out actionObj!))
+    {
+        actionName = actionObj.ToString();
+    }
 }
 
 <!DOCTYPE html>
@@ -40,7 +54,15 @@
                 <img src="/logos/MegaCarsLogo.png" class="logo">
             </a>
 
-            
+            @if (controllerName == "Product" && actionName == "All")
+            {
+                <div class="iconCart">
+                    <a asp-area="" asp-controller="ShopCart" asp-action="All">
+                        <i class="fa fa-shopping-cart" style="font-size:24px;color:orange"></i>
+                        <div class="totalQuantity">0</div>
+                    </a>
+                </div>
+            }
 
             <div class="toggle">
                 <i class="fa-solid fa-bars fa-2xl" style="color: white" onclick="menuHamburger()"></i>
@@ -118,9 +140,9 @@
             <a class="nav-link text-dark"></a>
             </li>*@
 
-            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-
-
+            <li>
+                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
             <li>
                 <a asp-area="" asp-controller="Car" asp-action="All">All Cars</a>
             </li>
@@ -140,8 +162,6 @@
                         <a asp-area="" asp-controller="Car" asp-action="Add">Add Car</a>
                     </li>
                 }
-
-
             }
 
             <partial name="_LoginPartial" />
@@ -160,8 +180,6 @@
     }
     </div>
     </footer>*@
-
-
 
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
