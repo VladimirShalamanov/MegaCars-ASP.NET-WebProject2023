@@ -6,13 +6,15 @@
     {
         // Views
         Task<IEnumerable<ItemsForShopCartViewModel>> AllItemsForShopCartByIdAsync(string userId);
+        Task<int> GetAllItemsQuantityByUserIdAsync(string userId);
 
         // Func
         Task AddToCartByIdAsync(string userId, string productId);
         Task RemoveFromCartByIdAsync(string userId, string itemId);
         Task IncreaseQuantityWithOneByIdAsync(string userId, string itemId);
+        Task DecreaseQuantityWithOneByIdAsync(string userId, string itemId);
 
-        Task<int> GetAllItemsQuantityByUserIdAsync(string userId);
+
 
         // Check
         Task<bool> ExistsItemByIdAsync(string itemId);

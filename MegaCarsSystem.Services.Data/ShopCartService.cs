@@ -18,6 +18,45 @@
             this.dbContext = dbContext;
         }
 
+        public async Task<IEnumerable<ItemsForShopCartViewModel>> AllItemsForShopCartByIdAsync(string userId)
+        {
+            ShopCart shopCart = await this.dbContext
+                 .ShopCarts
+                 .FirstAsync(u => u.UserId.ToString() == userId);
+
+            IEnumerable<ItemsForShopCartViewModel> allItems = await this.dbContext
+                .Items
+                .Where(i => i.ShopCartId == shopCart.Id)
+                .Select(i => new ItemsForShopCartViewModel
+                {
+                    Id = i.Id.ToString(),
+                    Name = i.Name,
+                    Quantity = i.Quantity,
+                    Price = i.Price,
+                    Image = i.Image,
+                })
+                .ToArrayAsync();
+
+            return allItems;
+        }
+
+        public async Task<int> GetAllItemsQuantityByUserIdAsync(string userId)
+        {
+            ShopCart shopCart = await this.dbContext
+                .ShopCarts
+                .Include(s => s.Items)
+                .FirstAsync(u => u.UserId.ToString() == userId);
+
+            if (!shopCart.Items.Any())
+            {
+                return 0;
+            }
+
+            int totalItems = shopCart.Items.Sum(i => i.Quantity);
+
+            return totalItems;
+        }
+
         public async Task AddToCartByIdAsync(string userId, string productId)
         {
             ShopCart shopCart = await this.dbContext
@@ -61,46 +100,24 @@
             await this.dbContext.SaveChangesAsync();
         }
 
-
-
-        public async Task<int> GetAllItemsQuantityByUserIdAsync(string userId)
+        public async Task DecreaseQuantityWithOneByIdAsync(string userId, string itemId)
         {
-            ShopCart shopCart = await this.dbContext
-                .ShopCarts
-                .Include(s => s.Items)
-                .FirstAsync(u => u.UserId.ToString() == userId);
+            Item item = await this.dbContext
+                .Items
+                .FirstAsync(p => p.Id.ToString() == itemId.ToLower());
 
-            if (!shopCart.Items.Any())
+            item.Quantity--;
+
+            if (item.Quantity == 0)
             {
-                return 0;
+                this.dbContext.Items.Remove(item);
             }
 
-            int totalItems = shopCart.Items.Sum(i => i.Quantity);
-
-            return totalItems;
+            await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ItemsForShopCartViewModel>> AllItemsForShopCartByIdAsync(string userId)
-        {
-            ShopCart shopCart = await this.dbContext
-                 .ShopCarts
-                 .FirstAsync(u => u.UserId.ToString() == userId);
 
-            IEnumerable<ItemsForShopCartViewModel> allItems = await this.dbContext
-                .Items
-                .Where(i => i.ShopCartId == shopCart.Id)
-                .Select(i => new ItemsForShopCartViewModel
-                {
-                    Id = i.Id.ToString(),
-                    Name = i.Name,
-                    Quantity = i.Quantity,
-                    Price = i.Price,
-                    Image = i.Image,
-                })
-                .ToArrayAsync();
 
-            return allItems;
-        }
 
         public async Task<bool> ExistsItemByIdAsync(string itemId)
         {

@@ -89,13 +89,23 @@
 /* Shopping Cart Page */
 .containerShopCart .emptyCart {
     text-align-last: center;
+    font-size: 40px;
+    font-weight: bold;
 }
 
-.returnCart a {
-    margin-left: 40%;
-    text-decoration: none;
-    color: red;
-}
+    .containerShopCart .emptyCart a {
+        color: magenta;
+        text-decoration: none;
+    }
+        .containerShopCart .emptyCart a:hover {
+            text-decoration: underline;
+        }
+
+        .returnCart a {
+            margin-left: 40%;
+            text-decoration: none;
+            color: red;
+        }
 
 .returnCart h1 {
     text-align-last: center;
@@ -178,7 +188,6 @@
     justify-content: space-between;
     margin-right: -90px;
     margin-bottom: 10px;
-
 }
 
     .checkoutLayout .priceDelivery .priceSubtotal,
@@ -189,13 +198,13 @@
 
 
 
-    .checkoutLayout .right .form {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        border-bottom: 1px solid purple;
-        padding-bottom: 20px;
-    }
+.checkoutLayout .right .form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    border-bottom: 1px solid purple;
+    padding-bottom: 20px;
+}
 
 .checkoutLayout .form .group:nth-child(-n+3) {
     grid-column-start: 1;

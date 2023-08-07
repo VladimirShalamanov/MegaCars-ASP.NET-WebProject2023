@@ -11,20 +11,22 @@
 
     bool isUserDealer = await DealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
 
-    int totalItems = await ShopCartService.GetAllItemsQuantityByUserIdAsync(this.User.GetId()!);
-
     var controllerName = string.Empty;
     object controllerObj;
     if (ViewContext.RouteData.Values.TryGetValue("controller", out controllerObj!))
     {
         controllerName = controllerObj.ToString();
     }
-
     var actionName = string.Empty;
     object actionObj;
     if (ViewContext.RouteData.Values.TryGetValue("action", out actionObj!))
     {
         actionName = actionObj.ToString();
+    }
+
+    if (this.User.Identity?.IsAuthenticated ?? false)
+    {
+
     }
 }
 
@@ -62,7 +64,15 @@
                 <div class="iconCart">
                     <a asp-area="" asp-controller="ShopCart" asp-action="All">
                         <i class="fa fa-shopping-cart" style="font-size:24px;color:orange"></i>
-                        <div class="totalQuantity">@totalItems</div>
+
+                        @if (this.User.Identity?.IsAuthenticated ?? false)
+                        {
+                            int totalItems = await ShopCartService.GetAllItemsQuantityByUserIdAsync(this.User.GetId()!);
+                            if (totalItems > 0)
+                            {
+                                <div class="totalQuantity">@totalItems</div>
+                            }
+                        }
                     </a>
                 </div>
             }
