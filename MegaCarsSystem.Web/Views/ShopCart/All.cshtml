@@ -2,183 +2,160 @@
 
 @{
     ViewBag.Title = "Your Shopping Cart";
+
+    decimal totalPriceProducts = Model.Sum(item => item.Price * item.Quantity);
+    decimal minSum = minSumForFreeOrder;
+    int totalQuantityProducts = Model.Sum(item => item.Quantity);
 }
 
 <div class="containerShopCart">
-    <div class="checkoutLayout">
-        <div class="returnCart">
 
-            <a href="/Product/All">Keep shopping</a>
-            <h1>@ViewBag.Title</h1>
+    @if (!Model.Any())
+    {
+        <p class="emptyCart">
+            Your cart is empty.
+            <br>
+            Click
+            <a href="/Product/All" style="color: magenta"
+               onmouseover="this.style.textDecoration='none';"
+               onmouseout="this.style.textDecoration='underline';">here</a> for continue your shopping.
+        </p>
+    }
+    else
+    {
+        <div class="checkoutLayout">
+            <div class="returnCart">
 
-            <div class="list">
-                <div class="item">
-                    @foreach (var item in Model)
-                    {
-                        <img src="@item.Image" alt="" />
-                        <div class="name">@item.Name</div>
-                        <div class="price">@item.Price BGN</div>
+                <a href="/Product/All">Keep shopping</a>
+                <h1>@ViewBag.Title</h1>
 
-                        <div class="quantity">
-                            <form asp-controller="ShopCart" asp-action="DecreaseQuantity" asp-route-id="@item.Id" method="post">
-                                <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
-                                    <i class="fa-regular fa-square-minus" style="color: magenta"></i>
-                                </button>
-                            </form>
+                <div class="infoTableCart">
+                    <div>Product</div>
+                    <div>Price</div>
+                    <div>Quantity</div>
+                    <div>Subtotal</div>
+                </div>
 
-                            @item.Quantity
+                <div class="list">
+                    <div class="item">
+                        @foreach (var item in Model)
+                        {
+                            <img src="@item.Image" alt="" />
+                            <div class="name">@item.Name</div>
+                            <div class="price">@item.Price</div>
 
-                            <form asp-controller="ShopCart" asp-action="IncreaseQuantity" asp-route-id="@item.Id" method="post">
-                                <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
-                                    <i class="fa-regular fa-square-plus" style="color: magenta"></i>
-                                </button>
-                            </form>
-                        </div>
+                            <div class="quantity">
+                                <form asp-controller="ShopCart" asp-action="DecreaseQuantity" asp-route-id="@item.Id" method="post">
+                                    <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
+                                        <i class="fa-regular fa-square-minus" style="color: magenta"></i>
+                                    </button>
+                                </form>
 
-                        <div class="returnPrice">@(item.Price * item.Quantity) BGN</div>
+                                @item.Quantity
 
-                        <div class="binIcon">
-                            <form asp-controller="ShopCart" asp-action="RemoveFromCart" asp-route-id="@item.Id" method="post">
-                                <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
+                                <form asp-controller="ShopCart" asp-action="IncreaseQuantity" asp-route-id="@item.Id" method="post">
+                                    <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
+                                        <i class="fa-regular fa-square-plus" style="color: magenta"></i>
+                                    </button>
+                                </form>
+                            </div>
 
-                                    <i class="fa-solid fa-trash-can" style="color: red"></i>
-                                </button>
-                            </form>
-                        </div>
-                    }
+                            <div class="returnPrice">@(item.Price * item.Quantity)</div>
 
+                            <div class="binIcon">
+                                <form asp-controller="ShopCart" asp-action="RemoveFromCart" asp-route-id="@item.Id" method="post">
+                                    <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
+
+                                        <i class="fa-solid fa-trash-can" style="color: red"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        }
+
+                    </div>
                 </div>
             </div>
+
+            <div class="right">
+                <h1>CHECKOUT</h1>
+
+                @if (totalPriceProducts < minSumForFreeOrder)
+                {
+                    <p>Order for an additional @(minSum - totalPriceProducts) BGN if you want free delivery.</p>
+                }
+                else
+                {
+                    <p>Your order is free.</p>
+                }
+
+                <div class="priceDelivery">
+                    <div class="row">
+                        <div>Subtotal:</div>
+                        <div>Delivery:</div>
+                    </div>
+                    <div class="row">
+                        <div class="priceSubtotal">@totalPriceProducts BGN</div>
+
+                        @if (totalPriceProducts < minSumForFreeOrder)
+                        {
+                            totalPriceProducts += delivery;
+                            <div class="delivery">@delivery BGN</div>
+                        }
+                        else
+                        {
+                            <div class="delivery">0.00 BGN</div>
+                        }
+                    </div>
+                </div>
+
+                <div class="form">
+
+                    <div class="group">
+                        <label for="">Full Name</label>
+                        <input type="text" name="" id="">
+                    </div>
+                    <div class="group">
+                        <label for="">Phone Num</label>
+                        <input type="text" name="" id="">
+                    </div>
+                    <div class="group">
+                        <label for="">Address</label>
+                        <input type="text" name="" id="">
+                    </div>
+                    <div class="group">
+                        <label for="">Country</label>
+                        <input name="" id="">
+                        <select>
+                            <option value="">Choose...</option>
+                            <option value="Kalofer">Kalofer</option>
+                        </select>
+                    </div>
+                    <div class="group">
+                        <label for="">City</label>
+                        <input name="" id="">
+                        <select>
+                            <option value="">Choose...</option>
+                            <option value="Kalofer">Kalofer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="return">
+                    <div class="row">
+                        <div>Total Quantity:</div>
+                        <div>Total Price:</div>
+                    </div>
+                    <div class="row">
+                        <div class="totalQuantity">@totalQuantityProducts</div>
+                        <div class="totalPrice">@totalPriceProducts BGN</div>
+                    </div>
+                </div>
+
+                <button class="buttonCheckout">
+                    CHECKOUT
+                </button>
+            </div>
+
         </div>
-
-        <div class="right">
-            <h1>CHECKOUT</h1>
-
-            <div class="form">
-                <div class="group">
-                    <label for="">Full Name</label>
-                    <input type="text" name="" id="">
-                </div>
-                <div class="group">
-                    <label for="">Phone Num</label>
-                    <input type="text" name="" id="">
-                </div>
-                <div class="group">
-                    <label for="">Address</label>
-                    <input type="text" name="" id="">
-                </div>
-                <div class="group">
-                    <label for="">Country</label>
-                    <input name="" id="">
-                    <select>
-                        <option value="">Choose...</option>
-                        <option value="Kalofer">Kalofer</option>
-                    </select>
-                </div>
-                <div class="group">
-                    <label for="">City</label>
-                    <input name="" id="">
-                    <select>
-                        <option value="">Choose...</option>
-                        <option value="Kalofer">Kalofer</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="return">
-                <div class="row">
-                    <div>Total Quantity</div>
-                    <div>Total Price</div>
-                </div>
-                <div class="row">
-                    <div class="totalQuantity">8</div>
-                    <div class="totalPrice">$99</div>
-                </div>
-            </div>
-            <button class="buttonCheckout">
-                CHECKOUT
-            </button>
-        </div>
-
-    </div>
+    }
 </div>
-
-@*<td></td>
-            <td>
-
-            </td>*@
-
-
-
-
-@*@if (!Model.Any())
-            {
-                <p class="text-center">
-                    Your cart is empty.
-                    <br>
-                    Click
-                    <a href="/Product/All" style="color: magenta"
-                       onmouseover="this.style.textDecoration='none';"
-                       onmouseout="this.style.textDecoration='underline';">here</a> for continue your shopping.
-                </p>
-            }
-            else
-            {
-                <table class="table table-striped">
-            <thead>
-            <tr class="text-white">
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var item in Model)
-            {
-            <tr class="text-white">
-            <td><img src="@item.Image" alt="Item Image" width="50" height="50" /></td>
-            <td>@item.Name</td>
-            <td>@item.Price</td>
-            <td style="display: flex;">
-            <form asp-controller="ShopCart" asp-action="DecreaseQuantity" asp-route-id="@item.Id" style="text-decoration: none">
-            <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
-            <i class="fa-regular fa-square-minus" style="color: magenta"></i>
-            </button>
-            </form>
-            @item.Quantity
-
-            <form asp-controller="ShopCart" asp-action="IncreaseQuantity" asp-route-id="@item.Id" method="post">
-            <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
-            <i class="fa-regular fa-square-plus" style="color: magenta"></i>
-            </button>
-            </form>
-            </td>
-            <td>@(item.Price * item.Quantity)</td>
-            <td>
-            <form asp-controller="ShopCart" asp-action="RemoveFromCart" asp-route-id="@item.Id" method="post">
-            <button type="submit" class="btn-icon" style="border: none; background-color: transparent;">
-            <input class="btn btn" type="submit" value="Leave" />
-            <i class="fa-solid fa-trash-can" style="color: red"></i>
-            </button>
-            </form>
-            </td>
-            </tr>
-            }
-            <tr>
-            <td colspan="6"></td>
-            </tr>
-            <tr class="text-white">
-            <td colspan="4" style="text-align: right;"><strong>Total:</strong></td>
-            <td>
-            @Model.Sum(item => item.Price * item.Quantity)
-            </td>
-            <td></td>
-            </tr>
-            </tbody>
-            </table>
-            }*@
-
-

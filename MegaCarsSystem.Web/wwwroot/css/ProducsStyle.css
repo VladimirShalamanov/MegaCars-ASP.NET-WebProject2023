@@ -1,5 +1,29 @@
-﻿/*            overflow--x:-hidden;*/
+﻿/*All Products Page*/
 
+.iconCart {
+    position: absolute;
+    right: 200px;
+    z-index: 1;
+}
+
+    .iconCart .totalQuantity {
+        position: absolute;
+        bottom: 20px;
+        left: 15px;
+        font-size: 18px;
+        background-color: red;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(10px);
+    }
+
+/*overflow--x:-hidden;*/
 .containerProduct {
     font-family: monospace;
     font-size: 15px;
@@ -12,41 +36,6 @@
     align-items: center;
 }
 
-.returnCart h1 {
-    text-align-last: center;
-}
-
-a {
-    text-decoration: none;
-}
-
-/*.listProduct img {
-    width: 60px;
-}*/
-
-.iconCart {
-    position: absolute;
-    right: 200px;
-    z-index: 1;
-}
-
-    .iconCart .totalQuantity {
-        position: absolute;
-        bottom: 20px;
-        left: 15px;
-        font-size: x-large;
-        background-color: red;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        color: white;
-        font-weight: bold;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transform: translateX(10px);
-    }
-
 .listProduct {
     display: grid;
     grid-template-columns: repeat(2, 2fr);
@@ -54,7 +43,8 @@ a {
 }
 
     .listProduct .item img {
-        width: 100%;
+        width: 300px;
+        height: 350px;
         margin-bottom: 15px;
     }
 
@@ -97,6 +87,20 @@ a {
 
 
 /* Shopping Cart Page */
+.containerShopCart .emptyCart {
+    text-align-last: center;
+}
+
+.returnCart a {
+    margin-left: 40%;
+    text-decoration: none;
+    color: red;
+}
+
+.returnCart h1 {
+    text-align-last: center;
+    border-top: none;
+}
 
 .checkoutLayout {
     display: grid;
@@ -105,86 +109,28 @@ a {
     padding: 20px;
 }
 
-    .checkoutLayout .right {
-        background-color: deepskyblue;
-        border-radius: 20px;
-        padding: 40px;
-        color: white;
-    }
-
-    .checkoutLayout .list img {
-        height: 70px;
-    }
-
-    .checkoutLayout .right .form {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        border-bottom: 1px solid purple;
-        padding-bottom: 20px;
-    }
-
-    .checkoutLayout .form .group:nth-child(-n+3) {
-        grid-column-start: 1;
-        grid-column-end: 3;
-    }
-
-    .checkoutLayout .form input,
-    .checkoutLayout .form select {
-        width: 100%;
-        padding: 10px 20px;
-        box-sizing: border-box;
-        border-radius: 20px;
-        margin-top: 10px;
-        border: none;
-        background-color: dodgerblue;
-        color: white;
-    }
-
-    .checkoutLayout .return {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 10px;
-    }
-
-        .checkoutLayout .return .totalQuantity,
-        .checkoutLayout .return .totalPrice {
-            font-weight: bold;
-            font-size: x-large;
-        }
-
-.buttonCheckout {
-    width: 100%;
-    height: 40px;
-    border: none;
-    border-radius: 20px;
-    margin-top: 20px;
+.returnCart .infoTableCart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-weight: bold;
-    background-color: blueviolet;
-    color: white;
+    padding: 20px 90px 20px 90px;
+    background-color: deepskyblue;
+    box-shadow: 0 10px 30px skyblue;
+    border-radius: 40px;
 }
-
-.returnCart h1 {
-    border-top: 1px solid white;
-    padding: 20px 0;
-}
-
-.returnCart .list .item img {
-    height: 80px;
-}
-
 
 .returnCart .item {
-    display: grid;
-/*    display: flex;*/
-    grid-template-columns: 50px 160px 1fr 110px 70px 10px; 
-/*    justify-content: space-between;*/
+    /*        display: flex;*/
     align-items: center;
+    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 80px 110px 0px 160px 1fr 40px;
     gap: 20px;
+    margin-top: 50px;
     margin-bottom: 30px;
     padding: 0 10px;
-    box-shadow: 0 10px 50px skyblue;
+    box-shadow: 0 10px 90px skyblue;
     border-radius: 10px;
 }
 
@@ -203,3 +149,96 @@ a {
         align-items: center;
         margin: 0 0px 0 70px;
     }
+
+.checkoutLayout .list img {
+    width: 60px;
+    height: 60px;
+}
+
+.checkoutLayout .right {
+    background-color: deepskyblue;
+    border-radius: 20px;
+    padding: 40px;
+    color: white;
+}
+
+    .checkoutLayout .right p {
+        font-size: 20px;
+        color: red;
+    }
+
+    .checkoutLayout .right h1 {
+        text-align: center;
+    }
+
+
+.checkoutLayout .priceDelivery {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: -90px;
+    margin-bottom: 10px;
+
+}
+
+    .checkoutLayout .priceDelivery .priceSubtotal,
+    .checkoutLayout .priceDelivery .delivery {
+        font-weight: bold;
+        font-size: x-large;
+    }
+
+
+
+    .checkoutLayout .right .form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        border-bottom: 1px solid purple;
+        padding-bottom: 20px;
+    }
+
+.checkoutLayout .form .group:nth-child(-n+3) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.checkoutLayout .form input,
+.checkoutLayout .form select {
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    margin-top: 10px;
+    border: none;
+    background-color: dodgerblue;
+    color: white;
+}
+
+.checkoutLayout .return {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+    .checkoutLayout .return .totalQuantity,
+    .checkoutLayout .return .totalPrice {
+        font-weight: bold;
+        font-size: x-large;
+    }
+
+.buttonCheckout {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    background-color: blueviolet;
+    color: white;
+}
+
+.returnCart h1 {
+    border-top: 1px solid white;
+    padding: 20px 0;
+}

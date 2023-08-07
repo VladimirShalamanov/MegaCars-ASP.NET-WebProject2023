@@ -4,6 +4,10 @@
     {
         public const int ReleaseYear = 2023;
 
+        // Products_Orders_Shipping
+        public const decimal minSumForFreeOrder = 50.00m;
+        public const decimal delivery = 5.00m;
+
         // For the sorting part of the Аpp.
         public const int DefaultPage = 1;
         public const int EntitiesPerPage = 3;
