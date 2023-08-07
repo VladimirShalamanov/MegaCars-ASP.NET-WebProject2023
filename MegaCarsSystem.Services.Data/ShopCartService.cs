@@ -67,16 +67,29 @@
                 .Products
                 .FirstAsync(p => p.Id.ToString() == productId.ToLower());
 
-            Item item = new Item()
-            {
-                Name = product.Name,
-                Quantity = 1,
-                Price = product.Price,
-                Image = product.Image,
-                ShopCartId = shopCart.Id
-            };
+            Item foundItem = await this.dbContext.Items.FirstOrDefaultAsync(i => i.Name == product.Name);
 
-            await this.dbContext.Items.AddAsync(item);
+            var sss = shopCart.Items;
+
+            if ((foundItem != null) && foundItem.ShopCartId == shopCart.Id)
+            {
+                foundItem.Quantity++;
+            }
+            else
+            {
+                Item item = new Item()
+                {
+                    Name = product.Name,
+                    Quantity = 1,
+                    Price = product.Price,
+                    Image = product.Image,
+                    ShopCartId = shopCart.Id
+                };
+
+                await this.dbContext.Items.AddAsync(item);
+                shopCart.Items.Add(item);
+            }
+
             await this.dbContext.SaveChangesAsync();
         }
 
