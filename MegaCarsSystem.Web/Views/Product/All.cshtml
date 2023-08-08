@@ -5,9 +5,11 @@
 }
 
 <h1 class="text-center">@ViewBag.Title</h1>
+<p class="text-center">FREE shipping on orders over @minSumForFreeOrder BGN</p>
 <hr />
 
 <div class="containerProduct">
+
     @foreach (var product in Model)
     {
         <div class="listProduct">

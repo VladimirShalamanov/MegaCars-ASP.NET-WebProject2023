@@ -25,8 +25,16 @@
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
+            if (this.User.Identity?.IsAuthenticated == false)
+            {
+                this.TempData[ErrorMessage] = "You must be login user if you want to buying products!";
+
+                return this.RedirectToAction("Login", "User");
+            }
+
             string userId = this.User.GetId()!;
 
             try
@@ -159,12 +167,12 @@
 
         
 
-        [HttpPost]
-        public async Task<IActionResult> AddPromoCode(string text)
-        {
-            var sss = text;
-            return this.Ok();
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> AddPromoCode(string text)
+        //{
+        //    var sss = text;
+        //    return this.Ok();
+        //}
 
         private IActionResult GeneralError()
         {

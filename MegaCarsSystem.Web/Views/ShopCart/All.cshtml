@@ -1,12 +1,12 @@
-﻿
-@model IEnumerable<ItemsForShopCartViewModel>
+﻿@model IEnumerable<ItemsForShopCartViewModel>
 
 @{
     ViewBag.Title = "Your Shopping Cart";
 
-    decimal totalPriceProducts = Model.Sum(item => item.Price * item.Quantity);
     decimal minSum = minSumForFreeOrder;
+    var ss = this.User.GetId();
     int totalQuantityProducts = Model.Sum(item => item.Quantity);
+    decimal totalPriceProducts = Model.Sum(item => item.Price * item.Quantity);
 }
 
 <div class="containerShopCart">
@@ -15,7 +15,7 @@
     {
         <p class="emptyCart">
             Your cart is empty.<br>
-            Click<a href="/Product/All"> here </a>for continue your shopping.
+            Click <a href="/Product/All">here</a> for continue your shopping.
         </p>
     }
     else
@@ -104,27 +104,8 @@
                     </div>
                 </div>
 
-                @*<div class="formPromoCode">
-                    <h2>Promo Code</h2>
-                    <input type="text" placeholder="Enter a discount code" id="promoCode">
-                    <button class="buttonCode" type="submit">Apply</button>
-                </div>*@
 
-                @**@
-                @*<form asp-controller="ShopCart" asp-action="AddPromoCode" method="post">
-                    <div class="form-group">
-                        <label for="" class=""></label>
-                        <input for="" class="form-control" placeholder="Code Brand...">
-                        
-                    </div>
-
-                    <div class="text-center">
-                        <input class="btn btn-primary mt-3" type="submit" value="Save" />
-                    </div>
-                </form>*@
-
-
-                <div class="form">
+                @*<div class="form">
 
                     <div class="group">
                         <label for="">Full Name</label>
@@ -154,12 +135,14 @@
                             <option value="Kalofer">Kalofer</option>
                         </select>
                     </div>
-                </div>
+                </div>*@
+
+                <hr />
 
                 <div class="return">
                     <div class="row">
                         <div>Total Quantity:</div>
-                        <div>Total Price:</div>
+                        <div>Total Amount including VAT:</div>
                     </div>
                     <div class="row">
                         <div class="totalQuantity">@totalQuantityProducts</div>
@@ -167,9 +150,16 @@
                     </div>
                 </div>
 
-                <button class="buttonCheckout">
+               @* <button class="buttonPayment">
                     CHECKOUT
-                </button>
+                </button>*@
+                @*asp-route-id="@item.I"*@
+
+                <form asp-controller="ShopCart" asp-action="paymentMethod"  method="post">
+                    <button type="submit" class="buttonPayment">
+                        Proceed to payment
+                    </button>
+                </form>
 
             </div>
         </div>

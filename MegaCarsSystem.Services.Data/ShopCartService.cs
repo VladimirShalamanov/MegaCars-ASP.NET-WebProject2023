@@ -1,4 +1,6 @@
-﻿namespace MegaCarsSystem.Services.Data
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+
+namespace MegaCarsSystem.Services.Data
 {
     using System.Threading.Tasks;
 
@@ -67,11 +69,11 @@
                 .Products
                 .FirstAsync(p => p.Id.ToString() == productId.ToLower());
 
-            Item foundItem = await this.dbContext.Items.FirstOrDefaultAsync(i => i.Name == product.Name);
+            Item foundItem = await this.dbContext.Items
+                .FirstOrDefaultAsync(i => i.ShopCartId == shopCart.Id
+                                           && i.Name == product.Name);
 
-            var sss = shopCart.Items;
-
-            if ((foundItem != null) && foundItem.ShopCartId == shopCart.Id)
+            if (foundItem != null)
             {
                 foundItem.Quantity++;
             }
