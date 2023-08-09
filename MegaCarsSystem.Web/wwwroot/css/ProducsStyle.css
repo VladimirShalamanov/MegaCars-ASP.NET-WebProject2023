@@ -1,4 +1,4 @@
-﻿/*All Products Page*/
+﻿/*---------------------All Products Page---------------------*/
 
 .iconCart {
     position: absolute;
@@ -115,7 +115,6 @@
     border-top: none;
 }
 
-
 .checkoutLayout {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -169,10 +168,11 @@
     height: 60px;
 }
 
+
 /*-------------Right-------------*/
 .checkoutLayout .right {
     background-color: deepskyblue;
-    border-radius: 20px;
+    border-radius: 40px;
     padding: 40px;
     color: white;
 }
@@ -201,34 +201,6 @@
             font-size: x-large;
         }
 
-
-
-/*    .checkoutLayout .right .form {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        border-bottom: 1px solid purple;
-        padding-bottom: 20px;
-    }
-
-.checkoutLayout .form .group:nth-child(-n+3) {
-    grid-column-start: 1;
-    grid-column-end: 3;
-}
-
-.checkoutLayout .form input,
-.checkoutLayout .form select {
-    width: 100%;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    border-radius: 20px;
-    margin-top: 10px;
-    border: none;
-    background-color: dodgerblue;
-    color: white;
-}*/
-
-
 .checkoutLayout .return {
     display: flex;
     align-items: center;
@@ -252,3 +224,55 @@
     background-color: blueviolet;
     color: white;
 }
+
+
+/* -------------------------------------Payment Page------------------------------------------------ */
+
+
+.deliveryDetails {
+    background-color: red;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+/*    border-bottom: 1px solid purple;*/
+/*    padding-bottom: 20px;*/
+}
+
+    .deliveryDetails .form-group:nth-child(-n+3) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+/*.checkoutLayout .form input,
+.checkoutLayout .form select {
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    margin-top: 10px;
+    border: none;
+    background-color: dodgerblue;
+    color: white;
+}*/
+
+    .deliveryDetails .staticInfo .namesOfUser {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: bold;
+        padding: 20px 90px 20px 90px;
+/*        background-color: deepskyblue;*/
+/*        box-shadow: 0 10px 30px skyblue;*/
+/*        border-radius: 40px;*/
+    }
+
+    .deliveryDetails .staticInfo .paymentTotalPrice {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: bold;
+        padding: 20px 90px 20px 90px;
+        /*        background-color: deepskyblue;*/
+        /*        box-shadow: 0 10px 30px skyblue;*/
+        /*        border-radius: 40px;*/
+    }

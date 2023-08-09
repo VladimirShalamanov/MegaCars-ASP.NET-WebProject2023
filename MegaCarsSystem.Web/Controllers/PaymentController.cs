@@ -1,5 +1,6 @@
 ﻿namespace MegaCarsSystem.Web.Controllers
 {
+    using System.Security.Claims;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
@@ -17,18 +18,24 @@
     {
         private readonly IPaymentService paymentService;
         private readonly IShopCartService shopCartService;
+        private readonly IUserService userService;
 
         public PaymentController(
             IPaymentService paymentService,
-            IShopCartService shopCartService)
+            IShopCartService shopCartService,
+            IUserService userService)
         {
             this.paymentService = paymentService;
             this.shopCartService = shopCartService;
+            this.userService = userService;
         }
 
         [HttpGet]
         public async Task<IActionResult> PaymentProduct()
         {
+            string fullNameUser = await this.userService.GetFullNameByIdAsync(this.User.GetId()!);
+            string[] names = fullNameUser.Split(' ');
+
             decimal totalPrice = await this.shopCartService.GetTotalPriceForItemsByUserIdAsync(this.User.GetId()!);
 
 
@@ -45,6 +52,8 @@
             {
                 PaymentProductFormModel viewModel = new PaymentProductFormModel()
                 {
+                    FirstName = names[0],
+                    LastName = names[1],
                     TotalPrice = totalPrice
                 };
 
@@ -72,8 +81,10 @@
                     return this.View(formModel);
                 }
             }
-            else if (submitButton == "Payment")
+            else if (submitButton == "Buy")
             {
+                string email = this.User.FindFirstValue(ClaimTypes.Email);
+
                 return this.RedirectToAction("Index", "Home");
 
             }

@@ -1,63 +1,79 @@
 ﻿@model PaymentProductFormModel
 @{
-    ViewBag.Title = "aaa-ddd";
+    ViewBag.Title = "Delivery Details";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
 
 <div class="formPayment">
 
-    <div class="paymentFirstName">
-        @Model.FirstName
+    <h1>@ViewBag.Title</h1>
+    <hr />
+
+    <div class="deliveryDetails">
+
+        <div class="staticInfo">
+            <div class="namesOfUser">
+                <div class="row">
+                    <div>First Name:</div>
+                    <div>Last Name:</div>
+                </div>
+                <div class="row">
+                    <div class="paymentFirstName">@Model.FirstName</div>
+                    <div class="paymentLastName">@Model.LastName</div>
+                </div>
+            </div>
+
+            <div class="paymentTotalPrice">
+                <div class="row">
+                    <div>Total Price:</div>
+                </div>
+                <div class="row">
+                    <div>@($"{Model.TotalPrice:f2}")</div>
+                </div>
+            </div>
+        </div>
+
+        <form method="post">
+
+            <div class="form-group">
+                <label asp-for="CheckEmail"></label>
+                <input asp-for="CheckEmail" class="form-control" placeholder="Write your Email">
+                <span asp-validation-for="CheckEmail" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="City"></label>
+                <input asp-for="City" class="form-control" placeholder="Your City...">
+                <span asp-validation-for="City" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address"></label>
+                <input asp-for="Address" class="form-control" placeholder="Your Address...">
+                <span asp-validation-for="Address" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" placeholder="Your Phone Number...">
+                <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
+            </div>
+
+            <div class="promoCode">
+                <div class="form-group">
+                    <label asp-for="PromoCode"></label>
+                    <input asp-for="PromoCode" class="form-control" placeholder="Write your promo Code...">
+                    <span asp-validation-for="PromoCode" class="small text-danger"></span>
+                </div>
+
+                <button class="buttonApply" type="submit" name="submitButton" value="Apply">
+                    Apply
+                </button>
+            </div>
+
+            <button class="buttonBuy" type="submit" name="submitButton" value="Buy">
+                Buy Now
+            </button>
+        </form>
     </div>
-
-    <div class="paymentLastName">
-        @Model.LastName
-    </div>
-
-    <form method="post">
-
-        <div class="form-group">
-            <label asp-for="CheckEmail"></label>
-            <input asp-for="CheckEmail" class="form-control" placeholder="Write again your Email">
-            <span asp-validation-for="CheckEmail" class="small text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="City"></label>
-            <input asp-for="City" class="form-control" placeholder="Your City...">
-            <span asp-validation-for="City" class="small text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Address"></label>
-            <input asp-for="Address" class="form-control" placeholder="Your Address...">
-            <span asp-validation-for="Address" class="small text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="PhoneNumber"></label>
-            <input asp-for="PhoneNumber" class="form-control" placeholder="Your Phone Number...">
-            <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
-        </div>
-
-        <div class="paymentTotalPrice">
-            @($"{Model.TotalPrice:f2}")
-        </div>
-
-        <div class="form-group">
-            <label asp-for="PromoCode"></label>
-            <input asp-for="PromoCode" class="form-control" placeholder="Write your promo Code...">
-            <span asp-validation-for="PromoCode" class="small text-danger"></span>
-        </div>
-
-        <button class="buttonApply" type="submit" name="submitButton" value="Apply">
-            Apply
-        </button>
-
-        <button class="buttonPayment" type="submit" name="submitButton" value="Payment">
-            Proceed To Payment
-        </button>
-    </form>
 </div>
