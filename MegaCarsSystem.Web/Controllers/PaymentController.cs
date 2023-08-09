@@ -3,56 +3,85 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
+    using ViewModels.Payment;
     using MegaCarsSystem.Data.Models;
     using MegaCarsSystem.Web.ViewModels.Car;
     using MegaCarsSystem.Services.Data.Interfaces;
     using MegaCarsSystem.Web.Infrastructure.Extensions;
 
+    using static Common.GeneralApplicationConstants;
     using static Common.NotificationsMessagesConstants;
 
     [Authorize]
     public class PaymentController : Controller
     {
+        private readonly IPaymentService paymentService;
         private readonly IShopCartService shopCartService;
 
-        public PaymentController(IShopCartService shopCartService)
+        public PaymentController(
+            IPaymentService paymentService,
+            IShopCartService shopCartService)
         {
+            this.paymentService = paymentService;
             this.shopCartService = shopCartService;
         }
 
         [HttpGet]
         public async Task<IActionResult> PaymentProduct()
         {
-            // check shop cart, item, user
-            // add errors
-            // END view page order
+            decimal totalPrice = await this.shopCartService.GetTotalPriceForItemsByUserIdAsync(this.User.GetId()!);
 
 
+            //bool isDealer = await this.dealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
 
-            bool isDealer = await this.dealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
+            //if (!isDealer)
+            //{
+            //    this.TempData[ErrorMessage] = "You must become an Dealer in order to add new cars!";
 
-            if (!isDealer)
-            {
-                this.TempData[ErrorMessage] = "You must become an Dealer in order to add new cars!";
-
-                return RedirectToAction("Become", "Dealer");
-            }
+            //    return RedirectToAction("Become", "Dealer");
+            //}
 
             try
             {
-                CarFormModel carModel = new CarFormModel()
+                PaymentProductFormModel viewModel = new PaymentProductFormModel()
                 {
-                    Engines = await this.engineService.GetAllEnginesAsync(),
-                    Gearboxes = await this.gearboxService.GetAllGearboxesAsync(),
-                    Categories = await this.categoryService.GetAllCategoriesAsync()
+                    TotalPrice = totalPrice
                 };
 
-                return View(carModel);
+                return this.View(viewModel);
             }
             catch (Exception)
             {
                 return this.GeneralError();
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PaymentProduct(string submitButton, PaymentProductFormModel formModel)
+        {
+            if (submitButton == "Apply")
+            {
+
+                if (formModel.PromoCode == "1")
+                {
+                    decimal totalPrice = await this.shopCartService.GetTotalPriceForItemsByUserIdAsync(this.User.GetId()!);
+
+                    decimal updatedPrice = await this.paymentService.PromoCode20UpdatePriceAsync(totalPrice);
+
+                    formModel.TotalPrice = updatedPrice;
+                    return this.View(formModel);
+                }
+            }
+            else if (submitButton == "Payment")
+            {
+                return this.RedirectToAction("Index", "Home");
+
+            }
+
+            return this.RedirectToAction("All", "Product");
+
+
+
         }
 
         private IActionResult GeneralError()

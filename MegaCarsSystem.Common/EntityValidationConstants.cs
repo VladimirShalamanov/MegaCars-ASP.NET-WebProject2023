@@ -85,5 +85,17 @@
             public const string Price_MinValue = "0";
             public const string Price_MaxValue = "1000";
         }
+
+        public static class PaymentProduct
+        {
+            public const int City_MinLength = 4;
+            public const int City_MaxLength = 85;
+
+            public const int Address_MinLength = 15;
+            public const int Address_MaxLength = 150;
+
+            public const int PhoneNumber_MinLength = 7;
+            public const int PhoneNumber_MaxLength = 15;
+        }
     }
 }

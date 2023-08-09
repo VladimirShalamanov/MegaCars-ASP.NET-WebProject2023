@@ -20,7 +20,7 @@
         {
             IEnumerable<AllProductViewModel> viewModel = await this.productService.AllProductsAsync();
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
     }
 }

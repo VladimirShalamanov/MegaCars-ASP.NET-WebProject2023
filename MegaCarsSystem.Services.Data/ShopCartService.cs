@@ -59,6 +59,19 @@ namespace MegaCarsSystem.Services.Data
             return totalItems;
         }
 
+        public async Task<decimal> GetTotalPriceForItemsByUserIdAsync(string userId)
+        {
+            ShopCart shopCart = await this.dbContext
+                .ShopCarts
+                .Include(s => s.Items)
+                .FirstAsync(u => u.UserId.ToString() == userId);
+
+            decimal totalPrice = shopCart.Items.Sum(i => i.Quantity * i.Price);
+
+            // order < minSumFree {sum+=5;}
+
+            return totalPrice;
+        }
         public async Task AddToCartByIdAsync(string userId, string productId)
         {
             ShopCart shopCart = await this.dbContext

@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.Extensions.Caching.Memory;
 
     using MegaCarsSystem.Web.ViewModels.Car;
     using MegaCarsSystem.Services.Data.Models.Car;
@@ -10,7 +11,6 @@
 
     using static Common.GeneralApplicationConstants;
     using static Common.NotificationsMessagesConstants;
-    using Microsoft.Extensions.Caching.Memory;
 
     [Authorize]
     public class CarController : Controller
@@ -81,7 +81,7 @@
                     Categories = await this.categoryService.GetAllCategoriesAsync()
                 };
 
-                return View(carModel);
+                return this.View(carModel);
             }
             catch (Exception)
             {
@@ -124,6 +124,8 @@
 
             if (!this.ModelState.IsValid)
             {
+                formModel.Engines = await this.engineService.GetAllEnginesAsync();
+                formModel.Gearboxes = await this.gearboxService.GetAllGearboxesAsync();
                 formModel.Categories = await this.categoryService.GetAllCategoriesAsync();
 
                 return this.View(formModel);

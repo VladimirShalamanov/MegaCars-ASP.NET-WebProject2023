@@ -13,9 +13,16 @@
             this.dbContext = dbContext;
         }
 
-        public Task<PaymentProductFormModel> InfoPaymentProductAsync()
+        public async Task<decimal> PromoCode20UpdatePriceAsync(decimal totalPrice)
         {
-            throw new NotImplementedException();
+            decimal updatedPrice = totalPrice * 0.8m;
+
+            return updatedPrice;
         }
+
+        //public Task<PaymentProductFormModel> InfoPaymentProductAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
