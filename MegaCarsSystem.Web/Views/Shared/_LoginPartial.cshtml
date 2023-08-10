@@ -6,13 +6,13 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@inject IUserService UserService
 
 @inject IDealerService DealerService
+@inject IUserService UserService
 
 @{
     bool isUserDealer = await DealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
-    string userFullName = await UserService.GetFullNameByEmailAsync(User.Identity?.Name!);
+    string userFullName = await UserService.GetFullNameByIdAsync(this.User.GetId()!);
 }
 
 @*<ul class="navbar-nav">*@

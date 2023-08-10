@@ -19,20 +19,6 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<string> GetFullNameByEmailAsync(string email)
-        {
-            ApplicationUser? user = await this.dbContext
-                .Users
-                .FirstOrDefaultAsync(u => u.Email == email);
-
-            if (user == null)
-            {
-                return string.Empty;
-            }
-
-            return $"{user.FirstName} {user.LastName}";
-        }
-        
         public async Task<string> GetFullNameByIdAsync(string userId)
         {
             ApplicationUser? user = await this.dbContext
@@ -45,24 +31,6 @@
             }
 
             return $"{user.FirstName} {user.LastName}";
-        }
-
-        public async Task<bool> UserExistsByIdAsync(string userId)
-        {
-            bool isFoundUser = await this.dbContext
-                .Users
-                .AnyAsync(a => a.Id.ToString() == userId);
-
-            return isFoundUser;
-        }
-
-        public async Task<bool> UserExistsByEmailAsync(string email)
-        {
-            bool isFoundUser = await this.dbContext
-                .Users
-                .AnyAsync(a => a.Email == email);
-
-            return isFoundUser;
         }
 
         public async Task<IEnumerable<UserViewModel>> AllUsersAsync()

@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Your Shopping Cart";
 
-    decimal minSum = minSumForFreeOrder;
+    decimal minSum = MinSumForFreeOrder;
     int totalQuantityProducts = Model.Sum(item => item.Quantity);
     decimal totalPriceProducts = Model.Sum(item => item.Price * item.Quantity);
 }
@@ -74,9 +74,9 @@
             <div class="right">
                 <h1>CHECKOUT</h1>
 
-                @if (totalPriceProducts < minSumForFreeOrder)
+                @if (totalPriceProducts < MinSumForFreeOrder)
                 {
-                    <p>Order for an additional @(minSum - totalPriceProducts) BGN if you want free delivery.</p>
+                    <p>Order for an additional @(minSum - totalPriceProducts) BGN if you want free Delivery.</p>
                 }
                 else
                 {
@@ -91,10 +91,10 @@
                     <div class="row">
                         <div class="priceSubtotal">@totalPriceProducts BGN</div>
 
-                        @if (totalPriceProducts < minSumForFreeOrder)
+                        @if (totalPriceProducts < MinSumForFreeOrder)
                         {
-                            totalPriceProducts += delivery;
-                            <div class="delivery">@delivery BGN</div>
+                            totalPriceProducts += Delivery;
+                            <div class="delivery">@Delivery BGN</div>
                         }
                         else
                         {

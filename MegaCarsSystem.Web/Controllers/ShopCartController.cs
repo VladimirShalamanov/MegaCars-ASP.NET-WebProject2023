@@ -165,15 +165,6 @@
             }
         }
 
-        
-
-        //[HttpPost]
-        //public async Task<IActionResult> AddPromoCode(string text)
-        //{
-        //    var sss = text;
-        //    return this.Ok();
-        //}
-
         private IActionResult GeneralError()
         {
             this.TempData[ErrorMessage] = "Unexpected error occurred! Please try again later or contact administrator.";

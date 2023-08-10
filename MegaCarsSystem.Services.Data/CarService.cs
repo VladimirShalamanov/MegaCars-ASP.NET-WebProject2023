@@ -289,7 +289,7 @@
                 Category = car.Category.Name,
                 Dealer = new DealerInfoOnCarViewModel()
                 {
-                    FullName = await this.userService.GetFullNameByEmailAsync(car.Dealer.User.Email),
+                    FullName = await this.userService.GetFullNameByIdAsync(car.Dealer.User.Id.ToString()),
                     Email = car.Dealer.User.Email,
                     PhoneNumber = car.Dealer.PhoneNumber
                 }

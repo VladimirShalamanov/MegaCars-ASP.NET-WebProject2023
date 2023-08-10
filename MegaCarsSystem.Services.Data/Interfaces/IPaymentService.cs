@@ -4,10 +4,8 @@
 
     public interface IPaymentService
     {
-        // Product
-        //Task<PaymentProductFormModel> InfoPaymentProductAsync();
-
         // 20% Discount 
-        Task<decimal> PromoCode20UpdatePriceAsync(decimal totalPrice);
+        Task<decimal> PromoCode20UpdatePrice(decimal totalPrice);
+        Task<decimal> TransformDiscountPriceByTwoSums(decimal totalPrice, decimal updatedPrice);
     }
 }

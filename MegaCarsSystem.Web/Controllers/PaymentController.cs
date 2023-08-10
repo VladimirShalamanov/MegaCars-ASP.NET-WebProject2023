@@ -12,6 +12,7 @@
 
     using static Common.GeneralApplicationConstants;
     using static Common.NotificationsMessagesConstants;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
 
     [Authorize]
     public class PaymentController : Controller
@@ -33,27 +34,16 @@
         [HttpGet]
         public async Task<IActionResult> PaymentProduct()
         {
-            string fullNameUser = await this.userService.GetFullNameByIdAsync(this.User.GetId()!);
-            string[] names = fullNameUser.Split(' ');
+            string[] namesOfUser = (await this.userService.GetFullNameByIdAsync(this.User.GetId()!)).Split(' ');
 
             decimal totalPrice = await this.shopCartService.GetTotalPriceForItemsByUserIdAsync(this.User.GetId()!);
-
-
-            //bool isDealer = await this.dealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
-
-            //if (!isDealer)
-            //{
-            //    this.TempData[ErrorMessage] = "You must become an Dealer in order to add new cars!";
-
-            //    return RedirectToAction("Become", "Dealer");
-            //}
 
             try
             {
                 PaymentProductFormModel viewModel = new PaymentProductFormModel()
                 {
-                    FirstName = names[0],
-                    LastName = names[1],
+                    FirstName = namesOfUser[0],
+                    LastName = namesOfUser[1],
                     TotalPrice = totalPrice
                 };
 
@@ -68,31 +58,112 @@
         [HttpPost]
         public async Task<IActionResult> PaymentProduct(string submitButton, PaymentProductFormModel formModel)
         {
+
+            string[] namesOfUser = (await this.userService.GetFullNameByIdAsync(this.User.GetId()!)).Split(' ');
+
+            decimal totalPrice = await this.shopCartService.GetTotalPriceForItemsByUserIdAsync(this.User.GetId()!);
+
             if (submitButton == "Apply")
             {
-
-                if (formModel.PromoCode == "1")
+                try
                 {
-                    decimal totalPrice = await this.shopCartService.GetTotalPriceForItemsByUserIdAsync(this.User.GetId()!);
+                    if (formModel.PromoCode == PromoCodes)
+                    {
+                        decimal updatedPrice = await this.paymentService.PromoCode20UpdatePrice(totalPrice);
 
-                    decimal updatedPrice = await this.paymentService.PromoCode20UpdatePriceAsync(totalPrice);
+                        decimal discount =
+                            await this.paymentService.TransformDiscountPriceByTwoSums(totalPrice, updatedPrice);
 
-                    formModel.TotalPrice = updatedPrice;
+                        formModel.TotalPrice = updatedPrice;
+                        formModel.Discount = discount;
+                    }
+                    else
+                    {
+                        formModel.TotalPrice = totalPrice;
+
+                        this.ModelState.AddModelError(nameof(formModel.PromoCode), "The Promo Code entered is incorrect or does not exist!");
+
+                    }
+
+                    ModelState["CheckEmail"]!.Errors.Clear();
+                    ModelState["City"]!.Errors.Clear();
+                    ModelState["Address"]!.Errors.Clear();
+                    ModelState["PhoneNumber"]!.Errors.Clear();
+
+                    formModel.FirstName = namesOfUser[0];
+                    formModel.LastName = namesOfUser[1];
                     return this.View(formModel);
                 }
+                catch (Exception)
+                {
+                    return this.GeneralError();
+                }
             }
-            else if (submitButton == "Buy")
+
+            // submitButton == "Buy"
+
+            string email = this.User.FindFirstValue(ClaimTypes.Email);
+
+            try
             {
-                string email = this.User.FindFirstValue(ClaimTypes.Email);
+                //if (!ModelState.IsValid || formModel.CheckEmail != email)
+                //{
+                    if (formModel.CheckEmail != email)
+                    {
+                        this.ModelState.AddModelError(nameof(formModel.CheckEmail), "The Email entered is incorrect or does not exist!");
+                    }
 
-                return this.RedirectToAction("Index", "Home");
+                    //if (formModel.PromoCode == PromoCodes)
+                    //{
+                    //    decimal updatedPrice = await this.paymentService.PromoCode20UpdatePrice(totalPrice);
+
+                    //    decimal discount =
+                    //        await this.paymentService.TransformDiscountPriceByTwoSums(totalPrice, updatedPrice);
+
+                    //    formModel.TotalPrice = updatedPrice;
+                    //    formModel.Discount = discount;
+                    //}
+                    //else
+                    //{
+                    //    formModel.TotalPrice = totalPrice;
+                    //}
+
+                    //formModel.FirstName = namesOfUser[0];
+                    //formModel.LastName = namesOfUser[1];
+                    //return this.View(formModel);
+                //}
+
+                // Buy - Create Order
+                var ss = formModel.TotalPrice;
+                var nn = formModel.FirstName;
+
+
+
 
             }
+            catch (Exception)
+            {
+                if (formModel.PromoCode == PromoCodes)
+                {
+                    decimal updatedPrice = await this.paymentService.PromoCode20UpdatePrice(totalPrice);
 
-            return this.RedirectToAction("All", "Product");
+                    decimal discount =
+                        await this.paymentService.TransformDiscountPriceByTwoSums(totalPrice, updatedPrice);
 
+                    formModel.TotalPrice = updatedPrice;
+                    formModel.Discount = discount;
+                }
+                else
+                {
+                    formModel.TotalPrice = totalPrice;
+                }
 
+                formModel.FirstName = namesOfUser[0];
+                formModel.LastName = namesOfUser[1];
+                return this.View(formModel);
+            }
 
+            return this.RedirectToAction("Index", "Home");
         }
 
         private IActionResult GeneralError()

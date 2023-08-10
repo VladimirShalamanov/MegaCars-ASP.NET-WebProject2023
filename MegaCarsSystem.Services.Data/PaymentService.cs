@@ -13,16 +13,18 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<decimal> PromoCode20UpdatePriceAsync(decimal totalPrice)
+        public async Task<decimal> PromoCode20UpdatePrice(decimal totalPrice)
         {
             decimal updatedPrice = totalPrice * 0.8m;
 
             return updatedPrice;
         }
 
-        //public Task<PaymentProductFormModel> InfoPaymentProductAsync()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task<decimal> TransformDiscountPriceByTwoSums(decimal totalPrice, decimal updatedPrice)
+        {
+            decimal discount = totalPrice - updatedPrice;
+
+            return discount;
+        }
     }
 }

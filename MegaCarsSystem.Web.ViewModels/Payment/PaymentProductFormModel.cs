@@ -6,14 +6,13 @@
 
     public class PaymentProductFormModel
     {
-        [Required]
-        public string FirstName { get; set; } = null!;
+        public string? FirstName { get; set; }
+
+        public string? LastName { get; set; }
 
         [Required]
-        public string LastName { get; set; } = null!;
-
-        [Required]
-        [Display(Name = "We need to Check your Email again")]
+        [EmailAddress]
+        [Display(Name = "Checking Email")]
         public string CheckEmail { get; set; } = null!;
 
         [Required]
@@ -32,7 +31,10 @@
 
         public decimal TotalPrice { get; set; }
 
-        [Display(Name = "Do you have a Promo Code?")]
-        public string? PromoCode { get; set; }
+        public decimal Discount { get; set; }
+
+        [Required]
+        [Display(Name = "Promo Code")]
+        public string PromoCode { get; set; } = null!;
     }
 }

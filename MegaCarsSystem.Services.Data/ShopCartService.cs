@@ -11,6 +11,8 @@ namespace MegaCarsSystem.Services.Data
     using MegaCarsSystem.Web.ViewModels.ShopCart;
     using MegaCarsSystem.Services.Data.Interfaces;
 
+    using static Common.GeneralApplicationConstants;
+
     public class ShopCartService : IShopCartService
     {
         private readonly MegaCarsDbContext dbContext;
@@ -68,7 +70,10 @@ namespace MegaCarsSystem.Services.Data
 
             decimal totalPrice = shopCart.Items.Sum(i => i.Quantity * i.Price);
 
-            // order < minSumFree {sum+=5;}
+            if (totalPrice < MinSumForFreeOrder)
+            {
+                totalPrice += Delivery;
+            }
 
             return totalPrice;
         }

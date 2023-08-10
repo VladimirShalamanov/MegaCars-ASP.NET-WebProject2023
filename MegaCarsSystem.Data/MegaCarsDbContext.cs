@@ -48,12 +48,14 @@
 
             //if (this.seedDb)
             //{
+
             builder.ApplyConfiguration(new CategoryEntityConfiguration());
             builder.ApplyConfiguration(new GearboxEntityConfiguration());
             builder.ApplyConfiguration(new EngineEntityConfiguration());
 
             builder.ApplyConfiguration(new CarSeedEC());
             builder.ApplyConfiguration(new ProductSeedEC());
+
             //}
 
             base.OnModelCreating(builder);

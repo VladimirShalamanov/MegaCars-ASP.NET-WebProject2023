@@ -221,9 +221,13 @@
     border-radius: 20px;
     margin-top: 20px;
     font-weight: bold;
-    background-color: blueviolet;
     color: white;
+    background-color: blueviolet;
 }
+
+    .buttonPayment:hover {
+        background-color: rebeccapurple;
+    }
 
 
 /* -------------------------------------Payment Page------------------------------------------------ */
@@ -247,8 +251,13 @@
         display: flex;
         align-self: center;
         justify-content: space-between;
-        margin-right: 100px;
+        margin-right: 50px;
     }
+
+        .deliveryDetails .staticInfo .discountCode {
+            font-size: 16px;
+            color: red;
+        }
 
         .deliveryDetails .staticInfo
         .paymentFirstName,
@@ -257,6 +266,15 @@
             font-weight: bold;
             font-size: x-large;
         }
+
+    .deliveryDetails .paymentTotalPrice {
+        text-decoration: underline;
+    }
+
+    .deliveryDetails .staticInfo .discountPrice {
+        font-size: 24px;
+        color: red;
+    }
 
     .deliveryDetails .form-group {
         padding-bottom: 20px;
@@ -271,28 +289,42 @@
             width: 60px;
             height: 40px;
             border: none;
-            border-radius: 20px;
+            border-radius: 10px;
             margin-right: 20px;
             color: white;
             background-color: orangered;
         }
 
-            .deliveryDetails. promoCode .buttonApply:hover {
+            .deliveryDetails .promoCode .buttonApply:hover {
                 background-color: red;
             }
 
-.deliveryDetails .buttonBuy {
-    float: right;
-    font-size: 25px;
-    width: 140px;
-    height: 60px;
-    border: none;
+    .deliveryDetails .buttonBuy {
+        float: right;
+        font-size: 25px;
+        width: 140px;
+        height: 60px;
+        border: none;
+        border-radius: 20px;
+        color: white;
+        background-color: forestgreen;
+    }
+
+        .deliveryDetails .buttonBuy:hover {
+            background-color: darkgreen;
+        }
+
+.formPayment a {
+    position: absolute;
+    text-decoration: none;
+    font-size: 20px;
     border-radius: 20px;
-    margin-right: 20px;
+    margin: -90px 0px 0px 35px;
+    padding: 15px 25px 15px 25px;
     color: white;
     background-color: blueviolet;
 }
 
-    .deliveryDetails .buttonBuy:hover {
+    .formPayment a:hover {
         background-color: rebeccapurple;
     }
