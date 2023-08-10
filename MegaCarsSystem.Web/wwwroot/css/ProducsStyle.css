@@ -228,51 +228,71 @@
 
 /* -------------------------------------Payment Page------------------------------------------------ */
 
-
-.deliveryDetails {
-    background-color: red;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-/*    border-bottom: 1px solid purple;*/
-/*    padding-bottom: 20px;*/
+.formPayment h1 {
+    text-align-last: center;
 }
 
-    .deliveryDetails .form-group:nth-child(-n+3) {
-        grid-column-start: 1;
-        grid-column-end: 3;
-    }
-
-/*.checkoutLayout .form input,
-.checkoutLayout .form select {
-    width: 100%;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    border-radius: 20px;
-    margin-top: 10px;
-    border: none;
-    background-color: dodgerblue;
+.deliveryDetails {
+    background-color: deepskyblue;
+    border-radius: 40px;
+    padding: 40px;
     color: white;
-}*/
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+    /*        gap: 20px;*/
 
-    .deliveryDetails .staticInfo .namesOfUser {
+    .deliveryDetails .staticInfo {
         display: flex;
-        align-items: center;
+        align-self: center;
         justify-content: space-between;
-        font-weight: bold;
-        padding: 20px 90px 20px 90px;
-/*        background-color: deepskyblue;*/
-/*        box-shadow: 0 10px 30px skyblue;*/
-/*        border-radius: 40px;*/
+        margin-right: 100px;
     }
 
-    .deliveryDetails .staticInfo .paymentTotalPrice {
+        .deliveryDetails .staticInfo
+        .paymentFirstName,
+        .paymentLastName,
+        .paymentTotalPrice {
+            font-weight: bold;
+            font-size: x-large;
+        }
+
+    .deliveryDetails .form-group {
+        padding-bottom: 20px;
+    }
+
+    .deliveryDetails .promoCode {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        font-weight: bold;
-        padding: 20px 90px 20px 90px;
-        /*        background-color: deepskyblue;*/
-        /*        box-shadow: 0 10px 30px skyblue;*/
-        /*        border-radius: 40px;*/
+    }
+
+        .deliveryDetails .promoCode .buttonApply {
+            width: 60px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            margin-right: 20px;
+            color: white;
+            background-color: orangered;
+        }
+
+            .deliveryDetails. promoCode .buttonApply:hover {
+                background-color: red;
+            }
+
+.deliveryDetails .buttonBuy {
+    float: right;
+    font-size: 25px;
+    width: 140px;
+    height: 60px;
+    border: none;
+    border-radius: 20px;
+    margin-right: 20px;
+    color: white;
+    background-color: blueviolet;
+}
+
+    .deliveryDetails .buttonBuy:hover {
+        background-color: rebeccapurple;
     }

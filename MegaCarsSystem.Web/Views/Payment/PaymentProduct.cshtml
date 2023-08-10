@@ -12,24 +12,15 @@
     <div class="deliveryDetails">
 
         <div class="staticInfo">
-            <div class="namesOfUser">
-                <div class="row">
-                    <div>First Name:</div>
-                    <div>Last Name:</div>
-                </div>
-                <div class="row">
-                    <div class="paymentFirstName">@Model.FirstName</div>
-                    <div class="paymentLastName">@Model.LastName</div>
-                </div>
+            <div class="row">
+                <div>First Name:</div>
+                <div>Last Name:</div>
+                <div>Total Price:</div>
             </div>
-
-            <div class="paymentTotalPrice">
-                <div class="row">
-                    <div>Total Price:</div>
-                </div>
-                <div class="row">
-                    <div>@($"{Model.TotalPrice:f2}")</div>
-                </div>
+            <div class="row">
+                <div class="paymentFirstName">@Model.FirstName</div>
+                <div class="paymentLastName">@Model.LastName</div>
+                <div class="paymentTotalPrice">@($"{Model.TotalPrice:f2}")</div>
             </div>
         </div>
 
@@ -60,15 +51,15 @@
             </div>
 
             <div class="promoCode">
-                <div class="form-group">
-                    <label asp-for="PromoCode"></label>
-                    <input asp-for="PromoCode" class="form-control" placeholder="Write your promo Code...">
-                    <span asp-validation-for="PromoCode" class="small text-danger"></span>
-                </div>
-
                 <button class="buttonApply" type="submit" name="submitButton" value="Apply">
                     Apply
                 </button>
+
+                <div class="form-group">
+                    <label asp-for="PromoCode"></label>
+                    <input asp-for="PromoCode" class="form-control" placeholder="Write your Promo Code...">
+                    <span asp-validation-for="PromoCode" class="small text-danger"></span>
+                </div>
             </div>
 
             <button class="buttonBuy" type="submit" name="submitButton" value="Buy">
