@@ -149,7 +149,21 @@ namespace MegaCarsSystem.Services.Data
             await this.dbContext.SaveChangesAsync();
         }
 
+        public async Task ClearShopCartAfterCreatedOrderByIdAsync(string userId)
+        {
+            ShopCart shopCart = await this.dbContext
+                .ShopCarts
+                .FirstAsync(u => u.UserId.ToString() == userId);
 
+            Item[] items = await this.dbContext
+                .Items
+                .Where(p => p.ShopCartId.ToString() == shopCart.Id.ToString().ToLower())
+                .ToArrayAsync();
+
+            this.dbContext.Items.RemoveRange(items);
+            shopCart.Items.Clear();
+            await this.dbContext.SaveChangesAsync();
+        }
 
 
         public async Task<bool> ExistsItemByIdAsync(string itemId)
@@ -185,6 +199,5 @@ namespace MegaCarsSystem.Services.Data
             user.ShoppingCartId = newShopCart.Id;
             await this.dbContext.SaveChangesAsync();
         }
-
     }
 }

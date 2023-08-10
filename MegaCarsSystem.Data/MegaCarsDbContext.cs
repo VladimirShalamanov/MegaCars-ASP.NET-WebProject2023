@@ -30,6 +30,7 @@
         public DbSet<Product> Products { get; set; } = null!;
         public DbSet<Item> Items { get; set; } = null!;
         public DbSet<ShopCart> ShopCarts { get; set; } = null!;
+        public DbSet<Order> Orders { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -41,6 +42,7 @@
             builder.ApplyConfiguration(new CarEntityConfiguration());
             builder.ApplyConfiguration(new ShopCartEntityConfiguration());
             builder.ApplyConfiguration(new ItemEntityConfiguration());
+            builder.ApplyConfiguration(new OrderEntityConfiguration());
 
             builder.ApplyConfiguration(new AppUserSeedEC());
             builder.ApplyConfiguration(new DealerSeedEC());

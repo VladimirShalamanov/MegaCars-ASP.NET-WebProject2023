@@ -59,7 +59,8 @@
         public async Task<IActionResult> PaymentProduct(string submitButton, PaymentProductFormModel formModel)
         {
 
-            string[] namesOfUser = (await this.userService.GetFullNameByIdAsync(this.User.GetId()!)).Split(' ');
+            string namesOfUser = await this.userService.GetFullNameByIdAsync(this.User.GetId()!);
+            string[] fAndLaName = (await this.userService.GetFullNameByIdAsync(this.User.GetId()!)).Split(' ');
 
             decimal totalPrice = await this.shopCartService.GetTotalPriceForItemsByUserIdAsync(this.User.GetId()!);
 
@@ -71,8 +72,7 @@
                     {
                         decimal updatedPrice = await this.paymentService.PromoCode20UpdatePrice(totalPrice);
 
-                        decimal discount =
-                            await this.paymentService.TransformDiscountPriceByTwoSums(totalPrice, updatedPrice);
+                        decimal discount = await this.paymentService.TransformDiscountPriceByTwoSums(totalPrice, updatedPrice);
 
                         formModel.TotalPrice = updatedPrice;
                         formModel.Discount = discount;
@@ -90,8 +90,8 @@
                     ModelState["Address"]!.Errors.Clear();
                     ModelState["PhoneNumber"]!.Errors.Clear();
 
-                    formModel.FirstName = namesOfUser[0];
-                    formModel.LastName = namesOfUser[1];
+                    formModel.FirstName = fAndLaName[0];
+                    formModel.LastName = fAndLaName[1];
                     return this.View(formModel);
                 }
                 catch (Exception)
@@ -104,42 +104,52 @@
 
             string email = this.User.FindFirstValue(ClaimTypes.Email);
 
+            if (!ModelState.IsValid || formModel.CheckEmail != email)
+            {
+                if (formModel.CheckEmail != email)
+                {
+                    this.ModelState.AddModelError(nameof(formModel.CheckEmail), "The Email entered is incorrect or does not exist!");
+                }
+
+                if (formModel.PromoCode == PromoCodes)
+                {
+                    decimal updatedPrice = await this.paymentService.PromoCode20UpdatePrice(totalPrice);
+
+                    decimal discount = await this.paymentService.TransformDiscountPriceByTwoSums(totalPrice, updatedPrice);
+
+                    formModel.TotalPrice = updatedPrice;
+                    formModel.Discount = discount;
+                }
+                else
+                {
+                    formModel.TotalPrice = totalPrice;
+                }
+
+                formModel.FirstName = fAndLaName[0];
+                formModel.LastName = fAndLaName[1];
+                return this.View(formModel);
+            }
+
             try
             {
-                //if (!ModelState.IsValid || formModel.CheckEmail != email)
-                //{
-                    if (formModel.CheckEmail != email)
-                    {
-                        this.ModelState.AddModelError(nameof(formModel.CheckEmail), "The Email entered is incorrect or does not exist!");
-                    }
+                // Create Order
+                string orderPrice = string.Empty;
+                if (formModel.PromoCode == PromoCodes)
+                {
+                    decimal updatedPrice = await this.paymentService.PromoCode20UpdatePrice(totalPrice);
 
-                    //if (formModel.PromoCode == PromoCodes)
-                    //{
-                    //    decimal updatedPrice = await this.paymentService.PromoCode20UpdatePrice(totalPrice);
+                    orderPrice = $"{updatedPrice:f2}";
+                }
+                else
+                {
+                    orderPrice = $"{totalPrice:f2}";
+                }
 
-                    //    decimal discount =
-                    //        await this.paymentService.TransformDiscountPriceByTwoSums(totalPrice, updatedPrice);
+                await this.paymentService.CreateOrderByIdAsync(formModel, this.User.GetId()!, namesOfUser, orderPrice);
 
-                    //    formModel.TotalPrice = updatedPrice;
-                    //    formModel.Discount = discount;
-                    //}
-                    //else
-                    //{
-                    //    formModel.TotalPrice = totalPrice;
-                    //}
+                // In New Order Controller I need to add the selected items in the story order for more details => I don't have time
 
-                    //formModel.FirstName = namesOfUser[0];
-                    //formModel.LastName = namesOfUser[1];
-                    //return this.View(formModel);
-                //}
-
-                // Buy - Create Order
-                var ss = formModel.TotalPrice;
-                var nn = formModel.FirstName;
-
-
-
-
+                await this.shopCartService.ClearShopCartAfterCreatedOrderByIdAsync(this.User.GetId()!);
             }
             catch (Exception)
             {
@@ -158,10 +168,12 @@
                     formModel.TotalPrice = totalPrice;
                 }
 
-                formModel.FirstName = namesOfUser[0];
-                formModel.LastName = namesOfUser[1];
+                formModel.FirstName = fAndLaName[0];
+                formModel.LastName = fAndLaName[1];
                 return this.View(formModel);
             }
+
+            this.TempData[SuccessMessage] = "The Order was created successfully!";
 
             return this.RedirectToAction("Index", "Home");
         }

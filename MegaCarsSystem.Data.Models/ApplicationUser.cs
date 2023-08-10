@@ -12,6 +12,7 @@
         {
             this.Id = Guid.NewGuid();
             this.RentedCars = new HashSet<Car>();
+            this.Orders = new HashSet<Order>();
         }
 
         [Required]
@@ -26,5 +27,7 @@
         public ShopCart? ShoppingCart { get; set; }
 
         public ICollection<Car> RentedCars { get; set; }
+        
+        public ICollection<Order> Orders { get; set; }
     }
 }

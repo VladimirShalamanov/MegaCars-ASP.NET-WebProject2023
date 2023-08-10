@@ -4,6 +4,7 @@ using MegaCarsSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MegaCarsSystem.Data.Migrations
 {
     [DbContext(typeof(MegaCarsDbContext))]
-    partial class MegaCarsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230810175635_clearData")]
+    partial class clearData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,65 +109,6 @@ namespace MegaCarsSystem.Data.Migrations
                         .HasFilter("[ShoppingCartId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("2c5628be-a8ca-4cf0-bc0d-c441e6aa0c6e"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "e4168580-1382-49e0-9fdb-a16d806d588a",
-                            Email = "user@user.com",
-                            EmailConfirmed = false,
-                            FirstName = "User",
-                            LastName = "Guest_Test",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "user@user.com",
-                            NormalizedUserName = "user@user.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECfZNQL78Rt6ocXoYvKX2/6rN9yoiWVZFIBTDU+WVEwpwdX+zZ6VpCd6fJkW7+KjFw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "1d221c9b-6ee1-4b03-8772-83ce22647537",
-                            ShoppingCartId = new Guid("88856b35-f932-4a23-9baf-2a8974418b22"),
-                            TwoFactorEnabled = false,
-                            UserName = "user@user.com"
-                        },
-                        new
-                        {
-                            Id = new Guid("993dc891-f1ee-4b53-984d-3a019f294bfd"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "45b7836c-f716-46e0-955e-d97f417f6c37",
-                            Email = "dealer@dealer.com",
-                            EmailConfirmed = false,
-                            FirstName = "Dealer",
-                            LastName = "DeIsHere_Test",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "dealer@dealer.com",
-                            NormalizedUserName = "dealer@dealer.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFiqDjyprlMVHu0iieRmLXYoov3T4vpy+CyXV7prWxrt+f57UYgKK2faYDP+oFL7zw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "d58ac461-599e-4b09-ad08-8b2c3c595464",
-                            ShoppingCartId = new Guid("61be485b-f019-4fd6-9c43-07f5aa896895"),
-                            TwoFactorEnabled = false,
-                            UserName = "dealer@dealer.com"
-                        },
-                        new
-                        {
-                            Id = new Guid("bcbd7654-ab17-4621-b75b-fc43ea4449db"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "bf005e36-373d-4c06-8bab-4ab46e53152d",
-                            Email = "admin@admin.com",
-                            EmailConfirmed = false,
-                            FirstName = "Admin",
-                            LastName = "AdIsHere_Test",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "admin@admin.com",
-                            NormalizedUserName = "admin@admin.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIopKxya5J7+HHCZVoZgconaGTYi/LHxaKySdvoyr5pb6+RnmJ8fsPb/XQV/x8ruLA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "bfeb9457-e377-4772-9bd4-a8360d9735f5",
-                            ShoppingCartId = new Guid("1bca46f0-2eb4-43c7-8a76-7b006ceb109a"),
-                            TwoFactorEnabled = false,
-                            UserName = "admin@admin.com"
-                        });
                 });
 
             modelBuilder.Entity("MegaCarsSystem.Data.Models.Car", b =>
@@ -246,44 +189,6 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasIndex("RenterId");
 
                     b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("2aad0c39-ee7f-49e6-b583-1c2d9507739f"),
-                            Address = "Boyana Neighbourhood, Sofia, Bulgaria",
-                            Brand = "McLaren",
-                            CategoryId = 6,
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DealerId = new Guid("4fd9d7ca-37c2-411e-8a03-b978fbb1c5f3"),
-                            Description = "This is a sports car and is recommended to be driven carefully.",
-                            EngineId = 2,
-                            GearboxId = 2,
-                            Horsepower = 560,
-                            ImageUrl = "https://edge.pxcrush.net/cars/dealer/dro0hrehxv0n0250f55sf7nqy.jpg?pxc_expires=20231101025101&pxc_clear=1&pxc_signature=2e0f693b59a609c1f0f77e21ed5fbfed",
-                            IsActive = false,
-                            Model = "720S",
-                            PricePerDay = 1500.00m,
-                            YearOfManufacture = 2016
-                        },
-                        new
-                        {
-                            Id = new Guid("7883647f-d64b-4271-908a-95689d532ff5"),
-                            Address = "Boyana Neighbourhood, Sofia, Bulgaria",
-                            Brand = "Toyota",
-                            CategoryId = 3,
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DealerId = new Guid("4fd9d7ca-37c2-411e-8a03-b978fbb1c5f3"),
-                            Description = "The car is a sports coupe type and is convenient for maneuvering in urban conditions.",
-                            EngineId = 1,
-                            GearboxId = 1,
-                            Horsepower = 430,
-                            ImageUrl = "https://performancedrive.com.au/wp-content/uploads/2020/02/2020-Toyota-GR-Supra-GT-scaled.jpg",
-                            IsActive = false,
-                            Model = "Supra",
-                            PricePerDay = 900.00m,
-                            YearOfManufacture = 2020
-                        });
                 });
 
             modelBuilder.Entity("MegaCarsSystem.Data.Models.Category", b =>
@@ -380,20 +285,6 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Dealers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("4fd9d7ca-37c2-411e-8a03-b978fbb1c5f3"),
-                            PhoneNumber = "+359888777666",
-                            UserId = new Guid("993dc891-f1ee-4b53-984d-3a019f294bfd")
-                        },
-                        new
-                        {
-                            Id = new Guid("d08e602f-3c3f-4391-aaf6-b4867a639c13"),
-                            PhoneNumber = "+359333222111",
-                            UserId = new Guid("bcbd7654-ab17-4621-b75b-fc43ea4449db")
-                        });
                 });
 
             modelBuilder.Entity("MegaCarsSystem.Data.Models.Engine", b =>
@@ -488,51 +379,6 @@ namespace MegaCarsSystem.Data.Migrations
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("MegaCarsSystem.Data.Models.Order", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AddressUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CityUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<string>("EmailUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullNameUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumberUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TotalPriceStrUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("MegaCarsSystem.Data.Models.Product", b =>
                 {
                     b.Property<Guid>("Id")
@@ -560,24 +406,6 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("64ba4529-de18-4017-8876-d1714cac6092"),
-                            Description = "Мetal key holder for your keys.",
-                            Image = "https://i.etsystatic.com/13582943/r/il/2f99a2/1700229685/il_fullxfull.1700229685_ooj3.jpg",
-                            Name = "Keychain Turbine",
-                            Price = 5.00m
-                        },
-                        new
-                        {
-                            Id = new Guid("6082f25d-aee4-414e-80e2-4abed39275a4"),
-                            Description = "Black T-shirt with great quality.",
-                            Image = "https://images-na.ssl-images-amazon.com/images/I/61oFHwCIKrL._SLDPMOBCAROUSELAUTOCROP288221_MCnd_AC_SR462,693_.jpg",
-                            Name = "T-shirt Supercar",
-                            Price = 18.00m
-                        });
                 });
 
             modelBuilder.Entity("MegaCarsSystem.Data.Models.ShopCart", b =>
@@ -592,23 +420,6 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ShopCarts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("88856b35-f932-4a23-9baf-2a8974418b22"),
-                            UserId = new Guid("2c5628be-a8ca-4cf0-bc0d-c441e6aa0c6e")
-                        },
-                        new
-                        {
-                            Id = new Guid("61be485b-f019-4fd6-9c43-07f5aa896895"),
-                            UserId = new Guid("993dc891-f1ee-4b53-984d-3a019f294bfd")
-                        },
-                        new
-                        {
-                            Id = new Guid("1bca46f0-2eb4-43c7-8a76-7b006ceb109a"),
-                            UserId = new Guid("bcbd7654-ab17-4621-b75b-fc43ea4449db")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -818,16 +629,6 @@ namespace MegaCarsSystem.Data.Migrations
                     b.Navigation("ShopCart");
                 });
 
-            modelBuilder.Entity("MegaCarsSystem.Data.Models.Order", b =>
-                {
-                    b.HasOne("MegaCarsSystem.Data.Models.ApplicationUser", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
@@ -881,8 +682,6 @@ namespace MegaCarsSystem.Data.Migrations
 
             modelBuilder.Entity("MegaCarsSystem.Data.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Orders");
-
                     b.Navigation("RentedCars");
                 });
 
