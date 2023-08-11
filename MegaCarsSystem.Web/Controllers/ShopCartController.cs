@@ -75,7 +75,7 @@
             {
                 await this.shopCartService.AddToCartByIdAsync(userId, id);
 
-                this.TempData[SuccessMessage] = "You have successfully added the product to your shopping cart.";
+                //this.TempData[SuccessMessage] = "You have successfully added the product to your shopping cart.";
 
                 return this.RedirectToAction("All", "Product");
             }

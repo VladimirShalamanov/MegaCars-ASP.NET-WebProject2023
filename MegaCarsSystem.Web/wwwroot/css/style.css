@@ -39,7 +39,7 @@ body {
 }
 
     .showcase.active {
-        right: 300px;
+        /*        right: 400px;*/
     }
 
     .showcase header {
@@ -47,34 +47,114 @@ body {
         top: 0;
         left: 0;
         width: 100%;
-        padding: 40px 100px;
+        padding: 50px 50px;
         z-index: 1000;
         display: flex;
-        align-items: center;
         justify-content: space-between;
     }
 
 
 .logo {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
 }
 
 .toggle {
     position: relative;
-    width: 60px;
-    height: 60px;
-    background-repeat: no-repeat;
-    background-size: 50px;
-    background-position: center;
     cursor: pointer;
+    /*    display: inline-block;
+        width: 60px;
+        height: 60px;
+        background-repeat: no-repeat;
+        background-size: 50px;
+        background-position: center;*/
 }
 
-    .toggle.active {
+    .toggle .bar1, .bar2, .bar3 {
+        width: 35px;
+        height: 5px;
+        background-color: white;
+        border: 2px;
+        margin: 6px 0;
+        transition: 0.7s;
+    }
+
+    /*    .toggle.active {
         background-repeat: no-repeat;
         background-size: 25px;
         background-position: center;
+    }*/
+
+    .toggle.active .bar1 {
+        transform: translate(0, 11px) rotate(-45deg);
     }
+
+    .toggle.active .bar2 {
+        opacity: 0;
+    }
+
+    .toggle.active .bar3 {
+        transform: translate(0, -11px) rotate(45deg);
+    }
+
+    .toggle.active .bar1, bar3 {
+        margin-right: 400px;
+    }
+
+
+
+.menu {
+    display: none;
+}
+
+    .menu.active {
+        /*        display: block;*/
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        right: 0;
+        width: 400px;
+        height: 100%;
+        animation: fade_in_show 1s;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        /*        color: white;*/
+    }
+
+        .menu.active ul {
+            position: relative;
+            list-style: none;
+        }
+
+            .menu.active ul li a {
+                text-decoration: none;
+                font-size: 24px;
+                color: white;
+                font-weight: bold;
+            }
+
+                .menu.active ul li a:hover {
+                    color: deepskyblue;
+                }
+
+            .menu.active ul li form button {
+                font-size: 24px;
+                background-color: transparent;
+                color: red;
+                border: none;
+                padding: 15px 0px 0px 0px;
+            }
+
+                .menu.active ul li form button:hover {
+                    text-decoration: underline;
+                }
+
 
 .overlay {
     position: absolute;
@@ -161,49 +241,6 @@ body {
 
 
 
-.menu {
-    display: none;
-}
-
-    .menu.active {
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 300px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        animation: fade_in_show 1s
-    }
-
-        .menu.active ul {
-            position: relative;
-            list-style: none;
-        }
-
-            .menu.active ul li a {
-                text-decoration: none;
-                font-size: 24px;
-                color: black;
-            }
-
-                .menu.active ul li a:hover {
-                    color: deepskyblue;
-                }
-
-            .menu.active ul li form button {
-                font-size: 24px;
-                background-color: transparent;
-                color: red;
-                border: none;
-                padding: 15px 0px 0px 0px;
-            }
-
-                .menu.active ul li form button:hover {
-                    text-decoration: underline;
-                }
 
 
 @keyframes fade_in_show {

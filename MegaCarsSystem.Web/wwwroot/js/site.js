@@ -1,6 +1,4 @@
-﻿function menuHamburger() {
-    //$('.toggle').on('click', () => {
-
+﻿function menuHamburger(x) {
     const menuToggle = $('.toggle');
     const showcase = $('.showcase');
     const menuItems = $('.menu');
@@ -8,7 +6,6 @@
     menuToggle.toggleClass('active');
     showcase.toggleClass('active');
     menuItems.toggleClass('active');
-    //});
 }
 
 
