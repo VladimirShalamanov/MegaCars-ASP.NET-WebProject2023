@@ -239,7 +239,13 @@ body {
             transform: scale(0.5) translateY(-15px);
         }
 
+.footer {
+/*    position: absolute;*/
+display:flex;
+justify-content: center;
+align-content: center;
 
+}
 
 
 
