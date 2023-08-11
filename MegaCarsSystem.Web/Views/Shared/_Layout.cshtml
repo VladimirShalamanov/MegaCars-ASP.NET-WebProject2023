@@ -38,7 +38,6 @@
     <title>@ViewBag.Title - Mega Cars</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/video-size.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/ProducsStyle.css" asp-append-version="true" />
 
     <link rel="stylesheet" href="~/MegaCarsSystem.Web.styles.css" asp-append-version="true" />
@@ -140,27 +139,62 @@
 
     </div>
 
-    <footer class="footer">
-        <div class="yearInfo">
 
-            &copy; Mega Cars @ReleaseYear
-            @if (DateTime.UtcNow.Year != ReleaseYear)
-            {
-                @Html.Raw($" - {DateTime.UtcNow.Year}")
-            }
-        </div>
-        
-        <ul class="social">
-            <li><a href="#"><img src="https://png.pngtree.com/png-clipart/20180626/ourmid/pngtree-instagram-icon-instagram-logo-png-image_3584853.png" alt=""></a></li>
-            <li><a href="#"><img src="https://png.pngtree.com/png-clipart/20180626/ourmid/pngtree-instagram-icon-instagram-logo-png-image_3584853.png" alt=""></a></li>
-        </ul>
-    </footer>
+    <div class="footer-clean">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Legacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Careers</h3>
+                        <ul>
+                            <li><a href="#">Job openings</a></li>
+                            <li><a href="#">Employee success</a></li>
+                            <li><a href="#">Benefits</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social">
+
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+
+                        <p class="copyright">
+                            &copy; Mega Cars @ReleaseYear
+
+                            @if (DateTime.UtcNow.Year != ReleaseYear)
+                            {
+                                @Html.Raw($" - {DateTime.UtcNow.Year}")
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/video-player.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
 
     @RenderSection("MenuScripts", required: false)
     @await RenderSectionAsync("Scripts", required: false)

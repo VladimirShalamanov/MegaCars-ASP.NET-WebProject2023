@@ -1,4 +1,4 @@
-﻿function menuHamburger(x) {
+﻿function menuHamburger() {
     const menuToggle = $('.toggle');
     const showcase = $('.showcase');
     const menuItems = $('.menu');
