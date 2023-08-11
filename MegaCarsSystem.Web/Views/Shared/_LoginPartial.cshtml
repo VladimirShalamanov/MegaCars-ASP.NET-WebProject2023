@@ -1,11 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-
-@using MegaCarsSystem.Data.Models;
-@using MegaCarsSystem.Services.Data.Interfaces;
-@using MegaCarsSystem.Web.Infrastructure.Extensions;
-@using System.Security.Claims
-
-@inject SignInManager<ApplicationUser> SignInManager
+﻿@inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
 @inject IDealerService DealerService
@@ -15,8 +8,6 @@
     bool isUserDealer = await DealerService.DealerExistsByUserIdAsync(this.User.GetId()!);
     string userFullName = await UserService.GetFullNameByIdAsync(this.User.GetId()!);
 }
-
-@*<ul class="navbar-nav">*@
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -32,7 +23,7 @@
     }
     <li>
         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button type="submit" @*class="nav-link btn btn-link"*@>Logout</button>
+            <button type="submit">Logout</button>
         </form>
     </li>
 }
@@ -45,4 +36,3 @@ else
         <a asp-area="" asp-controller="User" asp-action="Register">Register</a>
     </li>
 }
-@*</ul>*@

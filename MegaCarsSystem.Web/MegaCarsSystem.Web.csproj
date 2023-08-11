@@ -34,7 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Identity\Pages\Account\" />
     <Folder Include="wwwroot\logos\" />
   </ItemGroup>

@@ -123,8 +123,8 @@ body {
             .menu.active ul li a {
                 text-decoration: none;
                 font-size: 24px;
-                color: white;
                 font-weight: bold;
+                color: white;
             }
 
                 .menu.active ul li a:hover {
@@ -133,6 +133,7 @@ body {
 
             .menu.active ul li form button {
                 font-size: 24px;
+                font-weight: bold;
                 background-color: transparent;
                 color: red;
                 border: none;

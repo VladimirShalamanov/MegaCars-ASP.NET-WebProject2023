@@ -1,5 +1,6 @@
-﻿@inject IShopCartService ShopCartService
-@inject IDealerService DealerService
+﻿@inject IDealerService DealerService
+@inject IShopCartService ShopCartService
+
 @{
     // Add custom _AdminLoyout in Admin/Views/Shared - when end with this one !!!
 
@@ -70,8 +71,8 @@
                 </div>
             }
 
+            @*<i class="fa-solid fa-bars fa-2xl" style="color: white" onclick="menuHamburger()"></i>*@
             <div class="toggle" onclick="menuHamburger()">
-                @*<i class="fa-solid fa-bars fa-2xl" style="color: white" onclick="menuHamburger()"></i>*@
                 <div class="bar1"></div>
                 <div class="bar2"></div>
                 <div class="bar3"></div>

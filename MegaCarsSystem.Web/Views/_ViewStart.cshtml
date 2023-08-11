@@ -1,13 +1,13 @@
 ﻿@using static MegaCarsSystem.Common.GeneralApplicationConstants;
 
 @{
-    //if (this.User.IsInRole(AdminRoleName))
-    //{
-    //    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-    //}
-    //else
-    //{
-    //    Layout = "_Layout";
-    //}
-    Layout = "_Layout";
+    if (this.User.IsInRole(AdminRoleName))
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+    //Layout = "_Layout";
 }
