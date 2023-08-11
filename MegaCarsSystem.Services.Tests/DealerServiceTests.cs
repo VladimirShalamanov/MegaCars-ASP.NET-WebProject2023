@@ -53,7 +53,7 @@ namespace MegaCarsSystem.Services.Tests
         [Test]
         public async Task DealerExistsByPhoneNumber_ReturnTrueWhenExists()
         {
-            string foundDealerPhoneNumber = Dealer.PhoneNumber;
+            string foundDealerPhoneNumber = DatabaseSeeder.Dealer.PhoneNumber;
 
             bool result = await this.dealerService.DealerExistsByPhoneNumberAsync(foundDealerPhoneNumber);
 
@@ -68,6 +68,68 @@ namespace MegaCarsSystem.Services.Tests
             bool result = await this.dealerService.DealerExistsByPhoneNumberAsync(wrongPhoneNumber);
 
             Assert.IsFalse(result);
+        }
+
+        [Test]
+        public async Task HasRentsCars_ReturnFalseIfNotHaveAny()
+        {
+            string userId = DatabaseSeeder.Dealer.Id.ToString();
+
+            bool result = await this.dealerService.HasRentsByUserIdAsync(userId);
+
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public async Task HasRentsCars_ReturnTrueIfHaveAny()
+        {
+            string userId = RenterUser.Id.ToString();
+
+            bool result = await this.dealerService.HasRentsByUserIdAsync(userId);
+
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public async Task GetDealerIdByUserId()
+        {
+            string userId = DealerUser.Id.ToString();
+
+            string result = await this.dealerService.GetDealerIdByUserIdAsync(userId);
+
+            Assert.AreEqual(result, DatabaseSeeder.Dealer.Id.ToString());
+        }
+
+        [Test]
+        public async Task GetDealerIdByUserId_ReturnFalseNotFind()
+        {
+            string userId = RenterUser.Id.ToString();
+
+            string result = await this.dealerService.GetDealerIdByUserIdAsync(userId);
+
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public async Task HasCarWithIdAsync_ReturnNullWhenNotHave()
+        {
+            string userId = RenterUser.Id.ToString();
+            string carId = Car.Id.ToString();
+
+            bool result = await this.dealerService.HasCarWithIdAsync(userId, carId);
+
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public async Task HasCarWithIdAsync_ReturnTrueWhenHaveAny()
+        {
+            string userId = DealerUser.Id.ToString();
+            string carId = Car.Id.ToString();
+
+            bool result = await this.dealerService.HasCarWithIdAsync(userId, carId);
+
+            Assert.IsTrue(result);
         }
     }
 }

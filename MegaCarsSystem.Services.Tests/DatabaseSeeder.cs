@@ -9,6 +9,8 @@
         public static ApplicationUser RenterUser;
         public static Dealer Dealer;
 
+        public static Car Car;
+
         public static void SeedDatabase(MegaCarsDbContext dbContext)
         {
             DealerUser = new ApplicationUser()
@@ -47,6 +49,25 @@
             dbContext.Users.Add(DealerUser);
             dbContext.Users.Add(RenterUser);
             dbContext.Dealers.Add(Dealer);
+
+            Car = new Car()
+            {
+                Brand = "Reno",
+                Model = "Scenic",
+                YearOfManufacture = 2020,
+                Horsepower = 111,
+                EngineId = 1,
+                GearboxId = 1,
+                Address = "ul. Ivan Vazov N3, Sofia, Bulgaria",
+                Description =
+                    "The 2020 GT-R's standard twin-turbo 3.8-liter V-6 makes a mighty 565 horsepower. It hooks up to a six-speed automatic transmission and all-wheel drive that conspire to put all that power to the pavement. At our test track, the GT-R launched itself from zero to 60 mph in a mere 2.9 seconds.",
+                ImageUrl = "https://cdn.motor1.com/images/mgl/1MlwW/s1/2020-nissan-gt-r-nismo-review.jpg",
+                PricePerDay = 200.00M,
+                CategoryId = 2,
+                DealerId = Dealer.Id,
+                RenterId = RenterUser.Id
+            };
+            dbContext.Cars.Add(Car);
 
             dbContext.SaveChanges();
         }

@@ -48,17 +48,17 @@
             builder.ApplyConfiguration(new DealerSeedEC());
             builder.ApplyConfiguration(new ShopCartSeedEC());
 
-            //if (this.seedDb)
-            //{
+            if (this.seedDb)
+            {
 
-            builder.ApplyConfiguration(new CategoryEntityConfiguration());
-            builder.ApplyConfiguration(new GearboxEntityConfiguration());
-            builder.ApplyConfiguration(new EngineEntityConfiguration());
+                builder.ApplyConfiguration(new CategoryEntityConfiguration());
+                builder.ApplyConfiguration(new GearboxEntityConfiguration());
+                builder.ApplyConfiguration(new EngineEntityConfiguration());
 
-            builder.ApplyConfiguration(new CarSeedEC());
-            builder.ApplyConfiguration(new ProductSeedEC());
+                builder.ApplyConfiguration(new CarSeedEC());
+                builder.ApplyConfiguration(new ProductSeedEC());
 
-            //}
+            }
 
             base.OnModelCreating(builder);
         }
