@@ -7,7 +7,7 @@
         // Products_Orders_Shipping
         public const decimal MinSumForFreeOrder = 50.00m;
         public const decimal Delivery = 5.00m;
-        public const string PromoCodes = "1";
+        public const string PromoCodes = "summer20";
 
         // For the sorting part of the Аpp.
         public const int DefaultPage = 1;

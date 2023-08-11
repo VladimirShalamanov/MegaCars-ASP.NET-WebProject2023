@@ -195,6 +195,7 @@ body {
     -webkit-text-stroke-color: black;
     position: relative;
     z-index: 10;
+    width: 550px
 }
 
     .text h2 {
