@@ -1,10 +1,11 @@
 ﻿namespace MegaCarsSystem.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+
     using MegaCarsSystem.Data;
     using Web.ViewModels.Payment;
     using MegaCarsSystem.Data.Models;
     using MegaCarsSystem.Services.Data.Interfaces;
-    using Microsoft.EntityFrameworkCore;
 
     public class PaymentService : IPaymentService
     {

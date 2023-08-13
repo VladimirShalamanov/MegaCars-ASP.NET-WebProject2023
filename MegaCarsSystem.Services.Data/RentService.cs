@@ -1,9 +1,10 @@
 ﻿namespace MegaCarsSystem.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+    
     using MegaCarsSystem.Data;
     using MegaCarsSystem.Web.ViewModels.Rent;
     using MegaCarsSystem.Services.Data.Interfaces;
-    using Microsoft.EntityFrameworkCore;
 
     public class RentService : IRentService
     {

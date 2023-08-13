@@ -1,18 +1,16 @@
 ﻿namespace MegaCarsSystem.Web.Controllers
 {
     using System.Security.Claims;
+
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
     using ViewModels.Payment;
-    using MegaCarsSystem.Data.Models;
-    using MegaCarsSystem.Web.ViewModels.Car;
     using MegaCarsSystem.Services.Data.Interfaces;
     using MegaCarsSystem.Web.Infrastructure.Extensions;
 
     using static Common.GeneralApplicationConstants;
     using static Common.NotificationsMessagesConstants;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
 
     [Authorize]
     public class PaymentController : Controller

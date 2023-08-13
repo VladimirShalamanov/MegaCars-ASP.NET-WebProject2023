@@ -1,12 +1,12 @@
 ﻿namespace MegaCarsSystem.Services.Data
 {
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     using Microsoft.EntityFrameworkCore;
 
     using MegaCarsSystem.Data;
     using MegaCarsSystem.Data.Models;
-    using System.Collections.Generic;
     using MegaCarsSystem.Web.ViewModels.User;
     using MegaCarsSystem.Services.Data.Interfaces;
 
