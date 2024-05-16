@@ -113,7 +113,7 @@ namespace MegaCarsSystem.Data.Migrations
                         {
                             Id = new Guid("2c5628be-a8ca-4cf0-bc0d-c441e6aa0c6e"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c9dbe5d3-8fe5-404f-b945-9420a12bde84",
+                            ConcurrencyStamp = "1119391f-5275-4ee7-9200-a2a3c5c237c7",
                             Email = "user@user.com",
                             EmailConfirmed = false,
                             FirstName = "User",
@@ -121,9 +121,9 @@ namespace MegaCarsSystem.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user@user.com",
                             NormalizedUserName = "user@user.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN/e01hYbyWBgsB9PjaTcwwB+x1ttRhVSzuh0sq0pLujtjUs2bxj6nD9Nk9uQuJqIw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKurJcEqzZJB4eqd5m0B78h/mQMvvHOqxfIB3vkYSteevjl01w1BJxbRlQpd8BPhAA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "69e3f251-07fd-4285-a45e-38b7ca19966e",
+                            SecurityStamp = "a5ed3ee8-2361-40cd-a893-5c41cbf1cacf",
                             ShoppingCartId = new Guid("88856b35-f932-4a23-9baf-2a8974418b22"),
                             TwoFactorEnabled = false,
                             UserName = "user@user.com"
@@ -132,7 +132,7 @@ namespace MegaCarsSystem.Data.Migrations
                         {
                             Id = new Guid("993dc891-f1ee-4b53-984d-3a019f294bfd"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "21da2adf-9b86-4245-a170-011e7889fdab",
+                            ConcurrencyStamp = "57c4df42-e654-4f36-bcfd-bd03c27ddee6",
                             Email = "dealer@dealer.com",
                             EmailConfirmed = false,
                             FirstName = "Dealer",
@@ -140,9 +140,9 @@ namespace MegaCarsSystem.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "dealer@dealer.com",
                             NormalizedUserName = "dealer@dealer.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHPv3g9SesUdiswvKhY0OlpiU1INRoWl+fAIROFDvchicbD333XxuRlfiI+uGgcOuw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGafbK41oAIimkU+iaE7THLfRaTjnrerccfWevC6uBlO25p07pK33d5hQZtEuqfpKw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5377a1ac-1c63-41aa-a52a-5341efa26c75",
+                            SecurityStamp = "9f539083-2c1c-41b6-a199-aef430628602",
                             ShoppingCartId = new Guid("61be485b-f019-4fd6-9c43-07f5aa896895"),
                             TwoFactorEnabled = false,
                             UserName = "dealer@dealer.com"
@@ -151,7 +151,7 @@ namespace MegaCarsSystem.Data.Migrations
                         {
                             Id = new Guid("bcbd7654-ab17-4621-b75b-fc43ea4449db"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "14c99fd3-605e-437f-a262-4f49295aaa20",
+                            ConcurrencyStamp = "b409c1a7-aa92-4c47-a99f-7ed9c25c326a",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -159,9 +159,9 @@ namespace MegaCarsSystem.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@admin.com",
                             NormalizedUserName = "admin@admin.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP+vPe2XTclIxQ/vjPGpWKa7Yp6PKYB129CCN++QS2N/hL9OdFAY8OqJlKFGn1zaPA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDQpp/IUeh568RN+OshAYPNn7q5kZuZuOL7n7zZyB1o7W5pC6X6pqnaNn0TCwHNVcg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ccac2527-68a4-4b16-9da5-0cf40b7b02cb",
+                            SecurityStamp = "8528768b-8add-4420-8081-6889e83b0093",
                             ShoppingCartId = new Guid("1bca46f0-2eb4-43c7-8a76-7b006ceb109a"),
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
@@ -250,7 +250,7 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7e638245-94e0-4497-93d3-834d2590eeac"),
+                            Id = new Guid("c9b5a788-47f3-4280-8376-fb5fa40a8e14"),
                             Address = "ul. Ivan Vazov N3, Sofia, Bulgaria",
                             Brand = "Nissan",
                             CategoryId = 6,
@@ -268,7 +268,7 @@ namespace MegaCarsSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6c629b72-afe4-4f9c-a856-8804d88446ee"),
+                            Id = new Guid("7c6231d0-3b98-4353-ad5b-730e67bdac6d"),
                             Address = "ul. Ivan Vazov N3, Sofia, Bulgaria",
                             Brand = "Aston Martin",
                             CategoryId = 7,
@@ -286,7 +286,7 @@ namespace MegaCarsSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2f0a0eda-7432-4b70-8b02-b4e939b8c38a"),
+                            Id = new Guid("5623ed1b-2707-4905-a78e-40a1f143b938"),
                             Address = "ul. Ivan Vazov N3, Sofia, Bulgaria",
                             Brand = "BMW",
                             CategoryId = 1,
@@ -304,7 +304,7 @@ namespace MegaCarsSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("02640ce6-f8b8-4407-b27c-bcb3aff20765"),
+                            Id = new Guid("b4fe3974-1793-446b-b2f0-e8d07b0be6b6"),
                             Address = "ul. Ivan Vazov N3, Sofia, Bulgaria",
                             Brand = "Audi",
                             CategoryId = 5,
@@ -322,7 +322,7 @@ namespace MegaCarsSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("076c08fd-da24-4478-91bd-1b61ae22bf07"),
+                            Id = new Guid("9824c3a6-b1d1-48a4-8b46-3526b1fde9c5"),
                             Address = "ul. Ivan Vazov N3, Sofia, Bulgaria",
                             Brand = "Mercedes",
                             CategoryId = 11,
@@ -340,7 +340,7 @@ namespace MegaCarsSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9da6b21c-7fb9-4235-bfe3-74bb5514c043"),
+                            Id = new Guid("1a0606ad-3512-4c97-811f-5c41a0b441d2"),
                             Address = "ul. Ivan Vazov N3, Sofia, Bulgaria",
                             Brand = "Bentley",
                             CategoryId = 4,
@@ -636,7 +636,7 @@ namespace MegaCarsSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e8e2534c-b12f-40a5-810c-5ff3c01eea03"),
+                            Id = new Guid("0684bea3-31b8-4f63-9ed3-f3cad83f396b"),
                             Description = "Мetal key holder for your keys.",
                             Image = "https://i.etsystatic.com/13582943/r/il/2f99a2/1700229685/il_fullxfull.1700229685_ooj3.jpg",
                             Name = "Keychain Turbine",
@@ -644,7 +644,7 @@ namespace MegaCarsSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("10cfcba3-9fc3-4605-837b-a1280071e0ce"),
+                            Id = new Guid("b2f14c2a-6638-4858-8dd4-f2660a341268"),
                             Description = "Black T-shirt with great quality.",
                             Image = "https://images-na.ssl-images-amazon.com/images/I/61oFHwCIKrL._SLDPMOBCAROUSELAUTOCROP288221_MCnd_AC_SR462,693_.jpg",
                             Name = "T-shirt Supercar",
@@ -652,7 +652,7 @@ namespace MegaCarsSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("69aa41e1-193a-4b65-9f00-7b5220aeb388"),
+                            Id = new Guid("b8705c32-fea6-4815-a548-c95490991166"),
                             Description = "Blue Cap with great quality.",
                             Image = "https://cdn.shopify.com/s/files/1/1435/8030/products/LB17CAP2BL_Lamborghini_Blue_Cap_1.jpg?v=1657622166&width=533",
                             Name = "Cap Lamborghini",
@@ -660,7 +660,7 @@ namespace MegaCarsSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1d26bcd5-cc82-4f51-8b07-90f01bc27bc1"),
+                            Id = new Guid("2566d51f-7ac6-4c72-9d32-0ab4eadbbdf5"),
                             Description = "Red Jacket with great quality.",
                             Image = "https://shopf1apparel.com/cdn/shop/products/Hd360c9d9c1a64a089d0f91a3266b17f0d.jpg?v=1630395464",
                             Name = "Jacket Ferrari",
